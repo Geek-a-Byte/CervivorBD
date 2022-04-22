@@ -1,5 +1,9 @@
-- [CervivorBD : Survey for Doctors](https://forms.gle/fF53Cqug9EtVnhDw9)
 # CervivorBD
+
+- [CervivorBD : Survey for Doctors](https://forms.gle/fF53Cqug9EtVnhDw9)
+- [CervivorBD : Survey for General People](https://forms.gle/z8DA8W6dkfm31LWu5)
+- [CervivorBD : Initial Screening for Patients](https://forms.gle/HAAsupmkorKREZN37)
+
 ## Smart-Assistive-System-for-Cervical-Cancer-Patients
 
 ## Module 0 : Interview Session with doctors
