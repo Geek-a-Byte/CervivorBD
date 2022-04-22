@@ -13,8 +13,8 @@
 - If we develop a sw, would you be able to give time to patients through online chat/zoom
 - If we develop a public forum, would you use that to provide services/guidance to patients
 
-Module 1 : Initial Screening/Symptom testing through video call / chat with doctors and also a survey form
-Module 2 : Appointment Booking system
-Module 4 : Follow up routine on patient private dashboard, results of checkup/diagnosis
-Module 5 : public forum/threads, threads can either be public or private
-Module 6 : Preventive Measures
+## Module 1 : Initial Screening/Symptom testing through video call / chat with doctors and also a survey form
+## Module 2 : Appointment Booking system
+## Module 4 : Follow up routine on patient private dashboard, results of checkup/diagnosis
+## Module 5 : public forum/threads, threads can either be public or private
+## Module 6 : Preventive Measures
