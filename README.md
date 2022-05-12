@@ -44,10 +44,11 @@ Features of the app :
 ## Donation forum:
 - In order to acquire donations from mass people, doctors, an online transaction system would be introduced where anyone can donate via bkash/nagad/rocket.
 
+## samples:
 
-
-
-
+![1](https://user-images.githubusercontent.com/59027621/167979475-1b2e75fb-3afc-48d4-a662-aaa5c53e60bf.png)
+![2](https://user-images.githubusercontent.com/59027621/167979526-beb61de1-ddaf-487f-b210-79e2b924e9e5.png)
+![3](https://user-images.githubusercontent.com/59027621/167979550-b36046e3-7b5b-42aa-bfc1-7185c67782e2.png)
 
 
 
