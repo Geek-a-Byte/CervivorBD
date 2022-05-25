@@ -1,3 +1,4 @@
+import 'package:cervivorbd/authentication/login_screen.dart';
 import 'package:cervivorbd/splashScreen/splash_screen.dart';
 import 'package:cervivorbd/widgets/elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (c) => MySplashScreen()));
+                                builder: (c) => const LoginScreen()));
                       },
                       label: "নিবন্ধন করুন"),
                   TextButton2(
@@ -72,6 +73,8 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
           ),
-        )));
+        )
+      )
+    );
   }
 }

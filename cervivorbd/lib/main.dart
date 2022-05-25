@@ -9,7 +9,7 @@ void main() async {
       child: MaterialApp(
         title: 'Uber Clone',
         theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
+          primarySwatch: Colors.pink,
         ),
         home: MySplashScreen(),
         debugShowCheckedModeBanner: false,
