@@ -4,6 +4,8 @@ import 'package:cervivorbd/authentication/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class MySplashScreen extends StatefulWidget {
+  const MySplashScreen({Key? key}) : super(key: key);
+
   @override
   State<MySplashScreen> createState() => _MySplashScreenState();
 }

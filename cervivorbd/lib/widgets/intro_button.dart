@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 var introMenu = [
@@ -10,6 +12,11 @@ var introMenu = [
   IntroButton2(
       label: 'চিকিৎসার ঝুঁকি এবং পার্শ্ব প্রতিক্রিয়া', onPressed: () {}),
   IntroButton2(label: 'পোস্ট অপারেটিভ কেয়ার', onPressed: () {}),
+];
+
+var optionMenu = [
+  IntroButton2(label: 'অনসাইট ভিসিট (১০০ টাকা)', onPressed: () {}),
+  IntroButton2(label: 'চ্যাট/ভিডিও কল (৫০ টাকা)', onPressed: () {}),
 ];
 
 var centerMenu = [

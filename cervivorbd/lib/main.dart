@@ -17,7 +17,7 @@ void main() async {
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
-          '/': (context) => MySplashScreen(),
+          '/': (context) => const MySplashScreen(),
           '/doctor_details': (context) => const DoctorDetailScreen(),
         },
       ),

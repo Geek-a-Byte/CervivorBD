@@ -37,7 +37,7 @@ class _HomeTabPageState extends State<HomeTabPage>
           padding: const EdgeInsets.all(16.0),
           child: Column(children: [
             const SizedBox(
-              height: 24,
+              height: 12,
             ),
             Text(
               'জরায়ুর ক্যান্সার সম্পর্কে জানুন',

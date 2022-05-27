@@ -7,12 +7,12 @@ class TopDoctorsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
+    // double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child:SizedBox(
-        height: h*0.3,
+        height: h*0.37,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           physics: const ClampingScrollPhysics(),
@@ -33,8 +33,8 @@ class TopDoctorsList extends StatelessWidget {
                     doctorRating: topDoctors[index].doctorRating,
                     doctorSpecialty: topDoctors[index].doctorSpecialty,
                     doctorYearOfExperience: topDoctors[index].doctorYearOfExperience,
-                  ),
-                );
+                    doctorWorkingHour: topDoctors[index].doctorWorkingHour,
+                ));
               },
               child: Cards(
                 doctor: topDoctors[index],
