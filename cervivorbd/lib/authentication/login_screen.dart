@@ -1,10 +1,9 @@
+import 'package:cervivorbd/mainScreens/main_screen.dart';
 import 'package:cervivorbd/widgets/elevated_button.dart';
 import 'package:cervivorbd/widgets/heading.dart';
 import 'package:cervivorbd/widgets/text_button.dart';
 import 'package:cervivorbd/widgets/text_form_field.dart';
-import '../widgets/progress_dialog.dart';
 import 'package:flutter/material.dart';
-import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -43,12 +42,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: emailTextEditingController, label: 'ইমেইল*'),
                 TextFormField2(
                     controller: passwordTextEditingController, label: 'পাসওয়ার্ড*'),
-               
                 ElevatedButton2(
                     onPressed: () {
                       // validateForm();
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (c) => const LoginScreen()));
+                          MaterialPageRoute(builder: (c) => const MainScreen()));
                     },
                     label:  "লগইন",
                 ),

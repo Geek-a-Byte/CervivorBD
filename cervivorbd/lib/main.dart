@@ -1,3 +1,5 @@
+import 'package:cervivorbd/doctor_app_theme.dart';
+import 'package:cervivorbd/mainScreens/doctor_detail_screen.dart';
 import 'package:cervivorbd/splashScreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +9,17 @@ void main() async {
   runApp(
     MyApp(
       child: MaterialApp(
-        title: 'Uber Clone',
-        theme: ThemeData(
-          primarySwatch: Colors.pink,
-        ),
-        home: MySplashScreen(),
+        // theme: ThemeData(
+        //   primarySwatch: Colors.pink,
+        // ),
+        theme: DoctorAppTheme.lightTheme,
+        // home: MySplashScreen(),
         debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => MySplashScreen(),
+          '/doctor_details': (context) => const DoctorDetailScreen(),
+        },
       ),
     ),
   );
@@ -20,6 +27,7 @@ void main() async {
 
 class MyApp extends StatefulWidget {
   final Widget? child;
+  // ignore: use_key_in_widget_constructors
   const MyApp({this.child});
   static void restartApp(BuildContext context) {
     context.findAncestorStateOfType<_MyAppState>()!.restartApp();
