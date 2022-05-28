@@ -3,11 +3,11 @@ import 'package:cervivorbd/widgets/checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-enum AppEnum { optionA, optionB, optionC, optionD, NON }
+var clicked = [0, 1, 2, 3, 4];
 
 // ignore: must_be_immutable
 class QuestionWidget extends StatefulWidget {
-  Question question;
+  Question2 question;
   QuestionWidget(
     this.question, {
     Key? key,
@@ -19,15 +19,8 @@ class QuestionWidget extends StatefulWidget {
 }
 
 class _QuestionWidgetState extends State<QuestionWidget> {
-  Question item;
+  Question2 item;
   _QuestionWidgetState(this.item);
-
-  AppEnum _character = AppEnum.NON;
-
-  bool _isSelectedA = false;
-  bool _isSelectedB = false;
-  bool _isSelectedC = false;
-  bool _isSelectedD = false;
 
   int radio = 1;
   int check = 2;
@@ -45,34 +38,56 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         ]));
   }
 
-  onVerifyClick() {
-    var msg = "";
-
-    if (item.type == radio) {
-      if (_character == AppEnum.optionA && item.optionA == item.ans ||
-          _character == AppEnum.optionB && item.optionB == item.ans ||
-          _character == AppEnum.optionC && item.optionC == item.ans ||
-          _character == AppEnum.optionD && item.optionD == item.ans) {
-        msg = "Correct";
-      } else {
-        msg = "Incorrect";
-      }
-    } else {
-      if (_isSelectedA && item.optionA == item.ans ||
-          _isSelectedB && item.optionB == item.ans ||
-          _isSelectedC && item.optionC == item.ans ||
-          _isSelectedD && item.optionD == item.ans) {
-        msg = "Correct";
-      } else {
-        msg = "Incorrect";
-      }
-    }
-
-    print(msg);
-    Fluttertoast.showToast(msg: msg);
+  int char = 0;
+  Widget buildOption(BuildContext context, Option option, int index) {
+    return RadioListTile<int>(
+      dense: true,
+      title: Text(option.text),
+      value: clicked[index],
+      groupValue: char,
+      onChanged: (value) {
+        setState(() {
+          char = value!;
+        });
+      },
+    );
   }
 
-  Widget getRadioWidget(Question item) {
+  final _isSelected = [false, false, false, false, false];
+  Widget buildMultiOption(BuildContext context, Option option, int index) {
+    return CheckBoxWidget(
+      label: option.text,
+      value: _isSelected[index],
+      onChanged: (bool newValue) {
+        setState(() {
+          _isSelected[index] = newValue;
+        });
+      },
+    );
+  }
+
+  onVerifyClick() {
+    var msg = "";
+    print(char);
+    if (item.type == radio) {
+      if (item.options[char].isCorrect == true) {
+        msg = "Correct";
+      } else {
+        msg = "Incorrect";
+      }
+      } else {
+        if (_isSelected[char]) {
+          msg = "Correct";
+        } else {
+          msg = "Incorrect";
+        }
+      }
+
+      // print(msg);
+      Fluttertoast.showToast(msg: msg);
+    }
+
+  Widget getRadioWidget(Question2 item) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -89,57 +104,23 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           ),
           Column(
             children: [
-
-              RadioListTile<AppEnum>(
-                dense: true,
-                title: Text(item.optionA),
-                value: AppEnum.optionA,
-                groupValue: _character,
-                onChanged: (AppEnum? value) {
-                  setState(() {
-                    _character = value!;
-                  });
-                },
-              ),
-              RadioListTile<AppEnum>(
-                dense: true,
-                title: Text(item.optionB),
-                value: AppEnum.optionB,
-                groupValue: _character,
-                onChanged: (AppEnum? value) {
-                  setState(() {
-                    _character = value!;
-                  });
-                },
-              ),
-              RadioListTile<AppEnum>(
-                dense: true,
-                title: Text(item.optionC),
-                value: AppEnum.optionC,
-                groupValue: _character,
-                onChanged: (AppEnum? value) {
-                  setState(() {
-                    _character = value!;
-                  });
-                },
-              ),
-              RadioListTile<AppEnum>(
-                dense: true,
-                title: Text(item.optionD),
-                value: AppEnum.optionD,
-                groupValue: _character,
-                onChanged: (AppEnum? value) {
-                  setState(() {
-                    _character = value!;
-                  });
-                },
-              ),
+              ListView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: item.options.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        buildOption(context, item.options[index], index),
+                      ],
+                    );
+                  }),
             ],
           ),
         ]);
   }
 
-  Widget getCheckBoxWidget(Question item) {
+  Widget getCheckBoxWidget(Question2 item) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -154,41 +135,17 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               ),
             ),
           ),
-          CheckBoxWidget(
-            label: item.optionA,
-            value: _isSelectedA,
-            onChanged: (bool newValue) {
-              setState(() {
-                _isSelectedA = newValue;
-              });
-            },
-          ),
-          CheckBoxWidget(
-            label: item.optionB,
-            value: _isSelectedB,
-            onChanged: (bool newValue) {
-              setState(() {
-                _isSelectedB = newValue;
-              });
-            },
-          ),
-          CheckBoxWidget(
-            label: item.optionC,
-            value: _isSelectedC,
-            onChanged: (bool newValue) {
-              setState(() {
-                _isSelectedC = newValue;
-              });
-            },
-          ),
-          CheckBoxWidget(
-            label: item.optionD,
-            value: _isSelectedD,
-            onChanged: (bool newValue) {
-              setState(() {
-                _isSelectedD = newValue;
-              });
-            },
+          Column(
+            children: [
+              ListView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: item.options.length,
+                  itemBuilder: (context, index) {
+                    return buildMultiOption(
+                        context, item.options[index], index);
+                  }),
+            ],
           ),
         ]);
   }
@@ -208,20 +165,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         const SizedBox(
           width: 20.0,
         ),
-        // RaisedButton(
-        //   color: const Color(0xFF167F67),
-        //   child: const Text(
-        //     "Next",
-        //     style: TextStyle(color: Colors.white),
-        //   ),
-        //   onPressed: () => onNextClick(),
-        // ),
       ],
     );
   }
-
-  // onNextClick() {
-  //   buttonCarouselController.nextPage(
-  //       duration: const Duration(milliseconds: 300), curve: Curves.linear);
-  // }
 }

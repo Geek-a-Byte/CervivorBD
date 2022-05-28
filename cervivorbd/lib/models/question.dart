@@ -10,6 +10,30 @@ class Question {
       this.optionD, this.ans, this.type);
 }
 
+class Question2 {
+  final String question;
+  final List<Option> options;
+  final int type;
+
+  Question2({
+    required this.question,
+    required this.options,
+    required this.type,
+  });
+}
+
+class Option {
+  final String code;
+  final String text;
+  final bool isCorrect;
+
+  const Option({
+    required this.text,
+    required this.code,
+    required this.isCorrect,
+  });
+}
+
 final List<Question> questions = [
   Question(
       "'OS' computer abbreviation usually means ?",
@@ -47,34 +71,24 @@ final List<Question> questions = [
       1)
 ];
 
-const List<Map<String, Object>> questions2 = [
-  {
-    "questionText": "Who is the best cricketer in the world?",
-    'answers': [
-      {'text': 'Sachin Tendukar', 'score': 0},
-      {'text': 'Virat Kohli', 'score': 0},
-      {'text': 'Sandeep Lamichhane', 'score': 10},
+final questions2 = [
+  Question2(
+    question: 'Which planet is the hottest in the solar system?',
+    options: [
+      const Option(code: 'A', text: 'Earth', isCorrect: false),
+      const Option(code: 'B', text: 'Venus', isCorrect: true),
+      const Option(code: 'C', text: 'Jupiter', isCorrect: false),
+      const Option(code: 'D', text: 'Saturn', isCorrect: false),
     ],
-    'type': 1,
-  },
-  {
-    "questionText": "What is the Full form of RAM?",
-    'answers': [
-      {'optionA': 'Random Access Memory', 'score': 10},
-      {'text': 'Ram Ate Memory', 'score': 0},
-      {'text': 'Read Any Memory', 'score': 0},
-      
+    type: 1,
+  ),
+    Question2(
+    question: 'Which planet is the hottest in the solar system?',
+    options: [
+      const Option(code: 'A', text: 'Earth', isCorrect: false),
+      const Option(code: 'B', text: 'Venus', isCorrect: true),
+      const Option(code: 'C', text: 'Jupiter', isCorrect: false),
     ],
-    'type': 1,
-  },
-  {
-    "questionText": "What's capital city of USA?",
-    'answers': [
-      {'text': 'London', 'score': 0},
-      {'text': 'New York', 'score': 0},
-      {'text': 'Tokyo', 'score': 0},
-      {'text': 'Washington, D.C.', 'score': 10},
-    ],
-    'type': 1,
-  }
+    type: 2,
+  ),
 ];
