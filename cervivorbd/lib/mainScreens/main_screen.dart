@@ -1,6 +1,6 @@
+import 'package:cervivorbd/CancerScreening/Screening.dart';
 import 'package:cervivorbd/mainScreens/forum_screen.dart';
 import 'package:cervivorbd/mainScreens/home_screen.dart';
-import 'package:cervivorbd/mainScreens/screening_screen.dart';
 import 'package:cervivorbd/widgets/appbar.dart';
 import 'package:cervivorbd/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length:4, vsync: this);
+    tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -39,11 +39,11 @@ class _MainScreenState extends State<MainScreen>
         body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
           controller: tabController,
-          children: const [
-            HomeTabPage(),
-            ScreeningTabPage(),
-            AppointmentTabPage(),
-            ForumTabPage(),
+          children: [
+            const HomeTabPage(),
+            ScreeningPage(),
+            const AppointmentTabPage(),
+            const ForumTabPage(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

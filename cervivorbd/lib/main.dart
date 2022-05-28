@@ -1,3 +1,4 @@
+import 'package:cervivorbd/CancerScreening/Screening.dart';
 import 'package:cervivorbd/doctor_app_theme.dart';
 import 'package:cervivorbd/mainScreens/doctor_detail_screen.dart';
 import 'package:cervivorbd/splashScreen/splash_screen.dart';
@@ -13,7 +14,7 @@ void main() async {
         //   primarySwatch: Colors.pink,
         // ),
         theme: DoctorAppTheme.lightTheme,
-        // home: MySplashScreen(),
+        // home: Screening(),
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
