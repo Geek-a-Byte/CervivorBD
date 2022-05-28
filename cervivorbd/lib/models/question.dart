@@ -1,21 +1,9 @@
-class Question {
-  String question;
-  String optionA;
-  String optionB;
-  String optionC;
-  String optionD;
-  int type;
-  String ans;
-  Question(this.question, this.optionA, this.optionB, this.optionC,
-      this.optionD, this.ans, this.type);
-}
-
-class Question2 {
+class Question{
   final String question;
   final List<Option> options;
   final int type;
 
-  Question2({
+  Question({
     required this.question,
     required this.options,
     required this.type,
@@ -34,60 +22,58 @@ class Option {
   });
 }
 
-final List<Question> questions = [
+final questions = [
   Question(
-      "'OS' computer abbreviation usually means ?",
-      "Order of Significance",
-      "Open Software",
-      "Operating System",
-      "Optical Sensor",
-      "Operating System",
-      1),
-  Question(
-      "'.MOV' extension refers usually to what kind of file?",
-      "Image file",
-      "Animation/movie file",
-      "Audio file",
-      "MS Office document",
-      "Animation/movie file",
-      2),
-  Question(
-      "Who developed Yahoo?",
-      "Dennis Ritchie & Ken Thompson",
-      "David Filo & Jerry Yang",
-      "Vint Cerf & Robert Kahn",
-      "Steve Case & Jeff Bezos",
-      "Dennis Ritchie & Ken Thompson",
-      2),
-  Question("What does AM mean?", "Angelo marconi", "Anno median",
-      "Amplitude modulation", "Amperes", "Amplitude modulation", 1),
-  Question(
-      "Where is the headquarters of Intel located?",
-      "Redmond, Washington",
-      "Tucson, Arizona",
-      "Santa Clara, California",
-      "Richmond, Virginia",
-      "Santa Clara, California",
-      1)
-];
-
-final questions2 = [
-  Question2(
-    question: 'Which planet is the hottest in the solar system?',
+    question: 'সন্তানের সংখ্যা *',
     options: [
-      const Option(code: 'A', text: 'Earth', isCorrect: false),
-      const Option(code: 'B', text: 'Venus', isCorrect: true),
-      const Option(code: 'C', text: 'Jupiter', isCorrect: false),
-      const Option(code: 'D', text: 'Saturn', isCorrect: false),
+      const Option(code: 'A', text: '০', isCorrect: false),
+      const Option(code: 'B', text: '১', isCorrect: true),
+      const Option(code: 'C', text: '২', isCorrect: false),
+      const Option(code: 'D', text: '৩', isCorrect: false),
+      const Option(code: 'E', text: '৪ অথবা তার উপরে', isCorrect: false),
     ],
     type: 1,
   ),
-    Question2(
-    question: 'Which planet is the hottest in the solar system?',
+   Question(
+    question: 'বয়স *',
     options: [
-      const Option(code: 'A', text: 'Earth', isCorrect: false),
-      const Option(code: 'B', text: 'Venus', isCorrect: true),
-      const Option(code: 'C', text: 'Jupiter', isCorrect: false),
+      const Option(code: 'A', text: '২৫-৩৫ বছর', isCorrect: false),
+      const Option(code: 'B', text: '৩৫-৪৫ বছর', isCorrect: true),
+      const Option(code: 'C', text: '৪৫-৬৫ বছর', isCorrect: true),
+    ],
+    type: 1,
+  ),
+  Question(
+    question: 'বিবাহের সংখ্যা *',
+    options: [
+      const Option(code: 'A', text: '১', isCorrect: false),
+      const Option(code: 'B', text: 'একের অধিক', isCorrect: true),
+    ],
+    type: 1,
+  ),
+  Question(
+    question: 'পারিবারিক সদস্যের মধ্যে কারো জরায়ুর ক্যান্সার হয়েছে?',
+    options: [
+      const Option(code: 'A', text: 'হ্যাঁ', isCorrect: false),
+      const Option(code: 'B', text: 'না', isCorrect: true),
+    ],
+    type: 1,
+  ),
+  Question(
+    question: 'জর্দা অথবা পান খাওয়ার অভ্যাস আছে?',
+    options: [
+      const Option(code: 'A', text: 'হ্যাঁ', isCorrect: false),
+      const Option(code: 'B', text: 'না', isCorrect: true),
+    ],
+    type: 1,
+  ),
+  Question(
+    question: 'নিম্নলিখিত কোন কোন লক্ষণ পূর্বে দেখা দিয়েছে?',
+    options: [
+      const Option(code: 'A', text: 'অনিয়মিত মাসিক চক্র', isCorrect: false),
+      const Option(code: 'B', text: 'যোগাযোগে রক্তপাত (যেমন যৌন মিলনের সময়)', isCorrect: true),
+      const Option(code: 'B', text: 'স্ট্রেইনিংয়ে রক্তপাত (মলত্যাগের সময়)', isCorrect: true),
+      const Option(code: 'B', text: 'অতিরিক্ত সাদা স্রাব যা দুর্গন্ধযুক্ত স্রাব', isCorrect: true),
     ],
     type: 2,
   ),

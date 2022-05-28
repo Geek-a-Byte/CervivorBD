@@ -15,9 +15,9 @@ class _ScreeningPageState extends State<ScreeningPage> {
         body: ListView.builder(
             physics: const ClampingScrollPhysics(),
             shrinkWrap: true,
-            itemCount: questions2.length,
+            itemCount: questions.length,
             itemBuilder: (context, index) {
-              return QuestionWidget(questions2[index]);
+              return QuestionWidget(questions[index]);
             }));
   }
 }

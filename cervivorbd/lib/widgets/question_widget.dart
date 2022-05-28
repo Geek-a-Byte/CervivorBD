@@ -7,7 +7,7 @@ var clicked = [0, 1, 2, 3, 4];
 
 // ignore: must_be_immutable
 class QuestionWidget extends StatefulWidget {
-  Question2 question;
+  Question question;
   QuestionWidget(
     this.question, {
     Key? key,
@@ -19,7 +19,7 @@ class QuestionWidget extends StatefulWidget {
 }
 
 class _QuestionWidgetState extends State<QuestionWidget> {
-  Question2 item;
+  Question item;
   _QuestionWidgetState(this.item);
 
   int radio = 1;
@@ -31,10 +31,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         padding: const EdgeInsets.all(20.0),
         child: Column(children: <Widget>[
           item.type == check ? getCheckBoxWidget(item) : getRadioWidget(item),
-          const SizedBox(
-            height: 30.0,
-          ),
-          actionButton(),
+          // actionButton(),
         ]));
   }
 
@@ -87,7 +84,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
       Fluttertoast.showToast(msg: msg);
     }
 
-  Widget getRadioWidget(Question2 item) {
+  Widget getRadioWidget(Question item) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -120,7 +117,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         ]);
   }
 
-  Widget getCheckBoxWidget(Question2 item) {
+  Widget getCheckBoxWidget(Question item) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
