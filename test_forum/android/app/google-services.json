@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "244678085215",
+    "project_id": "forumapp-4ff95",
+    "storage_bucket": "forumapp-4ff95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244678085215:android:d733cf38e4472de57429ea",
+        "android_client_info": {
+          "package_name": "loyd.app.example.flutter.com.flutterthreadexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244678085215-8mo30rjo3g76h6tslms14j8olsnk15b2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4vFfByQC4-f_X7NxO6gr3_PyVSYxIuCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244678085215-8mo30rjo3g76h6tslms14j8olsnk15b2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
