@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-
-class CheckBoxTile extends StatelessWidget {
-  const CheckBoxTile({
+class RadioTile extends StatelessWidget {
+  const RadioTile({
     Key? key,
     required this.selected,
     required this.onTap,
+    required this.index,
     required this.title,
   }) : super(key: key);
 
   final String title;
-  final bool selected;
+  final int index;
+  final int? selected;
   final VoidCallback onTap;
 
   @override
@@ -18,8 +19,9 @@ class CheckBoxTile extends StatelessWidget {
     return ListTile(
       title: Text(title),
       onTap: onTap,
-      leading: Checkbox(
-        value: selected,
+      leading: Radio<int>(
+        groupValue: selected,
+        value: index,
         onChanged: (val) {
           onTap();
         },
