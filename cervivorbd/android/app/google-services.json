@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1072481497691",
+    "project_id": "cervivorbd",
+    "storage_bucket": "cervivorbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072481497691:android:eb18be1c63da5a95aa457e",
+        "android_client_info": {
+          "package_name": "com.example.cervivorbd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072481497691-97j0en47v5ri8j1dd698flms8sukm8a9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cervivorbd",
+            "certificate_hash": "4ba534940d5c280c95f96604f2b99b17baa5ed6e"
+          }
+        },
+        {
+          "client_id": "1072481497691-g4u0umuj8c3be9o286u7ki50i21o72k7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF_g58cFRMuvt3j2PEBltggvdwpWJqEe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072481497691-g4u0umuj8c3be9o286u7ki50i21o72k7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
