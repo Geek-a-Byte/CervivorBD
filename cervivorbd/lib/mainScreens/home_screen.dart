@@ -1,11 +1,14 @@
+import 'package:cervivorbd/models/user_patient.dart';
 import 'package:cervivorbd/widgets/cc_intro_grid_menu.dart';
 import 'package:cervivorbd/widgets/center_grid_menu.dart';
 import 'package:cervivorbd/widgets/text_button.dart';
 import 'package:cervivorbd/widgets/top_doctors_list.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class   HomeTabPage extends StatefulWidget {
-  const  HomeTabPage({Key? key}) : super(key: key);
+class HomeTabPage extends StatefulWidget {
+  const HomeTabPage({Key? key}) : super(key: key);
 
   @override
   State<HomeTabPage> createState() => _HomeTabPageState();
@@ -13,6 +16,23 @@ class   HomeTabPage extends StatefulWidget {
 
 class _HomeTabPageState extends State<HomeTabPage>
     with SingleTickerProviderStateMixin {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+    tabController = TabController(length: 3, vsync: this);
+  }
+
   TabController? tabController;
   int selectedIndex = 0;
   onItemClicked(int index) {
@@ -20,12 +40,6 @@ class _HomeTabPageState extends State<HomeTabPage>
       selectedIndex = index;
       tabController!.index = selectedIndex;
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -37,6 +51,14 @@ class _HomeTabPageState extends State<HomeTabPage>
           padding: const EdgeInsets.all(16.0),
           child: Column(children: [
             const SizedBox(
+              height: 12,
+            ),
+            // "${loggedInUser.firstName} ${loggedInUser.secondName}"
+            Text(
+              'Hi ${loggedInUser.fullname}!',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+             const SizedBox(
               height: 12,
             ),
             Text(

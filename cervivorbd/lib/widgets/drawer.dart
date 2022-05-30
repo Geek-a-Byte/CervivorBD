@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../authentication/login_screen.dart';
 
 class Drawer2 extends StatelessWidget {
   const Drawer2({Key? key}) : super(key: key);
@@ -65,11 +68,18 @@ class Drawer2 extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('LogOut'),
             onTap: () {
-              Navigator.pop(context);
+              logout(context);
             },
           ),
         ],
       ),
     );
   }
+   // the logout function
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const LoginScreen()));
+  }
 }
+

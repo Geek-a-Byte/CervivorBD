@@ -1,6 +1,11 @@
 import 'package:cervivorbd/authentication/login_screen.dart';
+import 'package:cervivorbd/mainScreens/main_screen.dart';
+import 'package:cervivorbd/models/user_patient.dart';
 import 'package:cervivorbd/widgets/elevated_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../widgets/heading.dart';
 import '../widgets/text_button.dart';
@@ -18,6 +23,23 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController phoneTextEditingController = TextEditingController();
+
+  
+  validateForm() {
+    if (nameTextEditingController.text.length < 3) {
+      Fluttertoast.showToast(msg: "name must be at least 2 characters long");
+    } else if (!emailTextEditingController.text.contains("@")) {
+      Fluttertoast.showToast(msg: "email address is not valid");
+    } else if (phoneTextEditingController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "phone number is mandatory");
+    } else if (passwordTextEditingController.text.length < 6) {
+      Fluttertoast.showToast(
+          msg: "password must be at least 6 characters long");
+    } else {
+      signUp(emailTextEditingController.text, passwordTextEditingController.text);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +75,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       label: 'ফোন নম্বর*'),
                   ElevatedButton2(
                       onPressed: () {
-                        // validateForm();
+                        validateForm();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -76,4 +98,70 @@ class _SignupScreenState extends State<SignupScreen> {
       )
     );
   }
+
+  final _auth = FirebaseAuth.instance;
+  String? errorMessage;
+  void signUp(String email, String password) async {
+      try {
+        await _auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) => {postDetailsToFirestore()})
+            .catchError((e) {
+          Fluttertoast.showToast(msg: e!.message);
+        });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "Your email address appears to be malformed.";
+            break;
+          case "wrong-password":
+            errorMessage = "Your password is wrong.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Too many requests";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Signing in with Email and Password is not enabled.";
+            break;
+          default:
+            errorMessage = "An undefined Error happened.";
+        }
+        Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+    }
+  }
+  postDetailsToFirestore() async {
+    // calling our firestore
+    // calling our user model
+    // sedning these values
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    UserModel userModel = UserModel();
+
+    // writing all the values
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.fullname= nameTextEditingController.text;
+    userModel.phonenumber = phoneTextEditingController.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Account created successfully :) ");
+
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => MainScreen()),
+        (route) => false);
+  }
+
 }

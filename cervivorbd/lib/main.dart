@@ -2,11 +2,12 @@ import 'package:cervivorbd/CancerScreening/Screening.dart';
 import 'package:cervivorbd/doctor_app_theme.dart';
 import 'package:cervivorbd/mainScreens/doctor_detail_screen.dart';
 import 'package:cervivorbd/splashScreen/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(
     MyApp(
       child: MaterialApp(
