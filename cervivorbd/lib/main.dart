@@ -1,30 +1,65 @@
 import 'package:cervivorbd/CancerScreening/Screening.dart';
 import 'package:cervivorbd/doctor_app_theme.dart';
 import 'package:cervivorbd/mainScreens/doctor_detail_screen.dart';
+import 'package:cervivorbd/mainScreens/main_screen.dart';
 import 'package:cervivorbd/splashScreen/splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class AuthModel extends ChangeNotifier {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool get isSignedIn => _auth.currentUser != null;
+
+  Future<void> signIn({required String email, required String password}) async {
+    await _auth.signInWithEmailAndPassword(email: email, password: password);
+    notifyListeners();
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+    notifyListeners();
+  }
+}
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    MyApp(
+    
+    ChangeNotifierProvider<AuthModel>(
+      create: (_) => AuthModel(),
       child: MaterialApp(
-        // theme: ThemeData(
-        //   primarySwatch: Colors.pink,
-        // ),
         theme: DoctorAppTheme.lightTheme,
         // home: Screening(),
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const MySplashScreen(),
-          '/doctor_details': (context) => const DoctorDetailScreen(),
-        },
+        home: Consumer<AuthModel>(
+          builder: (_, auth, __) =>
+              auth.isSignedIn ? const MainScreen() : const MySplashScreen(),
+        ),
       ),
     ),
   );
+  // runApp(
+  //   MyApp(
+  //     child: MaterialApp(
+  //       // theme: ThemeData(
+  //       //   primarySwatch: Colors.pink,
+  //       // ),
+  //       theme: DoctorAppTheme.lightTheme,
+  //       // home: Screening(),
+  //       debugShowCheckedModeBanner: false,
+  //       initialRoute: '/',
+  //       routes: {
+  //         '/': (context) => const MySplashScreen(),
+  //         '/doctor_details': (context) => const DoctorDetailScreen(),
+  //       },
+  //     ),
+  //   ),
+  // );
 }
 
 class MyApp extends StatefulWidget {
@@ -52,3 +87,4 @@ class _MyAppState extends State<MyApp> {
     return KeyedSubtree(key: key, child: widget.child!);
   }
 }
+

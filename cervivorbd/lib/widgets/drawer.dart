@@ -1,3 +1,4 @@
+import 'package:cervivorbd/cloud%20firestore/user_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,11 @@ class Drawer2 extends StatelessWidget {
             leading: const Icon(Icons.person),
             title: const Text('My Profile'),
             onTap: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
+               Navigator.pushAndRemoveUntil(
+                  (context),
+                  MaterialPageRoute(builder: (context) => UserDetails()),
+                  (route) => false);
             },
           ),
            ListTile(

@@ -32,8 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Fluttertoast.showToast(
           msg: "password must be at least 6 characters long");
     } else {
-      signIn(
-          emailTextEditingController.text, passwordTextEditingController.text);
+      signIn(emailTextEditingController.text, passwordTextEditingController.text);
     }
   }
 
