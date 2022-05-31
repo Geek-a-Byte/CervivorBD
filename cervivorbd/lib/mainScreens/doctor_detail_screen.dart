@@ -119,9 +119,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       borderRadius: BorderRadius.circular(8),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage(
-                          'images/${doctor.doctorPicture}',
-                        ),
+                        image: NetworkImage(doctor.doctorPicture),
                       ),
                     ),
                   ),

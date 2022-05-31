@@ -23,6 +23,30 @@ class Doctor {
 }
 
 var topDoctors = [
+    Doctor(
+      doctorWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
+      doctorName: 'Nazia Shehnaz Joynab',
+      doctorSpecialty: 'Oncologist',
+      doctorRating: '4.7',
+      doctorHospital: 'GDN Hospital',
+      doctorNumberOfPatient: '888',
+      doctorYearOfExperience: '4',
+      doctorDescription:
+          'She is one of the best doctors in the GDN Hospital. He has saved more than 800 patients in the past 4 years. She has also received many awards from domestic and abroad as the best doctors. She is available on a private or schedule.',
+      doctorPicture: 'img-women-03.png',
+      doctorIsOpen: true),
+   Doctor(
+      doctorWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
+      doctorName: 'Sazia Tabasum Mim',
+      doctorSpecialty: 'Oncologist',
+      doctorRating: '4.8',
+      doctorHospital: 'ABC Carolus Hospital',
+      doctorNumberOfPatient: '1451',
+      doctorYearOfExperience: '6',
+      doctorDescription:
+          'She is one of the best doctors in the ABC Carolus Hospital. She has saved more than 1400 patients in the past 6 years. She has also received many awards from domestic and abroad as the best doctors. She is available on a private or schedule.',
+      doctorPicture: 'img-women-02.png',
+      doctorIsOpen: false),
   Doctor(
       doctorName: 'Fairooz Nawar Nawme',
       doctorSpecialty: 'Oncologist',
@@ -35,28 +59,6 @@ var topDoctors = [
       doctorPicture: 'img-women-01.png',
       doctorWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
       doctorIsOpen: false),
-  Doctor(
-       doctorWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
-      doctorName: 'Sazia Tabasum Mim',
-      doctorSpecialty: 'Oncologist',
-      doctorRating: '4.8',
-      doctorHospital: 'ABC Carolus Hospital',
-      doctorNumberOfPatient: '1451',
-      doctorYearOfExperience: '6',
-      doctorDescription:
-          'is one of the best doctors in the Salemba Carolus Hospital. He has saved more than 1400 patients in the past 6 years. He has also received many awards from domestic and abroad as the best doctors. He is available on a private or schedule.',
-      doctorPicture: 'img-women-02.png',
-      doctorIsOpen: false),
-  Doctor(
-      doctorWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
-      doctorName: 'Nazia Shehnaz Joynab',
-      doctorSpecialty: 'Oncologist',
-      doctorRating: '4.7',
-      doctorHospital: 'GDN Hospital',
-      doctorNumberOfPatient: '888',
-      doctorYearOfExperience: '4',
-      doctorDescription:
-          'is one of the best doctors in the Wiloso Hospital. He has saved more than 800 patients in the past 4 years. He has also received many awards from domestic and abroad as the best doctors. He is available on a private or schedule.',
-      doctorPicture: 'img-women-03.png',
-      doctorIsOpen: true),
+ 
+
 ];

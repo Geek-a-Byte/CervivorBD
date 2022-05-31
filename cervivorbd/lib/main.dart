@@ -36,10 +36,19 @@ void main() async {
         theme: DoctorAppTheme.lightTheme,
         // home: Screening(),
         debugShowCheckedModeBanner: false,
-        home: Consumer<AuthModel>(
-          builder: (_, auth, __) =>
-              auth.isSignedIn ? const MainScreen() : const MySplashScreen(),
-        ),
+        // home: Consumer<AuthModel>(
+        //   builder: (_, auth, __) =>
+        //       auth.isSignedIn ? const MainScreen() : const MySplashScreen(),
+        // ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => Consumer<AuthModel>(
+                builder: (_, auth, __) => auth.isSignedIn
+                    ? const MainScreen()
+                    : const MySplashScreen(),
+              ),
+          '/doctor_details': (context) => const DoctorDetailScreen(),
+        },
       ),
     ),
   );
