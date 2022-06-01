@@ -1,3 +1,4 @@
+import 'package:cervivorbd/Modules/AppointmentBooking/booking_screen.dart';
 import 'package:cervivorbd/color_constants.dart';
 import 'package:cervivorbd/models/doctor.dart';
 import 'package:cervivorbd/widgets/appointment_option_menu.dart';
@@ -199,7 +200,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             ),
                             child: Text(
                               doctor.doctorIsOpen
-                                  ? 'Avilable'
+                                  ? 'Available'
                                   : 'Not Available',
                               style: Theme.of(context)
                                   .textTheme
@@ -287,7 +288,15 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
             const OptionGridMenu(),
             Center(
                 child: ElevatedButton2(
-                    onPressed: () {}, label: 'অ্যাপয়েন্টের জন্য পেমেন্ট করুন')),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                BookingScreen(doctor: doctor.doctorName)),
+                      );
+                    },
+                    label: 'অ্যাপয়েন্টের জন্য পেমেন্ট করুন')),
           ],
         ),
       ]),

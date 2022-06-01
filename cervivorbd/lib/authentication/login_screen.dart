@@ -1,4 +1,5 @@
-import 'package:cervivorbd/mainScreens/main_screen.dart';
+import 'package:cervivorbd/authentication/signup_screen.dart';
+import 'package:cervivorbd/tabPages/main_screen.dart';
 import 'package:cervivorbd/widgets/elevated_button.dart';
 import 'package:cervivorbd/widgets/heading.dart';
 import 'package:cervivorbd/widgets/text_button.dart';
@@ -69,20 +70,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ElevatedButton2(
                       onPressed: () {
                         validateForm();
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (c) => const MainScreen()));
                       },
                       label: "লগইন",
                     ),
                     TextButton2(
                         label: "অ্যাকাউন্ট নেই? নিবন্ধন করুন",
                         onPressed: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          // builder: (c) => const LoginScreen()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                          builder: (c) => const SignupScreen()));
                         }),
                   ],
                 ),

@@ -1,10 +1,11 @@
-import 'package:cervivorbd/CancerScreening/Screening.dart';
-import 'package:cervivorbd/mainScreens/forum_screen.dart';
-import 'package:cervivorbd/mainScreens/home_screen.dart';
+import 'package:cervivorbd/Modules/CancerScreening/Screening.dart';
+import 'package:cervivorbd/tabPages/forum_screen.dart';
+import 'package:cervivorbd/tabPages/home_screen.dart';
 import 'package:cervivorbd/widgets/appbar.dart';
 import 'package:cervivorbd/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../color_constants.dart';
 import 'my_appointments_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,8 +17,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
-
-  
   TabController? tabController;
   int selectedIndex = 0;
   onItemClicked(int index) {
@@ -36,6 +35,7 @@ class _MainScreenState extends State<MainScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: kWhiteColor,
         appBar: const Appbar2(),
         drawer: const Drawer2(),
         body: TabBarView(
@@ -51,19 +51,21 @@ class _MainScreenState extends State<MainScreen>
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled), label: "Home"),
+              icon: Icon(Icons.home),
+              label: "হোম",
+            ),
             BottomNavigationBarItem(
                 icon: Icon(
                   FontAwesomeIcons.vial,
                 ),
-                label: "Screening"),
+                label: "প্রাথমিক স্ক্রিনিং"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today), label: "Appointment"),
-            BottomNavigationBarItem(icon: Icon(Icons.forum), label: "Forum"),
+                icon: Icon(Icons.calendar_today), label: "অ্যাপয়েন্টসমূহ"),
+            BottomNavigationBarItem(icon: Icon(Icons.forum), label: "পাব্লিক ফোরাম"),
           ],
-          unselectedItemColor: Colors.white54,
-          selectedItemColor: Colors.white,
-          backgroundColor: const Color.fromARGB(255, 35, 34, 34),
+          unselectedItemColor: kBlackColor900,
+          selectedItemColor: kdarkPink,
+          backgroundColor: kPink,
           type: BottomNavigationBarType.fixed,
           selectedLabelStyle: const TextStyle(fontSize: 14),
           showUnselectedLabels: true,

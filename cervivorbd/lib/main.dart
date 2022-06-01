@@ -1,7 +1,6 @@
-import 'package:cervivorbd/CancerScreening/Screening.dart';
 import 'package:cervivorbd/doctor_app_theme.dart';
-import 'package:cervivorbd/mainScreens/doctor_detail_screen.dart';
-import 'package:cervivorbd/mainScreens/main_screen.dart';
+import 'package:cervivorbd/Profiles/doctorProfile.dart';
+import 'package:cervivorbd/tabPages/main_screen.dart';
 import 'package:cervivorbd/splashScreen/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';

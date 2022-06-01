@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 // Color constant
 const kBlueColor = Color.fromARGB(255, 231, 68, 253);
-const kPink = Color.fromARGB(255, 232, 162, 196);
+const kPink = Color(0xFFFFF6FC);
+const kdarkPink = Color.fromARGB(255, 164, 15, 87);
 const kGreenColor = Color(0xFF00CC6A);
 const kGreenLightColor = Color(0xffCCF5E1);
 const kRedColor = Color(0xffCC4900);
 const kRedLightColor = Color(0xffF7E4D9);
-const kWhiteColor = Color(0xFFFFFFFF);
+const kWhiteColor = Color(0xfffffafa);
 const kBlackColor900 = Color(0xFF25282B);
 const kBlackColor800 = Color(0xFF404345);
 const kGreyColor900 = Color(0xFFA0A4A8);

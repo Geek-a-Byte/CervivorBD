@@ -29,7 +29,7 @@ class Cards extends StatelessWidget {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 120,
+              height: 160,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,

@@ -1,4 +1,4 @@
-import 'package:cervivorbd/models/user_patient.dart';
+import 'package:cervivorbd/models/patient.dart';
 import 'package:cervivorbd/widgets/cc_intro_grid_menu.dart';
 import 'package:cervivorbd/widgets/center_grid_menu.dart';
 import 'package:cervivorbd/widgets/text_button.dart';
@@ -6,6 +6,9 @@ import 'package:cervivorbd/widgets/top_doctors_list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/popup_item_launcher.dart';
+import '../widgets/popup_item_body.dart';
 
 class HomeTabPage extends StatefulWidget {
   const HomeTabPage({Key? key}) : super(key: key);
@@ -55,10 +58,10 @@ class _HomeTabPageState extends State<HomeTabPage>
             ),
             // "${loggedInUser.firstName} ${loggedInUser.secondName}"
             Text(
-              'Hi ${loggedInUser.fullname}!',
+              'স্বাগতম ${loggedInUser.fullname}!',
               style: Theme.of(context).textTheme.headline4,
             ),
-             const SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Text(
@@ -69,17 +72,6 @@ class _HomeTabPageState extends State<HomeTabPage>
               height: 10,
             ),
             const CCIntroGridMenu(),
-            const SizedBox(
-              height: 24,
-            ),
-            Text(
-              'বাংলাদেশে স্ক্রিনিং সেন্টারগুলো সম্পর্কে জানুন',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            const CenterGridMenu(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -98,6 +90,41 @@ class _HomeTabPageState extends State<HomeTabPage>
               ],
             ),
             const TopDoctorsList(),
+            const SizedBox(
+              height: 24,
+            ),
+
+            Text(
+              'বাংলাদেশে স্ক্রিনিং সেন্টারগুলো সম্পর্কে জানুন',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const CenterGridMenu(),
+            // PopupItemLauncher(
+            //   tag: 'test',
+            //   child: Material(
+            //     color: Colors.white,
+            //     elevation: 2,
+            //     shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(32)),
+            //     child: const Icon(
+            //       Icons.add_rounded,
+            //       size: 56,
+            //     ),
+            //   ),
+            //   popUp: PopUpItem(
+            //     padding: const EdgeInsets.all(8), // Padding inside of the card
+            //     color: Colors.white, // Color of the card
+            //     shape: RoundedRectangleBorder(
+            //         borderRadius:
+            //             BorderRadius.circular(32)), // Shape of the card
+            //     elevation: 2, // Elevation of the card
+            //     tag: 'test', // MUST BE THE SAME AS IN `PopupItemLauncher`
+            //     child: const PopUpItemBody(), // Your custom child widget.
+            //   ),
+            // ),
           ]),
         ),
       )),

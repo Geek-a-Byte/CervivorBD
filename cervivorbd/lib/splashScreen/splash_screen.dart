@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cervivorbd/authentication/signup_screen.dart';
+import 'package:cervivorbd/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class MySplashScreen extends StatefulWidget {
@@ -13,7 +14,8 @@ class MySplashScreen extends StatefulWidget {
 class _MySplashScreenState extends State<MySplashScreen> {
   startTimer() {
     Timer(const Duration(seconds: 3), () async {
-      Navigator.push(context, MaterialPageRoute(builder: (c) => const SignupScreen()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (c) => const SignupScreen()));
     });
   }
 
@@ -29,22 +31,9 @@ class _MySplashScreenState extends State<MySplashScreen> {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
+        backgroundColor: kPink,
         body: SafeArea(
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment(0, 1),
-                colors: <Color>[
-                  Color.fromARGB(255, 196, 39, 105),
-                  Color(0xffffffff),
-                ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                tileMode: TileMode.mirror,
-              ),
-            ),
-            child: Image.asset('images/logo.png', width: w, height: h),
-
-          ),
+          child: Image.asset('images/logo.png', width: w, height: h),
         ));
   }
 }

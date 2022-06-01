@@ -1,6 +1,6 @@
 import 'package:cervivorbd/authentication/login_screen.dart';
-import 'package:cervivorbd/mainScreens/main_screen.dart';
-import 'package:cervivorbd/models/user_patient.dart';
+import 'package:cervivorbd/tabPages/main_screen.dart';
+import 'package:cervivorbd/models/patient.dart';
 import 'package:cervivorbd/widgets/elevated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -75,19 +75,15 @@ class _SignupScreenState extends State<SignupScreen> {
                   ElevatedButton2(
                       onPressed: () {
                         validateForm();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (c) => const LoginScreen()));
                       },
                       label: "নিবন্ধন করুন"),
                   TextButton2(
                       label: "অ্যাকাউন্ট আছে? লগইন করুন",
                       onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        // builder: (c) => const LoginScreen()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                        builder: (c) => const LoginScreen()));
                       }),
                 ],
               ),
@@ -155,7 +151,9 @@ class _SignupScreenState extends State<SignupScreen> {
         .doc(user.uid)
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully :) ");
-
+    
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (c) => const LoginScreen()));
     Navigator.pushAndRemoveUntil(
         (context),
         MaterialPageRoute(builder: (context) => const MainScreen()),

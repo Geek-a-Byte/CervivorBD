@@ -1,4 +1,5 @@
-import 'package:cervivorbd/cloud%20firestore/user_details.dart';
+import 'package:cervivorbd/Profiles/patientProfile.dart';
+import 'package:cervivorbd/color_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,11 +16,11 @@ class Drawer2 extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.pink,
+              color: kdarkPink,
             ),
             child: Text(
               'CervivorBD',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, color: kWhiteColor),
             ),
           ),
           ListTile(
