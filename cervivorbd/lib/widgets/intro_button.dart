@@ -12,6 +12,7 @@ var introMenu = [
   IntroButton2(
       label: 'চিকিৎসার ঝুঁকি এবং পার্শ্ব প্রতিক্রিয়া', onPressed: () {}),
   IntroButton2(label: 'পোস্ট অপারেটিভ কেয়ার', onPressed: () {}),
+  IntroButton2(label: 'জরায়ুর ক্যান্সার প্রতিরোধ', onPressed: () {}),
 ];
 
 var optionMenu = [
