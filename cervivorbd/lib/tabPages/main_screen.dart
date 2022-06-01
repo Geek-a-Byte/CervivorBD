@@ -1,5 +1,5 @@
 import 'package:cervivorbd/Modules/CancerScreening/Screening.dart';
-import 'package:cervivorbd/tabPages/forum_screen.dart';
+import 'package:cervivorbd/Modules/Forum/screens/home_screen.dart';
 import 'package:cervivorbd/tabPages/home_screen.dart';
 import 'package:cervivorbd/widgets/appbar.dart';
 import 'package:cervivorbd/widgets/drawer.dart';
