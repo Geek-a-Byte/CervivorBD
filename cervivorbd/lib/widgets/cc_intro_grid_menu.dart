@@ -35,7 +35,7 @@ class CCIntroGridMenu extends StatelessWidget {
                 ),
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(5),
                     child: Text(introMenu[index].label!,
                         style: const TextStyle(
                             fontSize: 10, color: kWhiteColor)),
