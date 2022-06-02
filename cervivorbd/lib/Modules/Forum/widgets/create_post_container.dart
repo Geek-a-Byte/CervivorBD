@@ -68,8 +68,12 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
   Future<void> createPost() async {
     // print(dateUTC + ' ' + date_Time + ':00');
     Post postModel = Post();
+    String postiddd;
     // writing all the values
-    postModel.postid = loggedInUser.email;
+    postModel.ownerid = loggedInUser.email;
+    postModel.postid = postiddd = DateTime.now().toString() +
+        loggedInUser.fullname! +
+        loggedInUser.email!;
     postModel.fullname = loggedInUser.fullname;
     postModel.details = blogEditingController.text;
     postModel.timeAgo = DateTime.now();
@@ -80,12 +84,13 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
         .collection("posts")
         .doc(user!.email)
         .collection("userposts")
-        .doc()
+        .doc(postiddd)
         .set(postModel.toMapPost());
     await FirebaseFirestore.instance
         .collection("posts")
         .doc('all')
-        .collection('userposts').doc()
+        .collection('userposts')
+        .doc(postiddd)
         .set(postModel.toMapPost());
     Fluttertoast.showToast(msg: "Post created successfully!");
   }
