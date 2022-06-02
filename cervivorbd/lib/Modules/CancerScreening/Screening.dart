@@ -5,6 +5,8 @@ import 'package:cervivorbd/widgets/test_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
+import '../../widgets/elevated_button.dart';
+
 class Screening extends StatefulWidget {
   const Screening({Key? key}) : super(key: key);
 
@@ -129,11 +131,14 @@ class _ScreeningState extends State<Screening> {
               checkboxesController: _checkboxesController[0],
               type: false),
           
-          ElevatedButton(
-              onPressed: () {
-                printSelected();
-              },
-              child: const Text('Submit'))
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton2(
+                onPressed: () {
+                  printSelected();
+                },
+               label:'Submit'),
+          )
         ],
       ),
     );

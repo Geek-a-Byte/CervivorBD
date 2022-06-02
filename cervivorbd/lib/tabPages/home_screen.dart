@@ -59,7 +59,7 @@ class _HomeTabPageState extends State<HomeTabPage>
             ),
             const CCIntroGridMenu(),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
             Text(
               'বাংলাদেশে স্ক্রিনিং সেন্টারগুলো সম্পর্কে জানুন',

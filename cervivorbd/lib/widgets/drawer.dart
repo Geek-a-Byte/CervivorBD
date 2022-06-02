@@ -29,10 +29,13 @@ class Drawer2 extends StatelessWidget {
             title: const Text('My Profile'),
             onTap: () {
               // Navigator.pop(context);
-              Navigator.pushAndRemoveUntil(
+              // Navigator.of(context).pushNamed(
+              //   '/doctor_details',
+              //   ),
+              // );
+              Navigator.push(
                   (context),
-                  MaterialPageRoute(builder: (context) => UserDetails()),
-                  (route) => false);
+                  MaterialPageRoute(builder: (context) => UserDetails()),);
             },
           ),
           ListTile(

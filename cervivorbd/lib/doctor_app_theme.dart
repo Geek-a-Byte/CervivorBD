@@ -34,7 +34,7 @@ class DoctorAppTheme {
           color: kGreyColor800,
           fontSize: 14,
           fontFamily: GoogleFonts.sourceSansPro().fontFamily,
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w500,
         ),
         headline6: const TextStyle(
           fontSize: 12,
