@@ -77,6 +77,8 @@ flutter:
     - images/img-women-01.png
     - images/img-women-02.png
     - images/img-women-03.png
+    - images/logoheader.png
+    - images/logo22.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

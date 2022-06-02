@@ -26,7 +26,7 @@ class DoctorAppTheme {
           fontWeight: FontWeight.w700,
         ),
         headline4: const TextStyle(
-          color: kBlackColor800,
+          color: kBlackColor900,
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),

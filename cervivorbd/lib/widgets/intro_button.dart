@@ -70,7 +70,8 @@ class IntroButton3 extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.pink),
+            backgroundColor: MaterialStateProperty.all<Color>(
+                const Color.fromARGB(224, 0, 0, 0)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),

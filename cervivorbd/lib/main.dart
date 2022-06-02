@@ -23,12 +23,10 @@ class AuthModel extends ChangeNotifier {
   }
 }
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    
     ChangeNotifierProvider<AuthModel>(
       create: (_) => AuthModel(),
       child: MaterialApp(
@@ -95,4 +93,3 @@ class _MyAppState extends State<MyApp> {
     return KeyedSubtree(key: key, child: widget.child!);
   }
 }
-

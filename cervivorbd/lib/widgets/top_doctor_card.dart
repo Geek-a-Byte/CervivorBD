@@ -20,16 +20,14 @@ class Cards extends StatelessWidget {
           ),
         ],
       ),
-      margin: const EdgeInsets.all(8),
-      height: 200,
-      width: 150,
+      width: 140,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              width: MediaQuery.of(context).size.width,
-              height: 160,
+              // width: MediaQuery.of(context).size.width,
+              height: 120,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,

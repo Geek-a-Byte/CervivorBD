@@ -15,12 +15,13 @@ class Drawer2 extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
+            child: Image(
+              alignment: Alignment.topLeft,
+              image: AssetImage('images/logo22.png'),
+              fit: BoxFit.contain,
+            ),
             decoration: BoxDecoration(
               color: kdarkPink,
-            ),
-            child: Text(
-              'CervivorBD',
-              style: TextStyle(fontSize: 20, color: kWhiteColor),
             ),
           ),
           ListTile(
@@ -28,20 +29,20 @@ class Drawer2 extends StatelessWidget {
             title: const Text('My Profile'),
             onTap: () {
               // Navigator.pop(context);
-               Navigator.pushAndRemoveUntil(
+              Navigator.pushAndRemoveUntil(
                   (context),
                   MaterialPageRoute(builder: (context) => UserDetails()),
                   (route) => false);
             },
           ),
-           ListTile(
+          ListTile(
             leading: const Icon(Icons.edit),
             title: const Text('Edit Profile'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
-           ListTile(
+          ListTile(
             leading: const Icon(Icons.question_answer),
             title: const Text('F. A. Q'),
             onTap: () {
@@ -62,8 +63,7 @@ class Drawer2 extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-         
-           ListTile(
+          ListTile(
             leading: const Icon(Icons.info),
             title: const Text('About Us'),
             onTap: () {
@@ -81,11 +81,11 @@ class Drawer2 extends StatelessWidget {
       ),
     );
   }
-   // the logout function
+
+  // the logout function
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 }
-

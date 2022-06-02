@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../models/models.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -12,35 +13,37 @@ class PostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      color: Colors.white,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _PostHeader(post: post),
-                const SizedBox(height: 4.0),
-                Text(post.caption),
-                post.imageUrl != ''
-                    ? const SizedBox.shrink()
-                    : const SizedBox(height: 6.0),
-              ],
+    return Material(
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 5.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        color: Colors.white,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _PostHeader(post: post),
+                  const SizedBox(height: 4.0),
+                  Text(post.details!),
+                  // post.imageUrl != ''
+                  //     ? const SizedBox.shrink()
+                  //     : const SizedBox(height: 6.0),
+                ],
+              ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
-            // child: NetworkImage('${post.imageUrl}'),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: _PostStats(post: post),
-          ),
-        ],
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              // child: NetworkImage('${post.imageUrl}'),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: _PostStats(post: post),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -64,29 +67,27 @@ class _PostHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                post.user.name,
+                post.fullname!,
                 style: const TextStyle(
+                  fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
               ),
+              const SizedBox(height: 3),
               Row(
                 children: [
                   Text(
                     '${post.timeAgo}',
                     style: TextStyle(
                       color: Colors.grey[600],
-                      fontSize: 12.0,
+                      fontSize: 9.0,
                     ),
                   ),
-               
                 ],
               ),
+              const SizedBox(height: 6),
             ],
           ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.more_horiz),
-          onPressed: () => print('More'),
         ),
       ],
     );
@@ -95,6 +96,10 @@ class _PostHeader extends StatelessWidget {
 
 class _PostStats extends StatelessWidget {
   final Post post;
+  
+  final String text = '';
+  final bool shouldDisplay = false;
+
 
   const _PostStats({
     Key? key,
@@ -146,7 +151,7 @@ class _PostStats extends StatelessWidget {
                 size: 20.0,
               ),
               label: 'Like',
-              onTap: () => print('Like'),
+              onTap: () {},
             ),
             _PostButton(
               icon: Icon(
@@ -155,7 +160,9 @@ class _PostStats extends StatelessWidget {
                 size: 20.0,
               ),
               label: 'Comment',
-              onTap: () => print('Comment'),
+              onTap: () {
+
+              },
             ),
           ],
         ),

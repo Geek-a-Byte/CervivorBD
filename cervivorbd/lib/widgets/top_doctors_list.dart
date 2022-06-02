@@ -24,7 +24,7 @@ class TopDoctorsList extends StatelessWidget {
                 );
               }
               return SizedBox(
-                  height: h * 0.37,
+                  height: 210,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     physics: const ClampingScrollPhysics(),

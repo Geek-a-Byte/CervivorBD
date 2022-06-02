@@ -1,41 +1,37 @@
-class Post {
-  String? postid;
+class Comment {
+  String? commentid;
   String? fullname;
   String? details;
   DateTime? timeAgo;
   int? likes;
-  int? comments;
 
-  Post({
+  Comment({
     this.fullname,
-    this.postid,
+    this.commentid,
     this.details,
     this.timeAgo,
     this.likes,
-    this.comments,
   });
 
-  //posting data to server
-  factory Post.fromMap(map) {
-    return Post(
-      postid: map['postid'],
+  //comment4ing data to server
+  factory Comment.fromMap(map) {
+    return Comment(
+      commentid: map['commentid'],
       fullname: map['fullname'],
       details: map['details'],
       timeAgo: map['timeAgo'],
       likes: map['likes'],
-      comments: map['comments'],
     );
   }
 
   // sending data to our server
-  Map<String, dynamic> toMapPost() {
+  Map<String, dynamic> toMapComment() {
     return {
-      'postid': postid,
+      'commentid': commentid,
       'fullname': fullname,
       'details': details,
       'timeAgo': timeAgo,
       'likes': likes,
-      'comments': comments,
     };
   }
 }
