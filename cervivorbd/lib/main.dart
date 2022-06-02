@@ -2,6 +2,7 @@ import 'package:cervivorbd/doctor_app_theme.dart';
 import 'package:cervivorbd/Profiles/doctorProfile.dart';
 import 'package:cervivorbd/tabPages/main_screen.dart';
 import 'package:cervivorbd/splashScreen/splash_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

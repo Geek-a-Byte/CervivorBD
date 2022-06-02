@@ -1,3 +1,4 @@
+import 'package:cervivorbd/Modules/Forum/widgets/comments.dart';
 import 'package:cervivorbd/models/patient.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -171,12 +172,12 @@ class _PostStatsState extends State<PostStats> {
                 ),
               ),
             ),
-            Text(
-              '${post.comments} Comments',
-              style: TextStyle(
-                color: Colors.grey[600],
-              ),
-            ),
+            // Text(
+            //   '${post.comments} Comments',
+            //   style: TextStyle(
+            //     color: Colors.grey[600],
+            //   ),
+            // ),
           ],
         ),
         const Divider(),
@@ -198,7 +199,11 @@ class _PostStatsState extends State<PostStats> {
                 size: 20.0,
               ),
               label: 'Comment',
-              onTap: () {},
+              onTap: () => showComments(
+                context,
+                postid: post.postid,
+                ownerid: post.ownerid,
+              ),
             ),
           ],
         ),
@@ -207,7 +212,6 @@ class _PostStatsState extends State<PostStats> {
   }
 
   void handleLikeCount() {
-
     String currentUserId = loggedInUser.uid!;
     bool _isLiked = post.likes![currentUserId] == true;
 
@@ -221,7 +225,7 @@ class _PostStatsState extends State<PostStats> {
       setState(() {
         likeCount -= 1;
         _isLiked = false;
-         post.likes[currentUserId] = false;
+        post.likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
       FirebaseFirestore.instance
@@ -237,6 +241,15 @@ class _PostStatsState extends State<PostStats> {
       });
     }
   }
+}
+
+showComments(BuildContext context, {String? postid, ownerid}) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return Comments(
+      postid: postid,
+      postOwnerid: ownerid
+    );
+  }));
 }
 
 // class _PostStats extends StatelessWidget {

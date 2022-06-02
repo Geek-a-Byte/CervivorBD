@@ -70,10 +70,6 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
     Post postModel = Post();
     String postiddd;
 
- 
-
-
-
     // writing all the values
     postModel.ownerid = loggedInUser.email;
     postModel.postid = postiddd = DateTime.now().toString() + loggedInUser.fullname! + loggedInUser.email!;
