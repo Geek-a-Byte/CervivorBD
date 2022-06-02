@@ -1,3 +1,6 @@
+import 'package:cervivorbd/models/patient.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -100,13 +103,46 @@ class PostStats extends StatefulWidget {
     required this.post,
   }) : super(key: key);
 
+  int getLikeCount(likes) {
+    // if no likes, return 0
+    if (likes == null) {
+      return 0;
+    }
+    int count = 0;
+    // if the key is explicitly set to true, add a like
+    likes.values.forEach((val) {
+      if (val == true) {
+        count += 1;
+      }
+    });
+    return count;
+  }
+
   @override
-  State<PostStats> createState() => _PostStatsState(post);
+  State<PostStats> createState() =>
+      _PostStatsState(post, getLikeCount(post.likes));
 }
 
 class _PostStatsState extends State<PostStats> {
   Post post;
-  _PostStatsState(this.post);
+  int likeCount;
+  _PostStatsState(this.post, this.likeCount);
+
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -128,7 +164,8 @@ class _PostStatsState extends State<PostStats> {
             const SizedBox(width: 4.0),
             Expanded(
               child: Text(
-                '${post.likes}',
+                // '${post.likes}',
+                '$likeCount',
                 style: TextStyle(
                   color: Colors.grey[600],
                 ),
@@ -152,7 +189,7 @@ class _PostStatsState extends State<PostStats> {
                 size: 20.0,
               ),
               label: 'Like',
-              onTap: () {},
+              onTap: handleLikeCount,
             ),
             _PostButton(
               icon: Icon(
@@ -168,7 +205,40 @@ class _PostStatsState extends State<PostStats> {
       ],
     );
   }
+
+  void handleLikeCount() {
+
+    String currentUserId = loggedInUser.uid!;
+    bool _isLiked = post.likes![currentUserId] == true;
+
+    if (_isLiked) {
+      FirebaseFirestore.instance
+          .collection("posts")
+          .doc('all')
+          .collection('userposts')
+          .doc(post.postid)
+          .update({'likes.$currentUserId': false});
+      setState(() {
+        likeCount -= 1;
+        _isLiked = false;
+         post.likes[currentUserId] = false;
+      });
+    } else if (!_isLiked) {
+      FirebaseFirestore.instance
+          .collection("posts")
+          .doc('all')
+          .collection('userposts')
+          .doc(post.postid)
+          .update({'likes.$currentUserId': true});
+      setState(() {
+        likeCount += 1;
+        _isLiked = true;
+        post.likes[currentUserId] = true;
+      });
+    }
+  }
 }
+
 // class _PostStats extends StatelessWidget {
 //   final Post post;
 
