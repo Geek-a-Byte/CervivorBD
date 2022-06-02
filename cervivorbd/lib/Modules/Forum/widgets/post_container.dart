@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../models/models.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -40,7 +39,7 @@ class PostContainer extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: _PostStats(post: post),
+              child: PostStats(post: post),
             ),
           ],
         ),
@@ -94,18 +93,20 @@ class _PostHeader extends StatelessWidget {
   }
 }
 
-class _PostStats extends StatelessWidget {
+class PostStats extends StatefulWidget {
   final Post post;
-  
-  final String text = '';
-  final bool shouldDisplay = false;
-
-
-  const _PostStats({
+  const PostStats({
     Key? key,
     required this.post,
   }) : super(key: key);
 
+  @override
+  State<PostStats> createState() => _PostStatsState(post);
+}
+
+class _PostStatsState extends State<PostStats> {
+  Post post;
+  _PostStatsState(this.post);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -160,9 +161,7 @@ class _PostStats extends StatelessWidget {
                 size: 20.0,
               ),
               label: 'Comment',
-              onTap: () {
-
-              },
+              onTap: () {},
             ),
           ],
         ),
@@ -170,6 +169,81 @@ class _PostStats extends StatelessWidget {
     );
   }
 }
+// class _PostStats extends StatelessWidget {
+//   final Post post;
+
+//   final String text = '';
+//   final bool shouldDisplay = false;
+
+//   const _PostStats({
+//     Key? key,
+//     required this.post,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Row(
+//           children: [
+//             Container(
+//               padding: const EdgeInsets.all(4.0),
+//               decoration: const BoxDecoration(
+//                 color: Colors.black,
+//                 shape: BoxShape.circle,
+//               ),
+//               child: const Icon(
+//                 Icons.thumb_up,
+//                 size: 10.0,
+//                 color: Colors.white,
+//               ),
+//             ),
+//             const SizedBox(width: 4.0),
+//             Expanded(
+//               child: Text(
+//                 '${post.likes}',
+//                 style: TextStyle(
+//                   color: Colors.grey[600],
+//                 ),
+//               ),
+//             ),
+//             Text(
+//               '${post.comments} Comments',
+//               style: TextStyle(
+//                 color: Colors.grey[600],
+//               ),
+//             ),
+//           ],
+//         ),
+//         const Divider(),
+//         Row(
+//           children: [
+//             _PostButton(
+//               icon: Icon(
+//                 MdiIcons.thumbUpOutline,
+//                 color: Colors.grey[600],
+//                 size: 20.0,
+//               ),
+//               label: 'Like',
+//               onTap: () {},
+//             ),
+//             _PostButton(
+//               icon: Icon(
+//                 MdiIcons.commentOutline,
+//                 color: Colors.grey[600],
+//                 size: 20.0,
+//               ),
+//               label: 'Comment',
+//               onTap: () {
+
+//               },
+//             ),
+//           ],
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 class _PostButton extends StatelessWidget {
   final Icon icon;

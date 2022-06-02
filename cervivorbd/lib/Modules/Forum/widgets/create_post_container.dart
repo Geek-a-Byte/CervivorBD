@@ -69,15 +69,18 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
     // print(dateUTC + ' ' + date_Time + ':00');
     Post postModel = Post();
     String postiddd;
+
+ 
+
+
+
     // writing all the values
     postModel.ownerid = loggedInUser.email;
-    postModel.postid = postiddd = DateTime.now().toString() +
-        loggedInUser.fullname! +
-        loggedInUser.email!;
+    postModel.postid = postiddd = DateTime.now().toString() + loggedInUser.fullname! + loggedInUser.email!;
     postModel.fullname = loggedInUser.fullname;
     postModel.details = blogEditingController.text;
     postModel.timeAgo = DateTime.now();
-    postModel.likes = 0;
+    postModel.likes = {};
     postModel.comments = 0;
 
     await FirebaseFirestore.instance
