@@ -91,6 +91,8 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
         .collection('userposts')
         .doc(postiddd)
         .set(postModel.toMapPost());
+
+      blogEditingController.clear();
     Fluttertoast.showToast(msg: "Post created successfully!");
   }
 }

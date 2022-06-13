@@ -114,9 +114,8 @@ class _CommentsState extends State<Comments> {
         ListTile(
             title: TextFormField2(
                 controller: commentController, label: 'Write a comment...'),
-            trailing: OutlineButton(
+            trailing: ElevatedButton(
                 onPressed: () => addComment(),
-                borderSide: BorderSide.none,
                 child: const Text('Post')))
       ],
     ));
