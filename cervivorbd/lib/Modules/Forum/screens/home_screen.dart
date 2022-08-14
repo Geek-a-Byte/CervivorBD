@@ -36,7 +36,7 @@ class _ForumTabPageState extends State<ForumTabPage> {
         children: [
           const CreatePostContainer(),
           SafeArea(
-              child: StreamBuilder(
+            child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('posts')
                 .doc('all')

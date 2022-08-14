@@ -1,7 +1,6 @@
-// ignore_for_file: avoid_print
-
-import 'package:cervivorbd/widgets/test_check_box.dart';
+import 'package:cervivorbd/widgets/heading.dart';
 import 'package:cervivorbd/widgets/test_radio.dart';
+import 'package:cervivorbd/widgets/text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
@@ -15,65 +14,63 @@ class Screening extends StatefulWidget {
 }
 
 class _ScreeningState extends State<Screening> {
-  final List<GroupButtonController> _checkboxesController =
-      List.filled(1, GroupButtonController());
   final List<GroupButtonController> _radioController =
-      List.filled(5, GroupButtonController());
+      List.filled(33, GroupButtonController());
+  final List<TextEditingController> _textController =
+      List.filled(33, TextEditingController());
 
   final List<String> questions = [
-    'সন্তানের সংখ্যা *',
     'বয়স *',
-    'বিবাহের সংখ্যা *',
-    'পারিবারিক সদস্যের মধ্যে কারো জরায়ুর ক্যান্সার হয়েছে?',
-    'জর্দা অথবা পান খাওয়ার অভ্যাস আছে?',
-    'নিম্নলিখিত কোন কোন লক্ষণ পূর্বে দেখা দিয়েছে?',
-  ];
-  final List<List<String>> _checkboxButtons = [
-    [
-      'অনিয়মিত মাসিক চক্র',
-      'যোগাযোগে রক্তপাত (যেমন যৌন মিলনের সময়)',
-      'স্ট্রেইনিংয়ে রক্তপাত (মলত্যাগের সময়)',
-      'অতিরিক্ত সাদা স্রাব যা দুর্গন্ধযুক্ত স্রাব',
-    ]
+    'যৌনসঙ্গীর সংখ্যা',
+    'প্রথম যৌন মিলনের বয়স',
+    'গর্ভধারণের সংখ্যা',
+    'আপনি কি ধূমপান করেন?',
+    'আপনি কত বছর ধরে ধূমপান করছেন?',
+    'আপনি বছরে কত প্যাকেট সিগারেট খান?',
+    'আপনি কি জন্মনিরোধক হরমোন গ্রহণ করেন?',
+    'আপনি কত বছর ধরে জন্মনিরোধক হরমোন ব্যবহার করেছেন?',
+    'আপনি কি ইন্ট্রা উটেরিন ডিভাইস (আই ইউ ডি) ব্যবহার করেছেন?',
+    'আপনি কত বছর ধরে ইন্ট্রা উটেরিন ডিভাইস (আই ইউ ডি) ব্যবহার করেছেন?',
+    'আপনার কি পূর্বে যৌনবাহিত রোগ (এসটিডি) নির্ণীত হয়েছে?',
+    'আপনার পূর্বে কতগুলো যৌনবাহিত রোগ (এসটিডি) নির্ণীত হয়েছে?',
+    'আপনার পূর্বে মোট কতবার যৌনবাহিত রোগ (এসটিডি) নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে এইডস নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে এইচআইভি নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে হেপাটাইটিস বি নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে এইচপিভি নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে এসটিডি (কোনডাইলোমেটোসিস) নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে এসটিডি (সার্ভিকাল কোনডাইলোমেটোসিস) নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে এসটিডি (ভ্যাজাইনাল কোনডাইলোমেটোসিস) নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে এসটিডি (ভলভো - পেরিনিয়াল কোনডাইলোমেটোসিস) নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে এসটিডি (সিফিলিস) নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে শ্রোণী প্রদাহজনক রোগ নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে জেনিটাল হারপিস নির্ণীত হয়েছে?',
+    'আপনার কি পূর্বে মলাস্কাম কন্টাজিওসাম নির্ণীত হয়েছে?',
+    'রোগ নির্ণয়ের পরে ক্যান্সারের উপস্থিতি?',
+    'রোগ নির্ণয়ের পরে সার্ভিকাল ইন্ট্রাপিথেলিয়াল নিউওপ্লাসিয়া এর উপস্থিতি?',
+    'রোগ নির্ণয়ের পরে এইচপিভি এর উপস্থিতি?',
+    'রোগ নির্ণয়ের পরে এইচপিভি/সার্ভিকাল ইন্ট্রাপিথেলিয়াল নিউওপ্লাসিয়া/ক্যান্সারের এর উপস্থিতি?',
+    'কলপোস্কোপির(হিন্সেলম্যান) ফলাফল পজিটিভ হলে ১ চাপুন, অন্যথায় ০ চাপুন',
+    'শিলার আয়োডিন পরীক্ষার ফলাফল পজিটিভ হলে ১ চাপুন, অন্যথায় ০ চাপুন',
+    'প্যাপ স্মিয়ার পরীক্ষার ফলাফল পজিটিভ হলে ১ চাপুন, অন্যথায় ০ চাপুন',
   ];
 
   final List<List<String>> _radioButtons = [
+    //5
+    [
+      'হ্যাঁ',
+      'না',
+    ],
     [
       '০',
       '১',
-      '২',
-      '৩',
-      '৪ অথবা তার উপরে',
-    ],
-    [
-      '২৫-৩৫ বছর',
-      '৩৫-৪৫ বছর',
-      '৪৫-৬৫ বছর',
-    ],
-    ['১', 'একের অধিক'],
-    [
-      'হ্যাঁ',
-      'না',
-    ],
-    [
-      'হ্যাঁ',
-      'না',
     ],
   ];
 
   @override
   void initState() {
-    for (var i = 0; i < _checkboxesController.length; i++) {
-      _checkboxesController[i] = GroupButtonController(
-        selectedIndexes: [],
-        // disabledIndexes: [0],
-        // onDisablePressed: (index) => ScaffoldMessenger.of(context).showSnackBar(
-        // SnackBar(content: Text('${_checkboxButtons[i][index]} is disabled')),
-        // ),
-      );
-    }
-     for (var i = 0; i < _radioController.length; i++) {
-       _radioController[i] = GroupButtonController(
+    for (var i = 0; i < _radioController.length; i++) {
+      _radioController[i] = GroupButtonController(
         selectedIndexes: [],
         // disabledIndexes: [2, 3],
         // onDisablePressed: (index) => ScaffoldMessenger.of(context).showSnackBar(
@@ -81,13 +78,13 @@ class _ScreeningState extends State<Screening> {
         // ),
       );
     }
+    for (var i = 0; i < _textController.length; i++) {
+      _textController[i] = TextEditingController();
+    }
     super.initState();
   }
 
   void printSelected() {
-    for (var i = 0; i < _checkboxesController.length; i++) {
-      print(_checkboxesController[i].selectedIndexes);
-    }
     print('-------------------------');
     for (var i = 0; i < _radioController.length; i++) {
       print(_radioController[i].selectedIndex);
@@ -97,49 +94,149 @@ class _ScreeningState extends State<Screening> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-         
-          TestRadio(
-              question: questions[0],
-              radioButtons: _radioButtons[0],
-              radioController: _radioController[0],
-              type: true),
-          TestRadio(
-              question: questions[1],
-              radioButtons: _radioButtons[1],
-              radioController: _radioController[1],
-              type: true),
-          TestRadio(
-              question: questions[2],
-              radioButtons: _radioButtons[2],
-              radioController: _radioController[2],
-              type: true),
-           TestRadio(
-              question: questions[4],
-              radioButtons: _radioButtons[4],
-              radioController: _radioController[4],
-              type: true),
-          TestRadio(
-              question: questions[3],
-              radioButtons: _radioButtons[3],
-              radioController: _radioController[3],
-              type: true),
-          TestCheckBox(
-              question: questions[5],
-              checkboxButtons: _checkboxButtons[0],
-              checkboxesController: _checkboxesController[0],
-              type: false),
-          
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton2(
-                onPressed: () {
-                  printSelected();
-                },
-               label:'Submit'),
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: ListView(
+          children: [
+            Heading(label: "সার্ভিকাল ক্যান্সার স্ক্রীনিং"),
+            TextFormField2(controller: _textController[0], label: questions[0]),
+            TextFormField2(controller: _textController[1], label: questions[1]),
+            TextFormField2(controller: _textController[2], label: questions[2]),
+            TextFormField2(controller: _textController[3], label: questions[3]),
+            TestRadio(
+                question: questions[4],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[0],
+                type: true),
+            TextFormField2(controller: _textController[4], label: questions[5]),
+            TextFormField2(controller: _textController[5], label: questions[6]),
+            TestRadio(
+                question: questions[7],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[1],
+                type: true),
+            TextFormField2(controller: _textController[6], label: questions[8]),
+            TestRadio(
+                question: questions[9],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[2],
+                type: true),
+            TextFormField2(
+                controller: _textController[7], label: questions[10]),
+            TestRadio(
+                question: questions[11],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[3],
+                type: true),
+            TextFormField2(
+                controller: _textController[8], label: questions[12]),
+            TextFormField2(
+                controller: _textController[9], label: questions[13]),
+            TestRadio(
+                question: questions[14],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[4],
+                type: true),
+            TestRadio(
+                question: questions[15],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[5],
+                type: true),
+            TestRadio(
+                question: questions[16],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[6],
+                type: true),
+            TestRadio(
+                question: questions[17],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[7],
+                type: true),
+            TestRadio(
+                question: questions[18],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[8],
+                type: true),
+            TestRadio(
+                question: questions[19],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[9],
+                type: true),
+            TestRadio(
+                question: questions[20],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[10],
+                type: true),
+            TestRadio(
+                question: questions[21],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[11],
+                type: true),
+            TestRadio(
+                question: questions[22],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[12],
+                type: true),
+            TestRadio(
+                question: questions[23],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[13],
+                type: true),
+            TestRadio(
+                question: questions[24],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[14],
+                type: true),
+            TestRadio(
+                question: questions[25],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[15],
+                type: true),
+            TestRadio(
+                question: questions[26],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[16],
+                type: true),
+            TestRadio(
+                question: questions[27],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[17],
+                type: true),
+            TestRadio(
+                question: questions[28],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[18],
+                type: true),
+            TestRadio(
+                question: questions[29],
+                radioButtons: _radioButtons[0],
+                radioController: _radioController[19],
+                type: true),
+            TestRadio(
+                question: questions[30],
+                radioButtons: _radioButtons[1],
+                radioController: _radioController[20],
+                type: true),
+            TestRadio(
+                question: questions[31],
+                radioButtons: _radioButtons[1],
+                radioController: _radioController[21],
+                type: true),
+            TestRadio(
+                question: questions[32],
+                radioButtons: _radioButtons[1],
+                radioController: _radioController[22],
+                type: true),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton2(
+                  onPressed: () {
+                    printSelected();
+                  },
+                  label: 'Submit'),
+            )
+          ],
+        ),
       ),
     );
   }

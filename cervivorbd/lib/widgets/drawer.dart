@@ -34,8 +34,9 @@ class Drawer2 extends StatelessWidget {
               //   ),
               // );
               Navigator.push(
-                  (context),
-                  MaterialPageRoute(builder: (context) => UserDetails()),);
+                (context),
+                MaterialPageRoute(builder: (context) => UserDetails()),
+              );
             },
           ),
           ListTile(
