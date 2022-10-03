@@ -3,7 +3,7 @@ import 'package:cervivorbd/Screens/Authentication/login_screen.dart';
 import 'package:cervivorbd/Screens/Authentication/signup_screen.dart';
 import 'package:cervivorbd/Screens/CancerInformationModule/cc_intro_grid_menu.dart';
 import 'package:cervivorbd/Utils/Widgets/Buttons/elevated_button.dart';
-import 'package:cervivorbd/utils/Theme/color_constants.dart';
+import 'package:cervivorbd/Utils/Theme/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class MySplashScreen extends StatefulWidget {

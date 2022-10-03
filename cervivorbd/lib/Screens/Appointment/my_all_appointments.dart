@@ -1,10 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:intl/intl.dart';
 
 class AppointmentHistoryList extends StatefulWidget {
+  const AppointmentHistoryList({Key? key}) : super(key: key);
+
   @override
   _AppointmentHistoryListState createState() => _AppointmentHistoryListState();
 }
@@ -12,7 +12,6 @@ class AppointmentHistoryList extends StatefulWidget {
 class _AppointmentHistoryListState extends State<AppointmentHistoryList> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? user;
-  String? _documentID;
 
   Future<void> _getUser() async {
     user = _auth.currentUser;
@@ -63,14 +62,14 @@ class _AppointmentHistoryListState extends State<AppointmentHistoryList> {
           }
           return snapshot.data!.size == 0
               ? Center(
-                child: Text(
+                  child: Text(
                     'History Appears here...',
                     style: GoogleFonts.lato(
                       color: Colors.grey,
                       fontSize: 18,
                     ),
                   ),
-              )
+                )
               : ListView.builder(
                   scrollDirection: Axis.vertical,
                   physics: const ClampingScrollPhysics(),

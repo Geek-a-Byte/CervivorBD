@@ -1,10 +1,5 @@
-import 'package:cervivorbd/Utils/Widgets/Buttons/elevated_button.dart';
-import 'package:cervivorbd/Utils/Widgets/TextStyle/heading.dart';
-import 'package:cervivorbd/utils/Widgets/FormOptions/test_radio.dart';
-import 'package:cervivorbd/utils/Widgets/TextStyle/text_form_field.dart';
-import 'package:flutter/material.dart';
-import 'package:group_button/group_button.dart';
-
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
 
 
 class Screening extends StatefulWidget {

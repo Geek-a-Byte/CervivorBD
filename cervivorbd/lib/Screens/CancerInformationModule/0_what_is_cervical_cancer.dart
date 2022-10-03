@@ -1,7 +1,6 @@
-import 'package:cervivorbd/Screens/CancerInformationModule/intro_to_cc.dart';
-import 'package:cervivorbd/Utils/Widgets/Buttons/intro_button.dart';
-import 'package:cervivorbd/Utils/Widgets/TextStyle/heading.dart';
-import 'package:flutter/material.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
 
 class WhatisCervicalCancer extends StatelessWidget {
   const WhatisCervicalCancer({Key? key}) : super(key: key);

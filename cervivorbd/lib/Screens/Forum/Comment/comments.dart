@@ -1,14 +1,12 @@
-
 import 'package:cervivorbd/Screens/Forum/Comment/comment_container.dart';
 import 'package:cervivorbd/Screens/UserProfiles/Patient/patient.dart';
-import 'package:cervivorbd/utils/Widgets/TextStyle/text_form_field.dart';
+import 'package:cervivorbd/Utils/Widgets/TextStyle/text_form_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
 
 class Comments extends StatefulWidget {
   final String? postid;
@@ -117,8 +115,7 @@ class _CommentsState extends State<Comments> {
             title: TextFormField2(
                 controller: commentController, label: 'Write a comment...'),
             trailing: ElevatedButton(
-                onPressed: () => addComment(),
-                child: const Text('Post')))
+                onPressed: () => addComment(), child: const Text('Post')))
       ],
     ));
   }

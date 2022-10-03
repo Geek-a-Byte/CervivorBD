@@ -1,4 +1,4 @@
-import 'package:cervivorbd/utils/Widgets/FormOptions/checkbox.dart';
+import 'package:cervivorbd/Utils/Widgets/FormOptions/checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
@@ -51,10 +51,7 @@ class TestCheckBox extends StatelessWidget {
                   checkboxesController.unselectIndex(index);
                 },
               );
-              
-            }
-            
-            )
+            })
       ],
     );
   }

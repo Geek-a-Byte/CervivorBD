@@ -1,6 +1,6 @@
 import 'package:cervivorbd/Screens/UserProfiles/Patient/patient.dart';
 import 'package:cervivorbd/Utils/Widgets/Buttons/elevated_button.dart';
-import 'package:cervivorbd/Utils/exports/models.dart';
+import 'package:cervivorbd/Utils/Exports/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +72,9 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
 
     // writing all the values
     postModel.ownerid = loggedInUser.email;
-    postModel.postid = postiddd = DateTime.now().toString() + loggedInUser.fullname! + loggedInUser.email!;
+    postModel.postid = postiddd = DateTime.now().toString() +
+        loggedInUser.fullname! +
+        loggedInUser.email!;
     postModel.fullname = loggedInUser.fullname;
     postModel.details = blogEditingController.text;
     postModel.timeAgo = DateTime.now();
@@ -92,7 +94,7 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
         .doc(postiddd)
         .set(postModel.toMapPost());
 
-      blogEditingController.clear();
+    blogEditingController.clear();
     Fluttertoast.showToast(msg: "Post created successfully!");
   }
 }

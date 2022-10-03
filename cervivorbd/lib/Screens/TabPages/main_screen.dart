@@ -1,9 +1,9 @@
 import 'package:cervivorbd/Screens/CancerScreening/Screening.dart';
 import 'package:cervivorbd/Screens/TabPages/forum_screen.dart';
 import 'package:cervivorbd/Screens/TabPages/home_screen.dart';
-import 'package:cervivorbd/utils/Theme/color_constants.dart';
-import 'package:cervivorbd/utils/Widgets/Appbar/appbar.dart';
-import 'package:cervivorbd/utils/Widgets/Appbar/drawer.dart';
+import 'package:cervivorbd/Utils/Theme/color_constants.dart';
+import 'package:cervivorbd/Utils/Widgets/Appbar/appbar.dart';
+import 'package:cervivorbd/Utils/Widgets/Appbar/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'my_appointments_screen.dart';
@@ -61,7 +61,8 @@ class _MainScreenState extends State<MainScreen>
                 label: "প্রাথমিক স্ক্রিনিং"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today), label: "অ্যাপয়েন্টসমূহ"),
-            BottomNavigationBarItem(icon: Icon(Icons.forum), label: "পাব্লিক ফোরাম"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.forum), label: "পাব্লিক ফোরাম"),
           ],
           unselectedItemColor: kBlackColor900,
           selectedItemColor: kdarkPink,

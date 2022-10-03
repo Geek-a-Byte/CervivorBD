@@ -1,11 +1,8 @@
-
-import 'package:cervivorbd/Screens/TabPages/my_appointments_screen.dart';
-import 'package:cervivorbd/utils/Widgets/TextStyle/text_form_field.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
 
 class BookingScreen extends StatefulWidget {
   final String doctor;
@@ -188,8 +185,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         height: 30,
                       ),
                       TextFormField2(
-                          controller: _nameController,
-                          label: 'ইমেইল*'),
+                          controller: _nameController, label: 'ইমেইল*'),
                       // TextFormField(
                       //   controller: _nameController,
                       //   focusNode: f1,

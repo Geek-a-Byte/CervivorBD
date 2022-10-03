@@ -74,7 +74,7 @@ class _AppointmentTabPageState extends State<AppointmentTabPage> {
                      Container(
                       padding:
                           const EdgeInsets.only(right: 10, left: 10, top: 10),
-                      child: AppointmentHistoryList(),
+                      child: const AppointmentHistoryList(),
                     ),
                   ],
                 ))

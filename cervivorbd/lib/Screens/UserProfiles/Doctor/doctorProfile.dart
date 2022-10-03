@@ -2,7 +2,7 @@ import 'package:cervivorbd/Screens/TabPages/my_appointments_screen.dart';
 import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctor.dart';
 import 'package:cervivorbd/Utils/Theme/color_constants.dart';
 import 'package:cervivorbd/Utils/Widgets/TextStyle/text_form_field.dart';
-import 'package:cervivorbd/utils/Widgets/Buttons/elevated_button.dart';
+import 'package:cervivorbd/Utils/Widgets/Buttons/elevated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -310,8 +310,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                   padding: const EdgeInsets.only(top: 0),
                   child: Column(children: [
                     TextFormField2(
-                        controller: _nameController,
-                        label: 'পেশেন্টের নাম *'),
+                        controller: _nameController, label: 'পেশেন্টের নাম *'),
                     TextFormField2(
                         controller: _phoneController,
                         label: 'পেশেন্টের ফোন নম্বর*'),

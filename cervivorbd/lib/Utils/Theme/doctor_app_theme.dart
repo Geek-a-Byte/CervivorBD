@@ -29,7 +29,6 @@ class DoctorAppTheme {
           color: kBlackColor900,
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          
         ),
         headline5: TextStyle(
           color: kGreyColor800,

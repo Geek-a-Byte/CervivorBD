@@ -1,5 +1,6 @@
 import 'package:cervivorbd/Utils/Theme/color_constants.dart';
 import 'package:flutter/material.dart';
+
 class Appbar2 extends StatelessWidget with PreferredSizeWidget {
   const Appbar2({Key? key}) : super(key: key);
 
@@ -9,7 +10,7 @@ class Appbar2 extends StatelessWidget with PreferredSizeWidget {
         // title: const Text("CervivorBD",
         //     style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)),
         flexibleSpace: const Padding(
-          padding: EdgeInsets.only(left:45.0,top:30.0),
+          padding: EdgeInsets.only(left: 45.0, top: 30.0),
           child: Image(
             alignment: Alignment.topLeft,
             image: AssetImage('images/logoheader.png'),

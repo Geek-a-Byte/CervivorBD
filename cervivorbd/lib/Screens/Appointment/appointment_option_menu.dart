@@ -1,5 +1,5 @@
-import 'package:cervivorbd/Utils/Widgets/Buttons/intro_button.dart';
-import 'package:flutter/material.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/widgets/Buttons/intro_button.dart';
 
 class OptionGridMenu extends StatelessWidget {
   const OptionGridMenu({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class OptionGridMenu extends StatelessWidget {
                   constraints: const BoxConstraints(
                     minHeight: 60,
                     minWidth: 60,
-                    maxHeight:100,
+                    maxHeight: 100,
                     maxWidth: 100,
                   ),
                   child: IntroButton3(

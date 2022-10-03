@@ -4,7 +4,6 @@ import 'package:cervivorbd/Utils/Theme/color_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-
 class Drawer2 extends StatelessWidget {
   const Drawer2({Key? key}) : super(key: key);
 

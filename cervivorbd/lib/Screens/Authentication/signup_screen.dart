@@ -1,14 +1,7 @@
-import 'package:cervivorbd/Screens/Authentication/login_screen.dart';
-import 'package:cervivorbd/Screens/TabPages/main_screen.dart';
-import 'package:cervivorbd/Screens/UserProfiles/Patient/patient.dart';
-import 'package:cervivorbd/Utils/Widgets/Buttons/elevated_button.dart';
-import 'package:cervivorbd/Utils/Widgets/Buttons/text_button.dart';
-import 'package:cervivorbd/utils/Widgets/TextStyle/heading.dart';
-import 'package:cervivorbd/utils/Widgets/TextStyle/text_form_field.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 
 class SignupScreen extends StatefulWidget {
@@ -83,7 +76,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                        builder: (c) => const LoginScreen()));
+                                builder: (c) => const LoginScreen()));
                       }),
                 ],
               ),
@@ -151,7 +144,7 @@ class _SignupScreenState extends State<SignupScreen> {
         .doc(user.uid)
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully :) ");
-    
+
     // Navigator.push(
     //     context, MaterialPageRoute(builder: (c) => const LoginScreen()));
     Navigator.pushAndRemoveUntil(

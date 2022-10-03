@@ -1,8 +1,6 @@
-
-import 'package:cervivorbd/Utils/Theme/color_constants.dart';
-import 'package:cervivorbd/Utils/Widgets/Buttons/intro_button.dart';
-import 'package:flutter/material.dart';
-
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Exports/theme.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
 
 class CCIntroGridMenu extends StatelessWidget {
   const CCIntroGridMenu({Key? key}) : super(key: key);
