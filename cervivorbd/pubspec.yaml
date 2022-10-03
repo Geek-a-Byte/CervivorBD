@@ -75,7 +75,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-    - assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -89,11 +88,11 @@ flutter:
   fonts:
     - family: Hind Siliguri Regular
       fonts:
-        - asset: fonts/HindSiliguri-Regular.ttf
+        - asset: assets/fonts/HindSiliguri-Regular.ttf
     - family: Hind Siliguri Bold
       fonts:
-        - asset: fonts/HindSiliguri-Bold.ttf
-        - asset: fonts/MyFlutterApp.ttf
+        - asset: assets/fonts/HindSiliguri-Bold.ttf
+        - asset: assets/fonts/MyFlutterApp.ttf
         # - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
