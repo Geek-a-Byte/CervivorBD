@@ -1,7 +1,6 @@
-import 'package:cervivorbd/Screens/CancerInformationModule/0_what_is_cervical_cancer.dart';
-import 'package:flutter/material.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
 
-import '../../../Screens/CancerScreening/Screening.dart';
 
 var introMenu = [
   IntroButton2(label: 'জরায়ুর ক্যান্সার কি?', onPressed: () {}),
