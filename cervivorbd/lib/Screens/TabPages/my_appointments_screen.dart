@@ -1,8 +1,8 @@
-import 'package:cervivorbd/Screens/Appointment/my_all_appointments.dart';
-import 'package:cervivorbd/Screens/Appointment/my_pending_appointments.dart';
-import 'package:cervivorbd/Utils/Theme/color_constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/theme.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+
 
 class AppointmentTabPage extends StatefulWidget {
   const AppointmentTabPage({Key? key}) : super(key: key);

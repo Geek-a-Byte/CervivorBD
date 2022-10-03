@@ -1,5 +1,5 @@
 import 'package:cervivorbd/Screens/SplashScreen/splash_screen.dart';
-import 'package:cervivorbd/Screens/TabPages/main_screen.dart';
+import 'package:cervivorbd/Screens/TabPages/bottom_navigation_menu.dart';
 import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctorProfile.dart';
 import 'package:cervivorbd/Utils/Theme/doctor_app_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';

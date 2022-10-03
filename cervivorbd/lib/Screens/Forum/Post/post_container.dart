@@ -1,10 +1,7 @@
 import 'package:cervivorbd/Screens/Forum/Comment/comments.dart';
-import 'package:cervivorbd/Screens/Forum/Post/post.dart';
-import 'package:cervivorbd/Screens/UserProfiles/Patient/patient.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 class PostContainer extends StatelessWidget {
   final Post post;

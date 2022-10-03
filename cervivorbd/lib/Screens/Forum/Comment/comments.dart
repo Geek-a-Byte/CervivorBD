@@ -1,11 +1,7 @@
-import 'package:cervivorbd/Screens/Forum/Comment/comment_container.dart';
-import 'package:cervivorbd/Screens/UserProfiles/Patient/patient.dart';
-import 'package:cervivorbd/Utils/Widgets/TextStyle/text_form_field.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class Comments extends StatefulWidget {

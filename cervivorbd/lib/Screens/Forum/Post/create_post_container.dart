@@ -1,10 +1,7 @@
-import 'package:cervivorbd/Screens/UserProfiles/Patient/patient.dart';
-import 'package:cervivorbd/Utils/Widgets/Buttons/elevated_button.dart';
-import 'package:cervivorbd/Utils/Exports/models.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 class CreatePostContainer extends StatefulWidget {
   const CreatePostContainer({Key? key}) : super(key: key);

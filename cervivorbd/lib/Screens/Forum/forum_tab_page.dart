@@ -1,13 +1,6 @@
-import 'package:cervivorbd/Screens/Forum/Post/create_post_container.dart';
-import 'package:cervivorbd/Screens/Forum/Post/post.dart';
-import 'package:cervivorbd/Screens/Forum/Post/post_container.dart';
-import 'package:cervivorbd/Screens/UserProfiles/Patient/patient.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 class ForumTabPage extends StatefulWidget {
   const ForumTabPage({Key? key}) : super(key: key);

@@ -1,12 +1,7 @@
-import 'package:cervivorbd/Screens/CancerScreening/Screening.dart';
-import 'package:cervivorbd/Screens/TabPages/forum_screen.dart';
-import 'package:cervivorbd/Screens/TabPages/home_screen.dart';
-import 'package:cervivorbd/Utils/Theme/color_constants.dart';
-import 'package:cervivorbd/Utils/Widgets/Appbar/appbar.dart';
-import 'package:cervivorbd/Utils/Widgets/Appbar/drawer.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'my_appointments_screen.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/theme.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

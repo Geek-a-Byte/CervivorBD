@@ -1,8 +1,6 @@
-import 'package:cervivorbd/Screens/CancerInformationModule/cc_intro_grid_menu.dart';
-import 'package:cervivorbd/Screens/UserProfiles/Doctor/top_doctors_list.dart';
-import 'package:cervivorbd/Utils/Widgets/Buttons/intro_button.dart';
-import 'package:cervivorbd/Utils/Widgets/Buttons/text_button.dart';
-import 'package:flutter/material.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 class HomeTabPage extends StatefulWidget {
   const HomeTabPage({Key? key}) : super(key: key);
