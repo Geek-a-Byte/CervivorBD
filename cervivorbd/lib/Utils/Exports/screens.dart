@@ -21,6 +21,9 @@ export 'package:cervivorbd/Screens/CancerInformationModule/cc_intro_grid_menu.da
 export 'package:cervivorbd/Screens/CancerScreening/Screening.dart';
 
 export 'package:cervivorbd/Screens/UserProfiles/Doctor/top_doctors_list.dart';
+export 'package:cervivorbd/Screens/UserProfiles/Doctor/doctor.dart';
+export 'package:cervivorbd/Screens/UserProfiles/Doctor/top_doctor_card.dart';
 
 export 'package:cervivorbd/Screens/Appointment/my_all_appointments.dart';
 export 'package:cervivorbd/Screens/Appointment/my_pending_appointments.dart';
+

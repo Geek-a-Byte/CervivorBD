@@ -1,7 +1,6 @@
-import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctor.dart';
-import 'package:cervivorbd/Screens/UserProfiles/Doctor/top_doctor_card.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
 
 class TopDoctorsList extends StatelessWidget {
   const TopDoctorsList({Key? key}) : super(key: key);
@@ -64,7 +63,8 @@ class TopDoctorsList extends StatelessWidget {
                               doctorPicture: doctor['picture'],
                               doctorRating: doctor['rating'],
                               doctorSpecialty: doctor['speciality'],
-                              doctorYearOfExperience: doctor['yearofexperience'],
+                              doctorYearOfExperience:
+                                  doctor['yearofexperience'],
                               doctorWorkingHour: doctor['workinghour'],
                             ),
                           );

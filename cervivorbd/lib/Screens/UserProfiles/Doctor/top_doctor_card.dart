@@ -1,5 +1,5 @@
-import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctor.dart';
-import 'package:flutter/material.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 class Cards extends StatelessWidget {
   const Cards({Key? key, this.doctor}) : super(key: key);

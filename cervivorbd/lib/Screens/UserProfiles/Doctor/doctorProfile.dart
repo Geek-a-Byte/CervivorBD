@@ -1,14 +1,9 @@
-import 'package:cervivorbd/Screens/TabPages/my_appointments_screen.dart';
-import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctor.dart';
-import 'package:cervivorbd/Utils/Theme/color_constants.dart';
-import 'package:cervivorbd/Utils/Widgets/TextStyle/text_form_field.dart';
-import 'package:cervivorbd/Utils/Widgets/Buttons/elevated_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
+import 'package:cervivorbd/Utils/Exports/theme.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 class DoctorDetailScreen extends StatefulWidget {
   const DoctorDetailScreen({Key? key}) : super(key: key);

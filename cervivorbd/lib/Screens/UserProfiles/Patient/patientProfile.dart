@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
 
+// ignore: use_key_in_widget_constructors
 class UserDetails extends StatefulWidget {
   @override
   _UserDetailsState createState() => _UserDetailsState();
@@ -16,17 +15,9 @@ class _UserDetailsState extends State<UserDetails> {
     user = _auth.currentUser!;
   }
 
-  List labelName = [
-    'Name',
-    'Email',
-    'Phone no'
-  ];
+  List labelName = ['Name', 'Email', 'Phone no'];
 
-  List value = [
-    'fullname',
-    'email',
-    'phonenumber'
-  ];
+  List value = ['fullname', 'email', 'phonenumber'];
 
   @override
   void initState() {
@@ -80,11 +71,13 @@ class _UserDetailsState extends State<UserDetails> {
                                 color: Colors.grey[200],
                               ),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 14),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 14),
                                 height: MediaQuery.of(context).size.height / 14,
                                 width: MediaQuery.of(context).size.width,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       labelName[index],

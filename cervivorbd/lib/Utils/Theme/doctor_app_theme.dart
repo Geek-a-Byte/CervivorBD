@@ -1,6 +1,5 @@
 import 'package:cervivorbd/Utils/Theme/color_constants.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 class DoctorAppTheme {
   static ThemeData get lightTheme {

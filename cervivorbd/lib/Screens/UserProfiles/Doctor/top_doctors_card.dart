@@ -1,7 +1,7 @@
-import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctor.dart';
-import 'package:cervivorbd/Utils/Theme/color_constants.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:cervivorbd/Utils/Exports/screens.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Exports/theme.dart';
+
 
 class TopDoctorsCard extends StatelessWidget {
   const TopDoctorsCard({Key? key, this.doctor}) : super(key: key);
