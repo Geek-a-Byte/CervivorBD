@@ -1,3 +1,4 @@
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
@@ -16,6 +17,7 @@ class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
   int selectedIndex = 0;
+
   onItemClicked(int index) {
     setState(() {
       selectedIndex = index;
@@ -23,9 +25,24 @@ class _MainScreenState extends State<MainScreen>
     });
   }
 
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
   @override
   void initState() {
     super.initState();
+    if (user != null) {
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(user!.uid)
+          .get()
+          .then((value) {
+        setState(() {
+          // call setState to rebuild the view
+          loggedInUser = UserModel.fromMap(value.data());
+        });
+      });
+    }
     tabController = TabController(length: 4, vsync: this);
   }
 
@@ -33,7 +50,23 @@ class _MainScreenState extends State<MainScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kWhiteColor,
-        appBar: const Appbar2(),
+        appBar: user != null
+            ? Appbar2(
+                username: loggedInUser.fullname,
+                propicURL: 'assets/images/nazia.png')
+            : AppBar(
+                flexibleSpace: const Padding(
+                  padding: EdgeInsets.only(left: 45.0, top: 30.0),
+                  child: Image(
+                    alignment: Alignment.topLeft,
+                    image: AssetImage('images/logoheader.png'),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                iconTheme: const IconThemeData(color: kBlackColor900),
+              ),
         drawer: const Drawer2(),
         body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
@@ -41,8 +74,6 @@ class _MainScreenState extends State<MainScreen>
           children: [
             const HomeTabPage(),
             const Screening(),
-            // AppointmentTabPage(),
-            // ForumTabPage(),
             Consumer<AuthModel>(
               builder: (_, auth, __) => auth.isSignedIn
                   ? const AppointmentTabPage()

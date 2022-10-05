@@ -77,19 +77,9 @@ class ComplicatedImageDemo extends StatelessWidget {
 
 class _HomeTabPageState extends State<HomeTabPage>
     with SingleTickerProviderStateMixin {
-  // User? user = FirebaseAuth.instance.currentUser;
-  // UserModel loggedInUser = UserModel();
-
   @override
   void initState() {
     super.initState();
-    // FirebaseFirestore.instance
-    //     .collection("users")
-    //     .doc(user!.uid)
-    //     .get()
-    //     .then((value) {
-    //   loggedInUser = UserModel.fromMap(value.data());
-    // });
   }
 
   // TabController? tabController;
@@ -190,8 +180,7 @@ class _HomeTabPageState extends State<HomeTabPage>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.only(left: 5.0),
+                  padding: const EdgeInsets.only(left: 5.0),
                   child: Text(
                     'বিশেষজ্ঞ ডাক্তারগণ',
                     style: Theme.of(context).textTheme.headline4,

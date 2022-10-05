@@ -1,3 +1,4 @@
+import 'package:cervivorbd/Screens/Authentication/login_screen.dart';
 import 'package:cervivorbd/Screens/TabPages/bottom_navigation_menu.dart';
 import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctorProfile.dart';
 import 'package:cervivorbd/Utils/Theme/doctor_app_theme.dart';
@@ -5,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'Screens/Authentication/signup_screen.dart';
 
 class AuthModel extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -39,6 +42,8 @@ void main() async {
           //           : const MainScreen(),
           //     ),
           '/': (context) => const MainScreen(),
+          '/login': (context) => const LoginScreen(),
+          '/signup': (context) => const SignupScreen(),
           '/doctor_details': (context) => const DoctorDetailScreen(),
         },
       ),

@@ -2,13 +2,12 @@ import 'package:cervivorbd/Utils/Theme/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class Appbar2 extends StatelessWidget with PreferredSizeWidget {
-  const Appbar2({Key? key}) : super(key: key);
-
+  String? username;
+  String? propicURL;
+  Appbar2({Key? key, this.username, this.propicURL}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        // title: const Text("CervivorBD",
-        //     style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)),
         flexibleSpace: const Padding(
           padding: EdgeInsets.only(left: 45.0, top: 30.0),
           child: Image(
@@ -20,15 +19,23 @@ class Appbar2 extends StatelessWidget with PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: kBlackColor900),
-        actions: const <Widget>[
+        actions: <Widget>[
           Padding(
-            padding: EdgeInsets.all(16.0),
-            child: SizedBox(
-              width: 36,
-              height: 36,
-              child: CircleAvatar(
-                backgroundImage: AssetImage('images/nazia.png'),
-              ),
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Text(username!, style: Theme.of(context).textTheme.headline4),
+                SizedBox(
+                    width: 40,
+                    height: 50,
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: AssetImage(propicURL!),
+                        ),
+                      ],
+                    )),
+              ],
             ),
           )
         ]);

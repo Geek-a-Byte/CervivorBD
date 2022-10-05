@@ -72,10 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextButton2(
                         label: "অ্যাকাউন্ট নেই? নিবন্ধন করুন",
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (c) => const SignupScreen()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (c) => const SignupScreen()));
+                          Navigator.popAndPushNamed(context, '/signup');
                         }),
                   ],
                 ),

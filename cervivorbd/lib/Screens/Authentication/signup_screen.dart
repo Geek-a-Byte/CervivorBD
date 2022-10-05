@@ -3,7 +3,6 @@ import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 
-
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
 
@@ -73,10 +72,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   TextButton2(
                       label: "অ্যাকাউন্ট আছে? লগইন করুন",
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (c) => const LoginScreen()));
+                        // Navigator.popAndPushNamed(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (c) => const LoginScreen()));
+                        Navigator.popAndPushNamed(context, '/login');
                       }),
                 ],
               ),
