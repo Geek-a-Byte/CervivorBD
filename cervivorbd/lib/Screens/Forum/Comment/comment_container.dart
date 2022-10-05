@@ -27,14 +27,26 @@ class CommentContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(username!),
+                  Text(
+                    username!,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const SizedBox(height: 4.0),
-                  Text(timestamp.toString()),
+                  Text(
+                    timestamp.toString(),
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
                   const SizedBox(height: 4.0),
-                  Text(comment!),
-                  // post.imageUrl != ''
-                  //     ? const SizedBox.shrink()
-                  //     : const SizedBox(height: 6.0),
+                  Text(
+                    comment!,
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 15.0,
+                    ),
+                  ),
                 ],
               ),
             ),

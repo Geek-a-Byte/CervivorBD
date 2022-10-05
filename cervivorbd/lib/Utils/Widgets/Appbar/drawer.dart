@@ -15,7 +15,7 @@ class Drawer2 extends StatelessWidget {
           const DrawerHeader(
             child: Image(
               alignment: Alignment.topLeft,
-              image: AssetImage('images/logo22.png'),
+              image: AssetImage('assets/images/logo22.png'),
               fit: BoxFit.contain,
             ),
             decoration: BoxDecoration(

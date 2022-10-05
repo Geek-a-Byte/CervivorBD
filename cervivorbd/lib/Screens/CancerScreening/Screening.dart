@@ -1,7 +1,6 @@
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
 
-
 class Screening extends StatefulWidget {
   const Screening({Key? key}) : super(key: key);
 
@@ -95,134 +94,169 @@ class _ScreeningState extends State<Screening> {
         child: ListView(
           children: [
             Heading(label: "সার্ভিকাল ক্যান্সার স্ক্রিনিং"),
+            const SizedBox(height: 2),
+            const SizedBox(height: 2),
             TextFormField2(controller: _textController[0], label: questions[0]),
+            const SizedBox(height: 2),
             TextFormField2(controller: _textController[1], label: questions[1]),
+            const SizedBox(height: 2),
             TextFormField2(controller: _textController[2], label: questions[2]),
+            const SizedBox(height: 2),
             TextFormField2(controller: _textController[3], label: questions[3]),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[4],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[0],
                 type: true),
+            const SizedBox(height: 2),
             TextFormField2(controller: _textController[4], label: questions[5]),
+            const SizedBox(height: 2),
             TextFormField2(controller: _textController[5], label: questions[6]),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[7],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[1],
                 type: true),
+            const SizedBox(height: 2),
             TextFormField2(controller: _textController[6], label: questions[8]),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[9],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[2],
                 type: true),
+            const SizedBox(height: 2),
             TextFormField2(
                 controller: _textController[7], label: questions[10]),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[11],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[3],
                 type: true),
+            const SizedBox(height: 2),
             TextFormField2(
                 controller: _textController[8], label: questions[12]),
+            const SizedBox(height: 2),
             TextFormField2(
                 controller: _textController[9], label: questions[13]),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[14],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[4],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[15],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[5],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[16],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[6],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[17],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[7],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[18],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[8],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[19],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[9],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[20],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[10],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[21],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[11],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[22],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[12],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[23],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[13],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[24],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[14],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[25],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[15],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[26],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[16],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[27],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[17],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[28],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[18],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[29],
                 radioButtons: _radioButtons[0],
                 radioController: _radioController[19],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[30],
                 radioButtons: _radioButtons[1],
                 radioController: _radioController[20],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[31],
                 radioButtons: _radioButtons[1],
                 radioController: _radioController[21],
                 type: true),
+            const SizedBox(height: 2),
             TestRadio(
                 question: questions[32],
                 radioButtons: _radioButtons[1],
                 radioController: _radioController[22],
                 type: true),
+            const SizedBox(height: 2),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton2(
@@ -230,7 +264,8 @@ class _ScreeningState extends State<Screening> {
                     printSelected();
                   },
                   label: 'Submit'),
-            )
+            ),
+            const SizedBox(height: 2),
           ],
         ),
       ),

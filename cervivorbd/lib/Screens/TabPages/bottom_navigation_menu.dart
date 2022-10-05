@@ -59,7 +59,7 @@ class _MainScreenState extends State<MainScreen>
                   padding: EdgeInsets.only(left: 45.0, top: 30.0),
                   child: Image(
                     alignment: Alignment.topLeft,
-                    image: AssetImage('images/logoheader.png'),
+                    image: AssetImage('assets/images/logoheader.png'),
                     fit: BoxFit.contain,
                   ),
                 ),

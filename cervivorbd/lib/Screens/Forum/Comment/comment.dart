@@ -1,37 +1,31 @@
-class Comment {
-  String? commentid;
-  String? fullname;
-  String? details;
-  DateTime? timeAgo;
-  int? likes;
+import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
-  Comment({
-    this.fullname,
-    this.commentid,
-    this.details,
-    this.timeAgo,
-    this.likes,
-  });
+class Comment extends StatelessWidget {
+  final String? username;
+  final String? userId;
+  final String? comment;
+  final DateTime? timestamp;
 
-  //comment4ing data to server
-  factory Comment.fromMap(map) {
+  const Comment({this.username, this.userId, this.comment, this.timestamp});
+
+  factory Comment.fromDocument(DocumentSnapshot doc) {
     return Comment(
-      commentid: map['commentid'],
-      fullname: map['fullname'],
-      details: map['details'],
-      timeAgo: map['timeAgo'],
-      likes: map['likes'],
-    );
+        username: doc['username'],
+        userId: doc['userId'],
+        comment: doc['comment'],
+        timestamp: doc['timestamp']);
   }
-
-  // sending data to our server
-  Map<String, dynamic> toMapComment() {
-    return {
-      'commentid': commentid,
-      'fullname': fullname,
-      'details': details,
-      'timeAgo': timeAgo,
-      'likes': likes,
-    };
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title: Text('$comment'),
+          subtitle: Text(timeago.format(timestamp!)),
+        )
+      ],
+    );
   }
 }

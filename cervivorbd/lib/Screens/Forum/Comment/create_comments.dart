@@ -2,7 +2,7 @@ import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:intl/intl.dart';
 
 class Comments extends StatefulWidget {
   final String? postid;
@@ -31,11 +31,15 @@ class _CommentsState extends State<Comments> {
         .doc(user!.uid)
         .get()
         .then((value) {
-      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {
+        // call setState to rebuild the view
+        loggedInUser = UserModel.fromMap(value.data());
+      });
     });
   }
 
   buildComments() {
+    final DateFormat formatter = DateFormat('hh:mm, dd-MM-yyyy');
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("comments")
@@ -48,12 +52,6 @@ class _CommentsState extends State<Comments> {
             return const CircularProgressIndicator();
           }
           List<Comment> comments = [];
-          // snapshot.data!.docs.map((doc) {
-          //   comments.add((Comment.fromDocument(doc)));
-          // });
-          // return ListView(
-          //   children: comments,
-          // );
           return snapshot.data!.size == 0
               ? Center(
                   child: Text(
@@ -75,7 +73,8 @@ class _CommentsState extends State<Comments> {
                       username: document['username'],
                       userId: document['userId'],
                       comment: document['comment'],
-                      timestamp: document['timestamp'],
+                      timestamp: formatter
+                          .format(DateTime.parse(document['timestamp'])),
                     );
                   },
                 );
@@ -83,14 +82,27 @@ class _CommentsState extends State<Comments> {
   }
 
   addComment() async {
+    FirebaseFirestore.instance
+        .collection("posts")
+        .doc('all')
+        .collection('userposts')
+        .doc(postid)
+        .update({'comments': FieldValue.increment(1)});
+    FirebaseFirestore.instance
+        .collection("posts")
+        .doc(user!.email)
+        .collection('userposts')
+        .doc(postid)
+        .update({'comments': FieldValue.increment(1)});
     await FirebaseFirestore.instance
         .collection("comments")
         .doc(postid)
         .collection("usercomments")
         .add({
+      "postid": postid,
       "username": loggedInUser.fullname,
       "comment": commentController.text,
-      "timestamp": DateTime.now().toString(),
+      "timestamp": DateTime.now(),
       "userId": loggedInUser.uid
     });
     commentController.clear();
@@ -109,38 +121,13 @@ class _CommentsState extends State<Comments> {
         const Divider(),
         ListTile(
             title: TextFormField2(
-                controller: commentController, label: 'Write a comment...'),
-            trailing: ElevatedButton(
-                onPressed: () => addComment(), child: const Text('Post')))
+                controller: commentController,
+                label: 'আপনার মন্তব্য প্রকাশ করুন..'),
+            trailing: ElevatedButton2(
+                onPressed: () => addComment(),
+                icon: Icons.post_add_outlined,
+                label: 'কমেন্ট'))
       ],
     ));
-  }
-}
-
-class Comment extends StatelessWidget {
-  final String? username;
-  final String? userId;
-  final String? comment;
-  final DateTime? timestamp;
-
-  const Comment({this.username, this.userId, this.comment, this.timestamp});
-
-  factory Comment.fromDocument(DocumentSnapshot doc) {
-    return Comment(
-        username: doc['username'],
-        userId: doc['userId'],
-        comment: doc['comment'],
-        timestamp: doc['timestamp']);
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          title: Text('$comment'),
-          subtitle: Text(timeago.format(timestamp!)),
-        )
-      ],
-    );
   }
 }

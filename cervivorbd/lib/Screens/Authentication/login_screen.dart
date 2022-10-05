@@ -53,30 +53,35 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: Column(
                   children: [
-                    Image.asset('images/logo.png', width: w, height: h * 0.28),
+                    Image.asset('assets/images/logo.png', width: w, height: h * 0.28),
                     Heading(
                       label: "লগইন করুন",
                     ),
+                    const SizedBox(height: 10),
                     TextFormField2(
                         controller: emailTextEditingController,
                         label: 'ইমেইল*'),
+                    const SizedBox(height: 10),
                     TextFormField2(
                         controller: passwordTextEditingController,
                         label: 'পাসওয়ার্ড*'),
+                    const SizedBox(height: 10),
                     ElevatedButton2(
+                      icon: Icons.login_outlined,
                       onPressed: () {
                         validateForm();
                       },
                       label: "লগইন",
                     ),
+                    const SizedBox(height: 10),
                     TextButton2(
                         label: "অ্যাকাউন্ট নেই? নিবন্ধন করুন",
                         onPressed: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (c) => const SignupScreen()));
-                          Navigator.popAndPushNamed(context, '/signup');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (c) => const SignupScreen()));
+                          // Navigator.popAndPushNamed(context, '/signup');
                         }),
                   ],
                 ),

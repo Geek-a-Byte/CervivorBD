@@ -12,7 +12,7 @@ class Appbar2 extends StatelessWidget with PreferredSizeWidget {
           padding: EdgeInsets.only(left: 45.0, top: 30.0),
           child: Image(
             alignment: Alignment.topLeft,
-            image: AssetImage('images/logoheader.png'),
+            image: AssetImage('assets/images/logoheader.png'),
             fit: BoxFit.contain,
           ),
         ),
@@ -24,7 +24,8 @@ class Appbar2 extends StatelessWidget with PreferredSizeWidget {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                Text(username!, style: Theme.of(context).textTheme.headline4),
+                Text(username!.split(' ').first,
+                    style: Theme.of(context).textTheme.headline4),
                 SizedBox(
                     width: 40,
                     height: 50,

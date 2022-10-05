@@ -32,7 +32,7 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
     return Material(
       child: Container(
         padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
-        color: Colors.white,
+        color: const Color.fromARGB(255, 251, 224, 227),
         child: Column(
           children: [
             Row(
@@ -42,25 +42,29 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
                 Expanded(
                   child: TextField(
                     maxLines: null,
-                    decoration: const InputDecoration.collapsed(
-                      hintText: 'What\'s on your mind?',
+                    decoration: const InputDecoration(
+                      hintText: 'আপনার প্রশ্ন/সমস্যা ব্যাখ্যা করে বলুন..',
+                      contentPadding: EdgeInsets.symmetric(vertical: 40),
                     ),
+                    style: const TextStyle(fontSize: 18),
                     controller: blogEditingController,
                   ),
                 ),
-                ElevatedButton2(
-                    onPressed: () {
-                      createPost();
-                    },
-                    label: 'Post'),
               ],
             ),
-            const Divider(height: 10.0, thickness: 0.5),
+            ElevatedButton2(
+                onPressed: () {
+                  createPost();
+                },
+                label: 'পোস্ট',
+                icon: Icons.post_add),
           ],
         ),
       ),
     );
   }
+
+ 
 
   Future<void> createPost() async {
     // print(dateUTC + ' ' + date_Time + ':00');
@@ -74,6 +78,7 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
         loggedInUser.email!;
     postModel.fullname = loggedInUser.fullname;
     postModel.details = blogEditingController.text;
+    // postModel.timeAgo = DateTime.parse(DateFormat('dd-MM-yyyy hh:mm:ss').format(now));
     postModel.timeAgo = DateTime.now();
     postModel.likes = {};
     postModel.comments = 0;

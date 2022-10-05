@@ -17,15 +17,15 @@ var introMenu = [
 ];
 
 var introPhotoMenu = [
-  'images/question.png',
-  'images/causes.png',
-  'images/symptoms.png',
-  'images/diagnosis.png',
-  'images/treatment.png',
-  'images/side-effect.png',
-  'images/post-operative-care.png',
-  'images/prevention.png',
-  'images/Screening.png',
+  'assets/images/question.png',
+  'assets/images/causes.png',
+  'assets/images/symptoms.png',
+  'assets/images/diagnosis.png',
+  'assets/images/treatment.png',
+  'assets/images/side-effect.png',
+  'assets/images/post-operative-care.png',
+  'assets/images/prevention.png',
+  'assets/images/Screening.png',
 ];
 
 var introPageNavigationMenu = [

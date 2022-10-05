@@ -31,7 +31,7 @@ class Cards extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('images/${doctor!.doctorPicture}')),
+                    image: AssetImage('assets/images/${doctor!.doctorPicture}')),
               ),
             ),
             const SizedBox(
@@ -43,7 +43,7 @@ class Cards extends StatelessWidget {
               maxLines: 1,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                fontSize: 10,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -52,7 +52,7 @@ class Cards extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: const TextStyle(
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: FontWeight.normal,
               ),
               textAlign: TextAlign.center,
@@ -62,7 +62,7 @@ class Cards extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: const TextStyle(
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: FontWeight.normal,
               ),
               textAlign: TextAlign.center,

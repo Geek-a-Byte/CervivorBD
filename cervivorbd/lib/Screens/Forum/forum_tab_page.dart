@@ -32,7 +32,7 @@ class _ForumTabPageState extends State<ForumTabPage> {
         children: [
           const CreatePostContainer(),
           SafeArea(
-            child: StreamBuilder(
+              child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('posts')
                 .doc('all')
@@ -47,11 +47,14 @@ class _ForumTabPageState extends State<ForumTabPage> {
               }
               return snapshot.data!.size == 0
                   ? Center(
-                      child: Text(
-                        'Posts Appears here...',
-                        style: GoogleFonts.lato(
-                          color: Colors.grey,
-                          fontSize: 18,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: Text(
+                          'Posts Appears here...',
+                          style: GoogleFonts.lato(
+                            color: Colors.grey,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     )
@@ -80,79 +83,3 @@ class _ForumTabPageState extends State<ForumTabPage> {
     );
   }
 }
-// class ForumTabPage extends StatelessWidget {
-//   const ForumTabPage({Key? key}) : super(key: key);
-  
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       CreatePostContainer(),
-//       child: StreamBuilder(
-//         stream: FirebaseFirestore.instance
-//             .collection('posts')
-//             .doc(user!.email.toString())
-//             .collection('userposts')
-//             .snapshots(),
-//         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-//           if (!snapshot.hasData) {
-//             return const Center(
-//               child: CircularProgressIndicator(),
-//             );
-//           }
-//           return snapshot.data!.size == 0
-//               ? Center(
-//                   child: Text(
-//                     'History Appears here...',
-//                     style: GoogleFonts.lato(
-//                       color: Colors.grey,
-//                       fontSize: 18,
-//                     ),
-//                   ),
-//                 )
-//               : ListView.builder(
-//                   scrollDirection: Axis.vertical,
-//                   physics: const ClampingScrollPhysics(),
-//                   shrinkWrap: true,
-//                   itemCount: snapshot.data!.size,
-//                   itemBuilder: (context, index) {
-//                     DocumentSnapshot document = snapshot.data!.docs[index];
-//                     return Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Container(
-//                           padding: const EdgeInsets.only(left: 10, top: 5),
-//                           height: 50,
-//                           width: MediaQuery.of(context).size.width,
-//                           decoration: BoxDecoration(
-//                             borderRadius: BorderRadius.circular(5),
-//                             color: Colors.blueGrey[50],
-//                           ),
-//                           child: Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               Text(
-//                                 document['doctor'],
-//                                 style: GoogleFonts.lato(
-//                                     fontSize: 15, fontWeight: FontWeight.bold),
-//                               ),
-//                               Text(
-//                                 _dateFormatter(
-//                                     document['date'].toDate().toString()),
-//                                 style: GoogleFonts.lato(
-//                                     fontSize: 12, fontWeight: FontWeight.bold),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                         const SizedBox(
-//                           height: 10,
-//                         ),
-//                       ],
-//                     );
-//                   },
-//                 );
-//         },
-//       ),
-//     );
-//   }
-// }

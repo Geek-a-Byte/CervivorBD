@@ -1,7 +1,9 @@
-import 'package:cervivorbd/Screens/Forum/Comment/comments.dart';
+import 'package:cervivorbd/Screens/Forum/Comment/create_comments.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Exports/widgets.dart';
+import 'package:intl/intl.dart';
 
 class PostContainer extends StatelessWidget {
   final Post post;
@@ -27,16 +29,18 @@ class PostContainer extends StatelessWidget {
                 children: [
                   _PostHeader(post: post),
                   const SizedBox(height: 4.0),
-                  Text(post.details!),
-                  // post.imageUrl != ''
-                  //     ? const SizedBox.shrink()
-                  //     : const SizedBox(height: 6.0),
+                  Text(
+                    post.details!,
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 15.0,
+                    ),
+                  ),
                 ],
               ),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 8.0),
-              // child: NetworkImage('${post.imageUrl}'),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -45,51 +49,6 @@ class PostContainer extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _PostHeader extends StatelessWidget {
-  final Post post;
-
-  const _PostHeader({
-    Key? key,
-    required this.post,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // ProfileAvatar(imageUrl: post.user.imageUrl),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                post.fullname!,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 3),
-              Row(
-                children: [
-                  Text(
-                    '${post.timeAgo}',
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                      fontSize: 9.0,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 6),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
@@ -122,7 +81,7 @@ class PostStats extends StatefulWidget {
 }
 
 class _PostStatsState extends State<PostStats> {
-  Post post;
+  Post? post;
   int likeCount;
   _PostStatsState(this.post, this.likeCount);
 
@@ -132,17 +91,23 @@ class _PostStatsState extends State<PostStats> {
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      loggedInUser = UserModel.fromMap(value.data());
-    });
+    if (user != null) {
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(user!.uid)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInUser = UserModel.fromMap(value.data());
+          // call setState to rebuild the view
+        });
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    String currentUserId = loggedInUser.uid!;
     return Column(
       children: [
         Row(
@@ -164,28 +129,35 @@ class _PostStatsState extends State<PostStats> {
               child: Text(
                 // '${post.likes}',
                 '$likeCount',
-                style: TextStyle(
-                  color: Colors.grey[600],
-                ),
+                style: Theme.of(context).textTheme.headline5,
               ),
             ),
-            // Text(
-            //   '${post.comments} Comments',
-            //   style: TextStyle(
-            //     color: Colors.grey[600],
-            //   ),
-            // ),
+            TextButton3(
+                label: '${post!.comments} Comments',
+                onPressed: () {
+                  showComments(
+                    context,
+                    postid: post!.postid,
+                    ownerid: post!.ownerid,
+                  );
+                }),
           ],
         ),
         const Divider(),
         Row(
           children: [
             _PostButton(
-              icon: Icon(
-                MdiIcons.thumbUpOutline,
-                color: Colors.grey[600],
-                size: 20.0,
-              ),
+              icon: post!.likes![currentUserId] == true
+                  ? const Icon(
+                      Icons.thumb_up,
+                      size: 22.0,
+                      color: Colors.black,
+                    )
+                  : Icon(
+                      MdiIcons.thumbUpOutline,
+                      color: Colors.grey[600],
+                      size: 22.0,
+                    ),
               label: 'Like',
               onTap: handleLikeCount,
             ),
@@ -193,13 +165,13 @@ class _PostStatsState extends State<PostStats> {
               icon: Icon(
                 MdiIcons.commentOutline,
                 color: Colors.grey[600],
-                size: 20.0,
+                size: 22.0,
               ),
               label: 'Comment',
               onTap: () => showComments(
                 context,
-                postid: post.postid,
-                ownerid: post.ownerid,
+                postid: post!.postid,
+                ownerid: post!.ownerid,
               ),
             ),
           ],
@@ -210,120 +182,85 @@ class _PostStatsState extends State<PostStats> {
 
   void handleLikeCount() {
     String currentUserId = loggedInUser.uid!;
-    bool _isLiked = post.likes![currentUserId] == true;
+    bool _isLiked = post!.likes![currentUserId] == true;
 
     if (_isLiked) {
       FirebaseFirestore.instance
           .collection("posts")
           .doc('all')
           .collection('userposts')
-          .doc(post.postid)
+          .doc(post!.postid)
           .update({'likes.$currentUserId': false});
       setState(() {
         likeCount -= 1;
         _isLiked = false;
-        post.likes[currentUserId] = false;
+        post!.likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
       FirebaseFirestore.instance
           .collection("posts")
           .doc('all')
           .collection('userposts')
-          .doc(post.postid)
+          .doc(post!.postid)
           .update({'likes.$currentUserId': true});
       setState(() {
         likeCount += 1;
         _isLiked = true;
-        post.likes[currentUserId] = true;
+        post!.likes[currentUserId] = true;
       });
     }
   }
 }
 
-showComments(BuildContext context, {String? postid, ownerid}) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) {
-    return Comments(
-      postid: postid,
-      postOwnerid: ownerid
+class _PostHeader extends StatelessWidget {
+  final Post post;
+  const _PostHeader({
+    Key? key,
+    required this.post,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final DateTime now = post.timeAgo!;
+    final DateFormat formatter = DateFormat('hh:mm, dd-MM-yyyy');
+    final String formatted = formatter.format(now);
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                post.fullname!,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 3),
+              Row(
+                children: [
+                  Text(
+                    // '${post.timeAgo}',
+                    formatted,
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+            ],
+          ),
+        ),
+      ],
     );
-  }));
+  }
 }
 
-// class _PostStats extends StatelessWidget {
-//   final Post post;
-
-//   final String text = '';
-//   final bool shouldDisplay = false;
-
-//   const _PostStats({
-//     Key? key,
-//     required this.post,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Row(
-//           children: [
-//             Container(
-//               padding: const EdgeInsets.all(4.0),
-//               decoration: const BoxDecoration(
-//                 color: Colors.black,
-//                 shape: BoxShape.circle,
-//               ),
-//               child: const Icon(
-//                 Icons.thumb_up,
-//                 size: 10.0,
-//                 color: Colors.white,
-//               ),
-//             ),
-//             const SizedBox(width: 4.0),
-//             Expanded(
-//               child: Text(
-//                 '${post.likes}',
-//                 style: TextStyle(
-//                   color: Colors.grey[600],
-//                 ),
-//               ),
-//             ),
-//             Text(
-//               '${post.comments} Comments',
-//               style: TextStyle(
-//                 color: Colors.grey[600],
-//               ),
-//             ),
-//           ],
-//         ),
-//         const Divider(),
-//         Row(
-//           children: [
-//             _PostButton(
-//               icon: Icon(
-//                 MdiIcons.thumbUpOutline,
-//                 color: Colors.grey[600],
-//                 size: 20.0,
-//               ),
-//               label: 'Like',
-//               onTap: () {},
-//             ),
-//             _PostButton(
-//               icon: Icon(
-//                 MdiIcons.commentOutline,
-//                 color: Colors.grey[600],
-//                 size: 20.0,
-//               ),
-//               label: 'Comment',
-//               onTap: () {
-
-//               },
-//             ),
-//           ],
-//         ),
-//       ],
-//     );
-//   }
-// }
+showComments(BuildContext context, {String? postid, ownerid}) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return Comments(postid: postid, postOwnerid: ownerid);
+  }));
+}
 
 class _PostButton extends StatelessWidget {
   final Icon icon;
@@ -352,7 +289,10 @@ class _PostButton extends StatelessWidget {
               children: [
                 icon,
                 const SizedBox(width: 4.0),
-                Text(label),
+                Text(
+                  label,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
               ],
             ),
           ),

@@ -75,7 +75,6 @@ class _MySplashScreenState extends State<MySplashScreen> {
                                         builder: (c) => const SignupScreen()));
                               },
                               label: 'নিবন্ধন করুন',
-                              color: kdarkPink,
                               icon: Icons.person_add),
                         ),
                       ),
@@ -90,7 +89,6 @@ class _MySplashScreenState extends State<MySplashScreen> {
                                         builder: (c) => const LoginScreen()));
                               },
                               label: 'লগইন করুন',
-                              color: kdarkPink,
                               icon: Icons.login),
                         ),
                       ),

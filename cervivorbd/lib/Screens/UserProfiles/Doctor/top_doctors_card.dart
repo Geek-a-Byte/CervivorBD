@@ -30,7 +30,7 @@ class TopDoctorsCard extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        'images/${doctor!.doctorPicture}',
+                        'assets/images/${doctor!.doctorPicture}',
                       ),
                     ),
                   ),

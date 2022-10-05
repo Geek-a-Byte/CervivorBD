@@ -52,19 +52,25 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               child: Column(
                 children: [
-                  Image.asset('images/logo.png', width: w, height: h * 0.28),
+                  Image.asset('assets/images/logo.png', width: w, height: h * 0.28),
                   Heading(label: "ফ্রিতে নিবন্ধন করুন"),
+                  const SizedBox(height: 10),
                   TextFormField2(
                       controller: nameTextEditingController, label: 'নাম*'),
+                  const SizedBox(height: 10),
                   TextFormField2(
                       controller: emailTextEditingController, label: 'ইমেইল*'),
+                  const SizedBox(height: 10),
                   TextFormField2(
                       controller: passwordTextEditingController,
                       label: 'পাসওয়ার্ড*'),
+                  const SizedBox(height: 10),
                   TextFormField2(
                       controller: phoneTextEditingController,
                       label: 'ফোন নম্বর*'),
+                  const SizedBox(height: 10),
                   ElevatedButton2(
+                      icon: Icons.app_registration,
                       onPressed: () {
                         validateForm();
                       },
@@ -72,11 +78,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   TextButton2(
                       label: "অ্যাকাউন্ট আছে? লগইন করুন",
                       onPressed: () {
-                        // Navigator.popAndPushNamed(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (c) => const LoginScreen()));
-                        Navigator.popAndPushNamed(context, '/login');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (c) => const LoginScreen()));
+                        // Navigator.popAndPushNamed(context, '/login');
                       }),
                 ],
               ),
