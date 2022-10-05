@@ -2,6 +2,8 @@ import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/main.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -36,11 +38,20 @@ class _MainScreenState extends State<MainScreen>
         body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
           controller: tabController,
-          children: const [
-            HomeTabPage(),
-            Screening(),
-            AppointmentTabPage(),
-            ForumTabPage(),
+          children: [
+            const HomeTabPage(),
+            const Screening(),
+            // AppointmentTabPage(),
+            // ForumTabPage(),
+            Consumer<AuthModel>(
+              builder: (_, auth, __) => auth.isSignedIn
+                  ? const AppointmentTabPage()
+                  : const LoginScreen(),
+            ),
+            Consumer<AuthModel>(
+              builder: (_, auth, __) =>
+                  auth.isSignedIn ? const ForumTabPage() : const LoginScreen(),
+            ),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

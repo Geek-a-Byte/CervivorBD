@@ -1,4 +1,3 @@
-import 'package:cervivorbd/Screens/SplashScreen/splash_screen.dart';
 import 'package:cervivorbd/Screens/TabPages/bottom_navigation_menu.dart';
 import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctorProfile.dart';
 import 'package:cervivorbd/Utils/Theme/doctor_app_theme.dart';
@@ -31,19 +30,15 @@ void main() async {
       create: (_) => AuthModel(),
       child: MaterialApp(
         theme: DoctorAppTheme.lightTheme,
-        // home: const Screening(),
         debugShowCheckedModeBanner: false,
-        // home: Consumer<AuthModel>(
-        //   builder: (_, auth, __) =>
-        //       auth.isSignedIn ? const MainScreen() : const MySplashScreen(),
-        // ),
         initialRoute: '/',
         routes: {
-          '/': (context) => Consumer<AuthModel>(
-                builder: (_, auth, __) => auth.isSignedIn
-                    ? const MainScreen()
-                    : const MySplashScreen(),
-              ),
+          // '/': (context) => Consumer<AuthModel>(
+          //       builder: (_, auth, __) => auth.isSignedIn
+          //           ? const MainScreen()
+          //           : const MainScreen(),
+          //     ),
+          '/': (context) => const MainScreen(),
           '/doctor_details': (context) => const DoctorDetailScreen(),
         },
       ),

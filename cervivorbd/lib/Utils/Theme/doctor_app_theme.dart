@@ -7,7 +7,7 @@ class DoctorAppTheme {
       dividerColor: kGreyColor800,
       backgroundColor: kWhiteColor,
       // visualDensity: VisualDensity.adaptivePlatformDensity,
-      fontFamily: GoogleFonts.lato().fontFamily,
+      fontFamily: GoogleFonts.notoSansBengali().fontFamily,
       textTheme: TextTheme(
         headline1: const TextStyle(
           color: kBlackColor900,

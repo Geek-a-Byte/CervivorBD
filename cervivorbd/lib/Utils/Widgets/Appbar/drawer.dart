@@ -3,7 +3,6 @@ import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 
-
 class Drawer2 extends StatelessWidget {
   const Drawer2({Key? key}) : super(key: key);
 
@@ -89,6 +88,6 @@ class Drawer2 extends StatelessWidget {
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const LoginScreen()));
+        MaterialPageRoute(builder: (context) => const MainScreen()));
   }
 }

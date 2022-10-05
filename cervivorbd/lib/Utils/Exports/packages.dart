@@ -7,3 +7,4 @@ export 'dart:async';
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 export 'package:flutter_rating_bar/flutter_rating_bar.dart';
 export 'package:group_button/group_button.dart';
+export 'package:carousel_slider/carousel_slider.dart';

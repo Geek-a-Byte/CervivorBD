@@ -37,7 +37,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
             child: Center(
               child: Column(
                 children: [
-                  Image.asset('images/awareness_poster.png'),
+                  Image.asset('images/beware-0.png'),
                   // Container(
                   //   height: h / 20,
                   //   width: double.infinity,

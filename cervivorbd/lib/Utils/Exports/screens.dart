@@ -21,7 +21,7 @@ export 'package:cervivorbd/Screens/CancerInformationModule/0_what_is_cervical_ca
 
 export 'package:cervivorbd/Screens/CancerScreening/Screening.dart';
 
-export 'package:cervivorbd/Screens/UserProfiles/Doctor/top_doctors_list.dart';
+export 'package:cervivorbd/Screens/UserProfiles/Doctor/top_doctors_horizontal_list.dart';
 export 'package:cervivorbd/Screens/UserProfiles/Doctor/doctor.dart';
 export 'package:cervivorbd/Screens/UserProfiles/Doctor/top_doctor_card.dart';
 
