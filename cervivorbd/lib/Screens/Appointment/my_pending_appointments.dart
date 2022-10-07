@@ -3,6 +3,8 @@ import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:intl/intl.dart';
 
 class MyAppointmentList extends StatefulWidget {
+  const MyAppointmentList({Key? key}) : super(key: key);
+
   @override
   _MyAppointmentListState createState() => _MyAppointmentListState();
 }
@@ -130,7 +132,6 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
                   itemCount: snapshot.data!.size,
                   itemBuilder: (context, index) {
                     DocumentSnapshot document = snapshot.data!.docs[index];
-                    print(_compareDate(document['date'].toDate().toString()));
                     if (_checkDiff(document['date'].toDate())) {
                       deleteAppointment(document.id);
                     }
@@ -216,7 +217,6 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
                                       color: Colors.black87,
                                     ),
                                     onPressed: () {
-                                      print(">>>>>>>>>" + document.id);
                                       _documentID = document.id;
                                       showAlertDialog(context);
                                     },

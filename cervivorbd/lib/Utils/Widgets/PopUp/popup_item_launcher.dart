@@ -1,4 +1,6 @@
 // NOTE: Most of the credit for this code goes to 'funwithflutter' on GitHub
+// ignore_for_file: implementation_imports
+
 library popup_card;
 
 import 'package:flutter/material.dart';

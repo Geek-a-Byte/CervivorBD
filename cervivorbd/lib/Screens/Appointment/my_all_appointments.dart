@@ -32,12 +32,6 @@ class _AppointmentHistoryListState extends State<AppointmentHistoryList> {
         .delete();
   }
 
-  String _timeFormatter(String _timestamp) {
-    String formattedTime =
-        DateFormat('kk:mm').format(DateTime.parse(_timestamp));
-    return formattedTime;
-  }
-
   @override
   void initState() {
     super.initState();

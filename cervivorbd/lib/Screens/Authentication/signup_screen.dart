@@ -75,15 +75,15 @@ class _SignupScreenState extends State<SignupScreen> {
                         validateForm();
                       },
                       label: "নিবন্ধন করুন"),
-                  TextButton2(
-                      label: "অ্যাকাউন্ট আছে? লগইন করুন",
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (c) => const LoginScreen()));
-                        // Navigator.popAndPushNamed(context, '/login');
-                      }),
+                  // TextButton2(
+                  //     label: "অ্যাকাউন্ট আছে? লগইন করুন",
+                  //     onPressed: () {
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (c) => const LoginScreen()));
+                  //       // Navigator.popAndPushNamed(context, '/login');
+                  //     }),
                 ],
               ),
             ),
@@ -125,7 +125,6 @@ class _SignupScreenState extends State<SignupScreen> {
           errorMessage = "An undefined Error happened.";
       }
       Fluttertoast.showToast(msg: errorMessage!);
-      print(error.code);
     }
   }
 

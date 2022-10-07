@@ -1,8 +1,9 @@
+// ignore_for_file: no_logic_in_create_state
+
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
-import 'package:intl/intl.dart';
 
 class Comments extends StatefulWidget {
   final String? postid;
@@ -50,7 +51,6 @@ class _CommentsState extends State<Comments> {
           if (!snapshot.hasData) {
             return const CircularProgressIndicator();
           }
-          List<Comment> comments = [];
           return snapshot.data!.size == 0
               ? Center(
                   child: Text(

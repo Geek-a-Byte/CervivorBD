@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
 

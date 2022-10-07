@@ -32,7 +32,7 @@ class _BookingScreenState extends State<BookingScreen> {
   TimeOfDay currentTime = TimeOfDay.now();
   String timeText = 'Select Time';
   late String dateUTC;
-  late String date_Time;
+  late String dateTime;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? user;
@@ -76,7 +76,7 @@ class _BookingScreenState extends State<BookingScreen> {
       timeText = formattedTime;
       _timeController.text = timeText;
     });
-    date_Time = selectedTime.toString().substring(10, 15);
+    dateTime = selectedTime.toString().substring(10, 15);
   }
 
   showAlertDialog(BuildContext context) {
@@ -482,9 +482,6 @@ class _BookingScreenState extends State<BookingScreen> {
                           ),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              print(_nameController.text);
-                              print(_dateController.text);
-                              print(widget.doctor);
                               showAlertDialog(context);
                               _createAppointment();
                             }
@@ -514,7 +511,6 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   Future<void> _createAppointment() async {
-    print(dateUTC + ' ' + date_Time + ':00');
     FirebaseFirestore.instance
         .collection('appointments')
         .doc(user!.email)
@@ -525,7 +521,7 @@ class _BookingScreenState extends State<BookingScreen> {
       'phone': _phoneController.text,
       'description': _descriptionController.text,
       'doctor': _doctorController.text,
-      'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
+      'date': DateTime.parse(dateUTC + ' ' + dateTime + ':00'),
     }, SetOptions(merge: true));
 
     FirebaseFirestore.instance
@@ -538,7 +534,7 @@ class _BookingScreenState extends State<BookingScreen> {
       'phone': _phoneController.text,
       'description': _descriptionController.text,
       'doctor': _doctorController.text,
-      'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
+      'date': DateTime.parse(dateUTC + ' ' + dateTime + ':00'),
     }, SetOptions(merge: true));
   }
 }

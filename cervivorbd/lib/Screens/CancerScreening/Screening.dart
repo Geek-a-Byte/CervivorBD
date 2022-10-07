@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
 
@@ -80,9 +82,9 @@ class _ScreeningState extends State<Screening> {
   }
 
   void printSelected() {
-    print('-------------------------');
+    // print('-------------------------');
     for (var i = 0; i < _radioController.length; i++) {
-      print(_radioController[i].selectedIndex);
+      // print(_radioController[i].selectedIndex);
     }
   }
 
@@ -261,7 +263,7 @@ class _ScreeningState extends State<Screening> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton2(
                   onPressed: () {
-                    printSelected();
+                    // printSelected();
                   },
                   label: 'Submit'),
             ),

@@ -3,7 +3,6 @@ import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 
-
 class AppointmentTabPage extends StatefulWidget {
   const AppointmentTabPage({Key? key}) : super(key: key);
 
@@ -36,7 +35,7 @@ class _AppointmentTabPageState extends State<AppointmentTabPage> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                 const SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -69,9 +68,9 @@ class _AppointmentTabPageState extends State<AppointmentTabPage> {
                     Container(
                       padding:
                           const EdgeInsets.only(right: 10, left: 10, top: 10),
-                      child: MyAppointmentList(),
+                      child: const MyAppointmentList(),
                     ),
-                     Container(
+                    Container(
                       padding:
                           const EdgeInsets.only(right: 10, left: 10, top: 10),
                       child: const AppointmentHistoryList(),
@@ -81,7 +80,6 @@ class _AppointmentTabPageState extends State<AppointmentTabPage> {
               ],
             ),
           )),
-        )
-        );
+        ));
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:intl/intl.dart';
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
@@ -28,18 +30,11 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
 
-  FocusNode f1 = FocusNode();
-  FocusNode f2 = FocusNode();
-  FocusNode f3 = FocusNode();
-  FocusNode f4 = FocusNode();
-  FocusNode f5 = FocusNode();
-
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
   TimeOfDay currentTime = TimeOfDay.now();
   String timeText = 'Select Time';
   late String dateUTC;
-  late String date_Time;
+  late String dateTime;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? user;
@@ -83,7 +78,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
       timeText = formattedTime;
       _timeController.text = timeText;
     });
-    date_Time = selectedTime.toString().substring(10, 15);
+    dateTime = selectedTime.toString().substring(10, 15);
   }
 
   showAlertDialog(BuildContext context) {
@@ -386,9 +381,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       label: "অ্যাপয়েন্ট কনফার্ম করুন",
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          print(_nameController.text);
-                          print(_dateController.text);
-                          print(doctor.doctorName);
                           showAlertDialog(context);
                           _createAppointment();
                         }
@@ -448,7 +440,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   }
 
   Future<void> _createAppointment() async {
-    print(dateUTC + ' ' + date_Time + ':00');
     FirebaseFirestore.instance
         .collection('appointments')
         .doc(user!.email)
@@ -459,7 +450,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
       'phone': _phoneController.text,
       'description': _descriptionController.text,
       'doctor': _doctorController.text,
-      'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
+      'date': DateTime.parse(dateUTC + ' ' + dateTime + ':00'),
     }, SetOptions(merge: true));
 
     FirebaseFirestore.instance
@@ -472,7 +463,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
       'phone': _phoneController.text,
       'description': _descriptionController.text,
       'doctor': _doctorController.text,
-      'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
+      'date': DateTime.parse(dateUTC + ' ' + dateTime + ':00'),
     }, SetOptions(merge: true));
   }
 }
