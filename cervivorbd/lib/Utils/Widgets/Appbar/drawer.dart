@@ -3,7 +3,6 @@ import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 
-
 class Drawer2 extends StatelessWidget {
   const Drawer2({Key? key}) : super(key: key);
 
@@ -56,7 +55,7 @@ class Drawer2 extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.privacy_tip),
+            leading: const Icon(Icons.security_outlined),
             title: const Text('Privacy Policy'),
             onTap: () {
               Navigator.pop(context);

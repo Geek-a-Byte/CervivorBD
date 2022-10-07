@@ -40,11 +40,11 @@ class DoctorAppTheme {
           fontWeight: FontWeight.w400,
         ),
         bodyText1: const TextStyle(
-          fontSize: 11,
+          fontSize: 15,
           fontWeight: FontWeight.w700,
         ),
         bodyText2: const TextStyle(
-          fontSize: 10,
+          fontSize: 15,
           fontWeight: FontWeight.w400,
         ),
       ),
