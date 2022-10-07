@@ -1,5 +1,4 @@
 import 'package:cervivorbd/Screens/Authentication/login_screen.dart';
-import 'package:cervivorbd/Screens/TabPages/bottom_navigation_menu.dart';
 import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctorProfile.dart';
 import 'package:cervivorbd/Utils/Theme/doctor_app_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +40,7 @@ void main() async {
           //           ? const MainScreen()
           //           : const MainScreen(),
           //     ),
-          '/': (context) => const MainScreen(),
+          '/': (context) => const SignupScreen(),
           '/login': (context) => const LoginScreen(),
           '/signup': (context) => const SignupScreen(),
           '/doctor_details': (context) => const DoctorDetailScreen(),

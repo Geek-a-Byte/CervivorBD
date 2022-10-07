@@ -1,5 +1,6 @@
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Exports/theme.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 
@@ -11,10 +12,31 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  //patient
   TextEditingController nameTextEditingController = TextEditingController();
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController phoneTextEditingController = TextEditingController();
+
+  //doctor
+  TextEditingController doctorNameTextEditingController =
+      TextEditingController();
+  TextEditingController doctorEmailTextEditingController =
+      TextEditingController();
+  TextEditingController doctorPasswordTextEditingController =
+      TextEditingController();
+  TextEditingController doctorPhoneTextEditingController =
+      TextEditingController();
+  TextEditingController doctorDescriptionTextEditingController =
+      TextEditingController();
+  TextEditingController doctorHospitalTextEditingController =
+      TextEditingController();
+  TextEditingController doctorSpecialityTextEditingController =
+      TextEditingController();
+  TextEditingController doctorWorkinghourTextEditingController =
+      TextEditingController();
+  TextEditingController doctorYearofExperinenceTextEditingController =
+      TextEditingController();
 
   validateForm() {
     if (nameTextEditingController.text.length < 3) {
@@ -32,10 +54,83 @@ class _SignupScreenState extends State<SignupScreen> {
     }
   }
 
+  String dropdownValue = 'Patient';
+  Widget _renderWidget(dropdownValue) {
+    if (dropdownValue == 'Patient') {
+      return Column(
+        children: [
+          TextFormField2(controller: nameTextEditingController, label: 'নাম*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: emailTextEditingController, label: 'ইমেইল*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: passwordTextEditingController, label: 'পাসওয়ার্ড*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: phoneTextEditingController, label: 'ফোন নম্বর*'),
+          const SizedBox(height: 10),
+          ElevatedButton2(
+              icon: Icons.app_registration,
+              onPressed: () {
+                validateForm();
+              },
+              label: "নিবন্ধন করুন"),
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          TextFormField2(
+              controller: doctorNameTextEditingController, label: 'নাম*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: doctorEmailTextEditingController, label: 'ইমেইল*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: doctorPasswordTextEditingController,
+              label: 'পাসওয়ার্ড*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: doctorPhoneTextEditingController,
+              label: 'ফোন নম্বর*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: doctorDescriptionTextEditingController,
+              label: 'পেশাগত অভিজ্ঞতার বিবরণ*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: doctorHospitalTextEditingController,
+              label: 'বর্তমানে যে হাসপাতালে চাকরি করছেন*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: doctorSpecialityTextEditingController,
+              label: 'বিভাগ*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: doctorWorkinghourTextEditingController,
+              label: 'কর্মঘণ্টা*'),
+          const SizedBox(height: 10),
+          TextFormField2(
+              controller: doctorWorkinghourTextEditingController,
+              label: 'চাকরির সময়ব্যাপ্তি*'),
+          const SizedBox(height: 10),
+          ElevatedButton2(
+              icon: Icons.app_registration,
+              onPressed: () {
+                validateForm();
+              },
+              label: "নিবন্ধন করুন"),
+        ],
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xFFFFF6FC),
@@ -52,29 +147,43 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               child: Column(
                 children: [
-                  Image.asset('assets/images/logo.png', width: w, height: h * 0.28),
+                  Image.asset('assets/images/logo.png',
+                      width: w, height: h * 0.28),
                   Heading(label: "ফ্রিতে নিবন্ধন করুন"),
                   const SizedBox(height: 10),
-                  TextFormField2(
-                      controller: nameTextEditingController, label: 'নাম*'),
+                  DropdownButtonFormField(
+                    decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        //<-- SEE HERE
+                        borderSide: BorderSide(color: kdarkPink, width: 0.5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        //<-- SEE HERE
+                        borderSide: BorderSide(color: kdarkPink, width: 0.5),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                    dropdownColor: Colors.white,
+                    value: dropdownValue,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                      });
+                    },
+                    items: <String>['Doctor', 'Patient']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                   const SizedBox(height: 10),
-                  TextFormField2(
-                      controller: emailTextEditingController, label: 'ইমেইল*'),
-                  const SizedBox(height: 10),
-                  TextFormField2(
-                      controller: passwordTextEditingController,
-                      label: 'পাসওয়ার্ড*'),
-                  const SizedBox(height: 10),
-                  TextFormField2(
-                      controller: phoneTextEditingController,
-                      label: 'ফোন নম্বর*'),
-                  const SizedBox(height: 10),
-                  ElevatedButton2(
-                      icon: Icons.app_registration,
-                      onPressed: () {
-                        validateForm();
-                      },
-                      label: "নিবন্ধন করুন"),
+                  _renderWidget(dropdownValue)
                   // TextButton2(
                   //     label: "অ্যাকাউন্ট আছে? লগইন করুন",
                   //     onPressed: () {
