@@ -1,8 +1,6 @@
 # CervivorBD
 
-
-<img width="946" alt="logo3" src="https://user-images.githubusercontent.com/59027621/170454347-9d6a1a05-32fe-46db-b212-36d597083fde.png">
-
+<p align="center"><img width="500" height="500" alt="logo3" src="https://user-images.githubusercontent.com/59027621/194188756-890854dd-d0a6-4780-baa1-6e5ffc75581a.png"></p>
 
 Cervical cancer is the 4th most common cancer among women worldwide and it is the 2nd most common cancer in Bangladesh. According to the International Agency for Research on Cancer, more than 50 million Bangladeshi women are at risk of developing cervical cancer.
 
