@@ -85,14 +85,13 @@ class _PostStatsState extends State<PostStats> {
   int likeCount;
   _PostStatsState(this.post, this.likeCount);
 
-  User? user = FirebaseAuth.instance.currentUser;
+  User? user;
   UserModel loggedInUser = UserModel();
 
-  @override
-  void initState() {
-    super.initState();
+  Future<void> _getUser() async {
+    user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection("users")
           .doc(user!.uid)
           .get()
@@ -103,6 +102,12 @@ class _PostStatsState extends State<PostStats> {
         });
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
   }
 
   @override

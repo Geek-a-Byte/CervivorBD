@@ -39,7 +39,6 @@ class _CommentsState extends State<Comments> {
   }
 
   buildComments() {
-    final DateFormat formatter = DateFormat('hh:mm, dd-MM-yyyy');
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("comments")
@@ -73,8 +72,7 @@ class _CommentsState extends State<Comments> {
                       username: document['username'],
                       userId: document['userId'],
                       comment: document['comment'],
-                      timestamp: formatter
-                          .format(DateTime.parse(document['timestamp'])),
+                      timestamp: document['timestamp'].toDate(),
                     );
                   },
                 );

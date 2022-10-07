@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CommentContainer extends StatelessWidget {
   final String? username;
   final String? userId;
   final String? comment;
-  final String? timestamp;
+  final DateTime? timestamp;
 
   const CommentContainer({
     this.username,
@@ -15,6 +16,9 @@ class CommentContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DateTime now = timestamp!;
+    final DateFormat formatter = DateFormat('hh:mm, dd-MM-yyyy');
+    final String formatted = formatter.format(now);
     return Material(
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5.0),
@@ -36,7 +40,7 @@ class CommentContainer extends StatelessWidget {
                   ),
                   const SizedBox(height: 4.0),
                   Text(
-                    timestamp.toString(),
+                    timestamp!.toString(),
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   const SizedBox(height: 4.0),

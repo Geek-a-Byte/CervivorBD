@@ -20,18 +20,18 @@ class Cards extends StatelessWidget {
           ),
         ],
       ),
-      width: 140,
+      width: 150, // width of the card
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              // width: MediaQuery.of(context).size.width,
-              height: 120,
+              height: 120, // height of the photo container
               decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('assets/images/${doctor!.doctorPicture}')),
+                    image:
+                        AssetImage('assets/images/${doctor!.doctorPicture}')),
               ),
             ),
             const SizedBox(

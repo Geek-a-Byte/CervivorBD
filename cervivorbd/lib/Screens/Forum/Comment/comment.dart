@@ -1,8 +1,6 @@
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
-import 'package:cervivorbd/Utils/Exports/packages.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
-class Comment extends StatelessWidget {
+class Comment {
   final String? username;
   final String? userId;
   final String? comment;
@@ -17,15 +15,5 @@ class Comment extends StatelessWidget {
         comment: doc['comment'],
         timestamp: doc['timestamp']);
   }
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          title: Text('$comment'),
-          subtitle: Text(timeago.format(timestamp!)),
-        )
-      ],
-    );
-  }
 }
+

@@ -3,8 +3,6 @@ import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
-import 'package:cervivorbd/main.dart';
-import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -27,22 +25,26 @@ class _MainScreenState extends State<MainScreen>
 
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
-
-  @override
-  void initState() {
-    super.initState();
+  Future<void> _getUser() async {
+    user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection("users")
           .doc(user!.uid)
           .get()
           .then((value) {
         setState(() {
-          // call setState to rebuild the view
           loggedInUser = UserModel.fromMap(value.data());
+          // call setState to rebuild the view
         });
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
     tabController = TabController(length: 4, vsync: this);
   }
 
@@ -74,15 +76,8 @@ class _MainScreenState extends State<MainScreen>
           children: [
             const HomeTabPage(),
             const Screening(),
-            Consumer<AuthModel>(
-              builder: (_, auth, __) => auth.isSignedIn
-                  ? const AppointmentTabPage()
-                  : const LoginScreen(),
-            ),
-            Consumer<AuthModel>(
-              builder: (_, auth, __) =>
-                  auth.isSignedIn ? const ForumTabPage() : const LoginScreen(),
-            ),
+            user != null ? const AppointmentTabPage() : const LoginScreen(),
+            user != null ? const ForumTabPage() : const LoginScreen(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

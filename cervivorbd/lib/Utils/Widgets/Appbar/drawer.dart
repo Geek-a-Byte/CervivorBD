@@ -3,6 +3,7 @@ import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 
+
 class Drawer2 extends StatelessWidget {
   const Drawer2({Key? key}) : super(key: key);
 
@@ -22,27 +23,30 @@ class Drawer2 extends StatelessWidget {
               color: kdarkPink,
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text('My Profile'),
-            onTap: () {
-              // Navigator.pop(context);
-              // Navigator.of(context).pushNamed(
-              //   '/doctor_details',
-              //   ),
-              // );
-              Navigator.push(
-                (context),
-                MaterialPageRoute(builder: (context) => UserDetails()),
-              );
-            },
+          Consumer<AuthModel>(
+            builder: (_, auth, __) => auth.isSignedIn
+                ? ListTile(
+                    leading: const Icon(Icons.person),
+                    title: const Text('My Profile'),
+                    onTap: () {
+                      Navigator.push(
+                        (context),
+                        MaterialPageRoute(builder: (context) => UserDetails()),
+                      );
+                    },
+                  )
+                : Container(),
           ),
-          ListTile(
-            leading: const Icon(Icons.edit),
-            title: const Text('Edit Profile'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+          Consumer<AuthModel>(
+            builder: (_, auth, __) => auth.isSignedIn
+                ? ListTile(
+                    leading: const Icon(Icons.edit),
+                    title: const Text('Edit Profile'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                : Container(),
           ),
           ListTile(
             leading: const Icon(Icons.question_answer),
@@ -59,25 +63,22 @@ class Drawer2 extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.bug_report),
-            title: const Text('Report a Bug'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.info),
             title: const Text('About Us'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('LogOut'),
-            onTap: () {
-              logout(context);
-            },
+          Consumer<AuthModel>(
+            builder: (_, auth, __) => auth.isSignedIn
+                ? ListTile(
+                    leading: const Icon(Icons.logout),
+                    title: const Text('LogOut'),
+                    onTap: () {
+                      logout(context);
+                    },
+                  )
+                : Container(),
           ),
         ],
       ),
