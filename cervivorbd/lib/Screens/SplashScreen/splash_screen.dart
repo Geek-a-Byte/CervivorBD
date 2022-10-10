@@ -1,7 +1,7 @@
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
-import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
+import 'package:cervivorbd/Utils/Widgets/Buttons/module_intro.dart';
 
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({Key? key}) : super(key: key);
@@ -36,15 +36,15 @@ class _MySplashScreenState extends State<MySplashScreen> {
             child: Center(
               child: Column(
                 children: [
-                  Image.asset('images/beware-0.png'),
+                  Image.asset('assets/images/logo.png'),
                   // Container(
-                  //   height: h / 20,
+                  //   height: h / 8,
                   //   width: double.infinity,
                   //   decoration: const BoxDecoration(
                   //       color: Colors.white,
                   //       image: DecorationImage(
                   //         fit: BoxFit.contain,
-                  //         image: AssetImage('images/logoheader.png'),
+                  //         image: AssetImage('assets/images/logoheader.png'),
                   //       )),
                   // ),
                   Container(
@@ -59,39 +59,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
                   ),
                   const Padding(
                     padding: EdgeInsets.all(5.0),
-                    child: CCIntroGridMenu(),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: FractionalOffset.bottomLeft,
-                          child: ElevatedButton2(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (c) => const SignupScreen()));
-                              },
-                              label: 'নিবন্ধন করুন',
-                              icon: Icons.person_add),
-                        ),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: FractionalOffset.bottomRight,
-                          child: ElevatedButton2(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (c) => const LoginScreen()));
-                              },
-                              label: 'লগইন করুন',
-                              icon: Icons.login),
-                        ),
-                      ),
-                    ],
+                    child: ModuleIntroGridMenu(),
                   ),
                 ],
               ),

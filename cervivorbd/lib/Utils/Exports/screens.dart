@@ -28,3 +28,6 @@ export 'package:cervivorbd/Screens/UserProfiles/Doctor/top_doctor_card.dart';
 export 'package:cervivorbd/Screens/Appointment/my_all_appointments.dart';
 export 'package:cervivorbd/Screens/Appointment/my_pending_appointments.dart';
 
+export 'package:cervivorbd/Screens/UserProfiles/Doctor/doctorProfile.dart';
+
+export 'package:cervivorbd/Screens/SplashScreen/splash_screen.dart';

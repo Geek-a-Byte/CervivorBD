@@ -53,7 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: Column(
                   children: [
-                    Image.asset('assets/images/logo.png', width: w, height: h * 0.28),
+                    Image.asset('assets/images/logo.png',
+                        width: w, height: h * 0.28),
                     Heading(
                       label: "লগইন করুন",
                     ),
@@ -100,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const MainScreen())),
+                    builder: (context) => MainScreen(selectedIndex: 0, initialIndex: 0))),
               });
     } on FirebaseAuthException catch (error) {
       switch (error.code) {

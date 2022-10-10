@@ -87,7 +87,8 @@ class Drawer2 extends StatelessWidget {
   // the logout function
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const MainScreen()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => MainScreen(selectedIndex: 0, initialIndex: 0),
+    ));
   }
 }

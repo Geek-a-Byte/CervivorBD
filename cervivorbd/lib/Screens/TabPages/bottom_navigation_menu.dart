@@ -5,7 +5,11 @@ import 'package:cervivorbd/Utils/Exports/theme.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  int selectedIndex = 0;
+  int initialIndex = 0;
+  MainScreen(
+      {Key? key, required this.selectedIndex, required this.initialIndex})
+      : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -14,12 +18,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
-  int selectedIndex = 0;
 
   onItemClicked(int index) {
     setState(() {
-      selectedIndex = index;
-      tabController!.index = selectedIndex;
+      widget.selectedIndex = index;
+      tabController!.index = widget.selectedIndex;
     });
   }
 
@@ -45,7 +48,8 @@ class _MainScreenState extends State<MainScreen>
   void initState() {
     super.initState();
     _getUser();
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(
+        initialIndex: widget.initialIndex, length: 4, vsync: this);
   }
 
   @override
@@ -58,7 +62,7 @@ class _MainScreenState extends State<MainScreen>
                 propicURL: 'assets/images/nazia.png')
             : AppBar(
                 flexibleSpace: const Padding(
-                  padding: EdgeInsets.only(left: 45.0, top: 30.0),
+                  padding: EdgeInsets.only(left: 45.0, top: 10.0),
                   child: Image(
                     alignment: Alignment.topLeft,
                     image: AssetImage('assets/images/logoheader.png'),
@@ -102,7 +106,7 @@ class _MainScreenState extends State<MainScreen>
           type: BottomNavigationBarType.fixed,
           selectedLabelStyle: const TextStyle(fontSize: 14),
           showUnselectedLabels: true,
-          currentIndex: selectedIndex,
+          currentIndex: widget.selectedIndex,
           onTap: onItemClicked,
         ));
   }

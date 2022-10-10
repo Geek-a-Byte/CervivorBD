@@ -152,7 +152,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const MainScreen())),
+                      builder: (context) => MainScreen(selectedIndex: 0, initialIndex: 0))),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

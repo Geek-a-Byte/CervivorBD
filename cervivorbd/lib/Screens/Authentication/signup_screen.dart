@@ -38,7 +38,7 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController doctorYearofExperinenceTextEditingController =
       TextEditingController();
 
-  validateForm() {
+  validatePatientForm() {
     if (nameTextEditingController.text.length < 3) {
       Fluttertoast.showToast(msg: "name must be at least 2 characters long");
     } else if (!emailTextEditingController.text.contains("@")) {
@@ -49,8 +49,24 @@ class _SignupScreenState extends State<SignupScreen> {
       Fluttertoast.showToast(
           msg: "password must be at least 6 characters long");
     } else {
-      signUp(
-          emailTextEditingController.text, passwordTextEditingController.text);
+      signUp(emailTextEditingController.text,
+          passwordTextEditingController.text, 'Patient');
+    }
+  }
+
+  validateDoctorForm() {
+    if (doctorNameTextEditingController.text.length < 3) {
+      Fluttertoast.showToast(msg: "name must be at least 2 characters long");
+    } else if (!doctorEmailTextEditingController.text.contains("@")) {
+      Fluttertoast.showToast(msg: "email address is not valid");
+    } else if (doctorPhoneTextEditingController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "phone number is mandatory");
+    } else if (doctorPasswordTextEditingController.text.length < 6) {
+      Fluttertoast.showToast(
+          msg: "password must be at least 6 characters long");
+    } else {
+      signUp(emailTextEditingController.text,
+          passwordTextEditingController.text, 'Doctor');
     }
   }
 
@@ -73,7 +89,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ElevatedButton2(
               icon: Icons.app_registration,
               onPressed: () {
-                validateForm();
+                validatePatientForm();
               },
               label: "নিবন্ধন করুন"),
         ],
@@ -112,13 +128,13 @@ class _SignupScreenState extends State<SignupScreen> {
               label: 'কর্মঘণ্টা*'),
           const SizedBox(height: 10),
           TextFormField2(
-              controller: doctorWorkinghourTextEditingController,
+              controller: doctorYearofExperinenceTextEditingController,
               label: 'চাকরির সময়ব্যাপ্তি*'),
           const SizedBox(height: 10),
           ElevatedButton2(
               icon: Icons.app_registration,
               onPressed: () {
-                validateForm();
+                validateDoctorForm();
               },
               label: "নিবন্ধন করুন"),
         ],
@@ -202,11 +218,17 @@ class _SignupScreenState extends State<SignupScreen> {
 
   final _auth = FirebaseAuth.instance;
   String? errorMessage;
-  void signUp(String email, String password) async {
+  void signUp(String email, String password, String userType) async {
+    dynamic Function()? funcCallOnUserType;
+    if (userType == 'Patient') {
+      funcCallOnUserType = postPatientDetailsToFirestore();
+    } else if (userType == 'Doctor') {
+      funcCallOnUserType = postDoctorDetailsToFirestore();
+    }
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => {postDetailsToFirestore()})
+          .then((value) => {funcCallOnUserType})
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
@@ -237,7 +259,7 @@ class _SignupScreenState extends State<SignupScreen> {
     }
   }
 
-  postDetailsToFirestore() async {
+  postPatientDetailsToFirestore() async {
     // calling our firestore
     // calling our user model
     // sedning these values
@@ -263,7 +285,41 @@ class _SignupScreenState extends State<SignupScreen> {
     //     context, MaterialPageRoute(builder: (c) => const LoginScreen()));
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => const MainScreen()),
+        MaterialPageRoute(
+            builder: (context) =>
+                MainScreen(selectedIndex: 0, initialIndex: 0)),
+        (route) => false);
+  }
+
+  postDoctorDetailsToFirestore() async {
+    // calling our firestore
+    // calling our user model
+    // sedning these values
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    UserModel userModel = UserModel();
+
+    // writing all the values
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.fullname = nameTextEditingController.text;
+    userModel.phonenumber = phoneTextEditingController.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Account created successfully :) ");
+
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (c) => const LoginScreen()));
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(
+            builder: (context) =>
+                MainScreen(selectedIndex: 0, initialIndex: 0)),
         (route) => false);
   }
 }

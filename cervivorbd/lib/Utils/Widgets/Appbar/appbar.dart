@@ -11,7 +11,7 @@ class Appbar2 extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         flexibleSpace: const Padding(
-          padding: EdgeInsets.only(left: 45.0, top: 30.0),
+          padding: EdgeInsets.only(left: 45.0, top: 10.0),
           child: Image(
             alignment: Alignment.topLeft,
             image: AssetImage('assets/images/logoheader.png'),
