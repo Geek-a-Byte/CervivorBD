@@ -1,115 +1,43 @@
 // ignore_for_file: file_names
 
+import 'package:cervivorbd/Screens/UserProfiles/Patient/patient.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
-import 'package:cervivorbd/Utils/Exports/firebase.dart';
+import 'package:cervivorbd/Utils/Widgets/TextStyle/text_box_display.dart';
 
-// ignore: use_key_in_widget_constructors
+// ignore: must_be_immutable
 class UserDetails extends StatefulWidget {
+  Patient? patient;
+  UserDetails({Key? key, this.patient}) : super(key: key);
   @override
   _UserDetailsState createState() => _UserDetailsState();
 }
 
 class _UserDetailsState extends State<UserDetails> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  late User user;
-
-  Future<void> _getUser() async {
-    user = _auth.currentUser!;
-  }
-
-  List labelName = ['Name', 'Email', 'Phone no'];
-
-  List value = ['fullname', 'email', 'phonenumber'];
-
-  @override
-  void initState() {
-    super.initState();
-    _getUser();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(user.uid)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                var userData = snapshot.data! as DocumentSnapshot;
-                return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    physics: const ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: value.length,
-                    itemBuilder: (context, index) {
-                      return Material(
-                        child: InkWell(
-                          splashColor: Colors.grey.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(10),
-                          onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => UpdateUserDetails(
-                            //               label: labelName[index],
-                            //               field: value[index],
-                            //             )));
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Ink(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.grey[200],
-                              ),
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 14),
-                                height: MediaQuery.of(context).size.height / 14,
-                                width: MediaQuery.of(context).size.width,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      labelName[index],
-                                      style: GoogleFonts.lato(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      userData[value[index]],
-                                      style: GoogleFonts.lato(
-                                        color: Colors.black54,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    });
-              },
+        body: Column(children: [
+      Material(
+        child: InkWell(
+          splashColor: Colors.grey.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(10),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: Column(
+              children: [
+                Text(
+                  'User Details',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                TextDisplayBox(label: "Name", value: widget.patient!.fullname!),
+                TextDisplayBox(label: "Email", value: widget.patient!.email!),
+                TextDisplayBox(
+                    label: "Phone No", value: widget.patient!.phonenumber!),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-    );
+      )
+    ]));
   }
 }

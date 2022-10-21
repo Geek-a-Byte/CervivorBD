@@ -2,7 +2,6 @@ import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 
-
 class TopDoctorsCard extends StatelessWidget {
   const TopDoctorsCard({Key? key, this.doctor}) : super(key: key);
 
@@ -45,11 +44,11 @@ class TopDoctorsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Hero(
-                    tag: doctor!.doctorName,
+                    tag: doctor!.fullname!,
                     child: Material(
                       color: Colors.transparent,
                       child: Text(
-                        doctor!.doctorName,
+                        doctor!.fullname!,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: Theme.of(context).textTheme.headline4,
@@ -57,7 +56,7 @@ class TopDoctorsCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${doctor!.doctorSpecialty} • ${doctor!.doctorHospital}',
+                    '${doctor!.doctorSpeciality} • ${doctor!.doctorHospital}',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: Theme.of(context).textTheme.headline5,
@@ -68,35 +67,6 @@ class TopDoctorsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            RatingBar.builder(
-                              itemSize: 16,
-                              initialRating: double.parse(
-                                doctor!.doctorRating,
-                              ),
-                              minRating: 1,
-                              direction: Axis.horizontal,
-                              itemCount: 5,
-                              itemPadding: EdgeInsets.zero,
-                              itemBuilder: (context, _) => const Icon(
-                                Icons.star,
-                                color: kYellowColor,
-                              ),
-                              onRatingUpdate: (rating) {
-                                debugPrint(rating.toString());
-                              },
-                              unratedColor: kGreyColor600,
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            Text(
-                              '(${doctor!.doctorNumberOfPatient})',
-                              style: Theme.of(context).textTheme.bodyText2,
-                            ),
-                          ],
-                        ),
                         Container(
                           height: 24,
                           padding: const EdgeInsets.symmetric(
@@ -105,15 +75,15 @@ class TopDoctorsCard extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            color: doctor!.doctorIsOpen
+                            color: doctor!.doctorIsOpen!
                                 ? kGreenLightColor
                                 : kRedLightColor,
                           ),
                           child: Text(
-                            doctor!.doctorIsOpen ? 'Open' : 'Close',
+                            doctor!.doctorIsOpen! ? 'Open' : 'Close',
                             style:
                                 Theme.of(context).textTheme.headline6!.copyWith(
-                                      color: doctor!.doctorIsOpen
+                                      color: doctor!.doctorIsOpen!
                                           ? kGreenColor
                                           : kRedColor,
                                     ),

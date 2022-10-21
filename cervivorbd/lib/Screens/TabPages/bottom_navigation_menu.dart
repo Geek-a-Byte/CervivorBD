@@ -4,6 +4,7 @@ import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 
+// ignore: must_be_immutable
 class MainScreen extends StatefulWidget {
   int selectedIndex = 0;
   int initialIndex = 0;
@@ -27,7 +28,7 @@ class _MainScreenState extends State<MainScreen>
   }
 
   User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  Patient loggedInUser = Patient();
   Future<void> _getUser() async {
     user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -37,10 +38,11 @@ class _MainScreenState extends State<MainScreen>
           .get()
           .then((value) {
         setState(() {
-          loggedInUser = UserModel.fromMap(value.data());
+          loggedInUser = Patient.fromMap(value.data());
           // call setState to rebuild the view
         });
       });
+    
     }
   }
 
@@ -73,7 +75,7 @@ class _MainScreenState extends State<MainScreen>
                 elevation: 0,
                 iconTheme: const IconThemeData(color: kBlackColor900),
               ),
-        drawer: const Drawer2(),
+        drawer: Drawer2(uid: loggedInUser.uid),
         body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
           controller: tabController,

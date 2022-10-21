@@ -35,7 +35,7 @@ class TopDoctorsList extends StatelessWidget {
                         onTap: () {
                           // Navigator.of(context).pushNamed('/doctor_details',
                           //     arguments: Doctor(
-                          //       doctorName: topDoctors[index].doctorName,
+                          //       fullname: topDoctors[index].fullname,
                           //       doctorDescription:
                           //           topDoctors[index].doctorDescription,
                           //       doctorHospital:
@@ -55,17 +55,17 @@ class TopDoctorsList extends StatelessWidget {
                           Navigator.of(context).pushNamed(
                             '/doctor_details',
                             arguments: Doctor(
-                              doctorName: doctor['name'],
+                              fullname: doctor['name'],
                               doctorDescription: doctor['description'],
                               doctorHospital: doctor['hospital'],
                               doctorIsOpen: doctor['IsOpen'],
-                              doctorNumberOfPatient: doctor['patientcount'],
+                             
                               doctorPicture: doctor['picture'],
-                              doctorRating: doctor['rating'],
-                              doctorSpecialty: doctor['speciality'],
+                              
+                              doctorSpeciality: doctor['speciality'],
                               doctorYearOfExperience:
                                   doctor['yearofexperience'],
-                              doctorWorkingHour: doctor['workinghour'],
+                              doctorStartWorkingHour: doctor['workinghour'],
                             ),
                           );
                         },

@@ -38,7 +38,7 @@ class Cards extends StatelessWidget {
               height: 20.0,
             ),
             Text(
-              doctor!.doctorName,
+              doctor!.fullname!,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               textAlign: TextAlign.center,
@@ -48,7 +48,7 @@ class Cards extends StatelessWidget {
               ),
             ),
             Text(
-              doctor!.doctorSpecialty,
+              doctor!.doctorSpeciality!,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: const TextStyle(
@@ -58,7 +58,7 @@ class Cards extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              doctor!.doctorHospital,
+              doctor!.doctorHospital!,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: const TextStyle(

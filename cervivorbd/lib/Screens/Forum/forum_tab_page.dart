@@ -11,7 +11,7 @@ class ForumTabPage extends StatefulWidget {
 
 class _ForumTabPageState extends State<ForumTabPage> {
   User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  Patient loggedInUser = Patient();
 
   @override
   void initState() {
@@ -21,7 +21,7 @@ class _ForumTabPageState extends State<ForumTabPage> {
         .doc(user!.uid)
         .get()
         .then((value) {
-      loggedInUser = UserModel.fromMap(value.data());
+      loggedInUser = Patient.fromMap(value.data());
     });
   }
 

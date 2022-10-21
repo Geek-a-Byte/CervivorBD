@@ -88,7 +88,7 @@ class _PostStatsState extends State<PostStats> {
   _PostStatsState(this.post, this.likeCount);
 
   User? user;
-  UserModel loggedInUser = UserModel();
+  Patient loggedInUser = Patient();
 
   Future<void> _getUser() async {
     user = FirebaseAuth.instance.currentUser;
@@ -99,7 +99,7 @@ class _PostStatsState extends State<PostStats> {
           .get()
           .then((value) {
         setState(() {
-          loggedInUser = UserModel.fromMap(value.data());
+          loggedInUser = Patient.fromMap(value.data());
           // call setState to rebuild the view
         });
       });

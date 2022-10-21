@@ -135,7 +135,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final doctor = ModalRoute.of(context)!.settings.arguments as Doctor;
-    _doctorController.text = doctor.doctorName;
+    _doctorController.text = doctor.fullname!;
 
     TextEditingController emailTextEditingController = TextEditingController();
     TextEditingController passwordTextEditingController =
@@ -152,7 +152,8 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => MainScreen(selectedIndex: 0, initialIndex: 0))),
+                      builder: (context) =>
+                          MainScreen(selectedIndex: 0, initialIndex: 0))),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
@@ -224,7 +225,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(doctor.doctorPicture),
+                          image: NetworkImage(doctor.doctorPicture!),
                         ),
                       ),
                     ),
@@ -238,11 +239,11 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Hero(
-                        tag: doctor.doctorName,
+                        tag: doctor.fullname!,
                         child: Material(
                           color: Colors.transparent,
                           child: Text(
-                            doctor.doctorName,
+                            doctor.fullname!,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: Theme.of(context).textTheme.headline4,
@@ -250,7 +251,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                         ),
                       ),
                       Text(
-                        '${doctor.doctorSpecialty} • ${doctor.doctorHospital}',
+                        '${doctor.doctorSpeciality} • ${doctor.doctorHospital}',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: Theme.of(context).textTheme.headline4,
@@ -261,35 +262,35 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                RatingBar.builder(
-                                  itemSize: 16,
-                                  initialRating: double.parse(
-                                    doctor.doctorRating,
-                                  ),
-                                  minRating: 1,
-                                  direction: Axis.horizontal,
-                                  itemCount: 5,
-                                  itemPadding: EdgeInsets.zero,
-                                  itemBuilder: (context, _) => const Icon(
-                                    Icons.star,
-                                    color: kYellowColor,
-                                  ),
-                                  onRatingUpdate: (rating) {
-                                    debugPrint(rating.toString());
-                                  },
-                                  unratedColor: kGreyColor600,
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  '(${doctor.doctorNumberOfPatient})',
-                                  style: Theme.of(context).textTheme.bodyText2,
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     RatingBar.builder(
+                            //       itemSize: 16,
+                            //       initialRating: double.parse(
+                            //         doctor.doctorRating!,
+                            //       ),
+                            //       minRating: 1,
+                            //       direction: Axis.horizontal,
+                            //       itemCount: 5,
+                            //       itemPadding: EdgeInsets.zero,
+                            //       itemBuilder: (context, _) => const Icon(
+                            //         Icons.star,
+                            //         color: kYellowColor,
+                            //       ),
+                            //       onRatingUpdate: (rating) {
+                            //         debugPrint(rating.toString());
+                            //       },
+                            //       unratedColor: kGreyColor600,
+                            //     ),
+                            //     const SizedBox(
+                            //       width: 4,
+                            //     ),
+                            //     Text(
+                            //       '(${doctor.doctorNumberOfPatient})',
+                            //       style: Theme.of(context).textTheme.bodyText2,
+                            //     ),
+                            //   ],
+                            // ),
                             Container(
                               height: 24,
                               padding: const EdgeInsets.symmetric(
@@ -298,19 +299,19 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
-                                color: doctor.doctorIsOpen
+                                color: doctor.doctorIsOpen!
                                     ? kGreenLightColor
                                     : kRedLightColor,
                               ),
                               child: Text(
-                                doctor.doctorIsOpen
+                                doctor.doctorIsOpen!
                                     ? 'Available'
                                     : 'Not Available',
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6!
                                     .copyWith(
-                                      color: doctor.doctorIsOpen
+                                      color: doctor.doctorIsOpen!
                                           ? kGreenColor
                                           : kRedColor,
                                     ),
@@ -336,7 +337,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                 style: Theme.of(context).textTheme.headline4,
               ),
               Text(
-                doctor.doctorDescription,
+                doctor.doctorDescription!,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               const SizedBox(
@@ -348,7 +349,11 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                 textAlign: TextAlign.left,
               ),
               Text(
-                doctor.doctorWorkingHour,
+                doctor.doctorStartWorkingHour!,
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              Text(
+                doctor.doctorEndWorkingHour!,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               const SizedBox(
@@ -520,7 +525,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
               //             context,
               //             MaterialPageRoute(
               //                 builder: (context) =>
-              //                     BookingScreen(doctor: doctor.doctorName)),
+              //                     BookingScreen(doctor: doctor.fullname)),
               //           );
               //         },
               //         label: 'অ্যাপয়েন্টের জন্য পেমেন্ট করুন')),

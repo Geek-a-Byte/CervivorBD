@@ -196,7 +196,7 @@ class _HomeTabPageState extends State<HomeTabPage>
                     }),
               ],
             ),
-            const TopDoctorsList(),
+            // const TopDoctorsList(),
             const SizedBox(
               height: 20,
             ),

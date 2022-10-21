@@ -22,7 +22,7 @@ class _CommentsState extends State<Comments> {
   final String? postOwnerid;
 
   User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  Patient loggedInUser = Patient();
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _CommentsState extends State<Comments> {
         .then((value) {
       setState(() {
         // call setState to rebuild the view
-        loggedInUser = UserModel.fromMap(value.data());
+        loggedInUser = Patient.fromMap(value.data());
       });
     });
   }

@@ -13,7 +13,7 @@ class CreatePostContainer extends StatefulWidget {
 class _CreatePostContainerState extends State<CreatePostContainer> {
   TextEditingController blogEditingController = TextEditingController();
   User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  Patient loggedInUser = Patient();
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
         .doc(user!.uid)
         .get()
         .then((value) {
-      loggedInUser = UserModel.fromMap(value.data());
+      loggedInUser = Patient.fromMap(value.data());
     });
   }
 
@@ -63,8 +63,6 @@ class _CreatePostContainerState extends State<CreatePostContainer> {
       ),
     );
   }
-
- 
 
   Future<void> createPost() async {
     // print(dateUTC + ' ' + date_Time + ':00');

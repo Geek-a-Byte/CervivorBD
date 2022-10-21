@@ -1,12 +1,12 @@
-class UserModel {
+class Patient {
   String? uid;
   String? fullname;
   String? email;
   String? phonenumber;
 
-  UserModel({this.uid, this.fullname, this.email, this.phonenumber});
-  
-  //   UserModel.fromJson(Map<String, dynamic> json) {
+  Patient({this.uid, this.fullname, this.email, this.phonenumber});
+
+  //   Patient.fromJson(Map<String, dynamic> json) {
   //   name = json['name'];
   //   //  phone = json['phone'];
   //   address = json['address'];
@@ -24,8 +24,10 @@ class UserModel {
   // }
 
   // receiving data from server
-  factory UserModel.fromMap(map) {
-    return UserModel(
+
+  factory Patient.fromMap(map) {
+    return Patient(
+      // userType: map['userType'],
       uid: map['uid'],
       fullname: map['fullname'],
       email: map['email'],
@@ -36,6 +38,7 @@ class UserModel {
   // sending data to our server
   Map<String, dynamic> toMap() {
     return {
+      // 'userType': "Patient",
       'uid': uid,
       'fullname': fullname,
       'email': email,
