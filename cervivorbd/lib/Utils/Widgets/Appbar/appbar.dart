@@ -10,12 +10,17 @@ class Appbar2 extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        flexibleSpace: const Padding(
-          padding: EdgeInsets.only(left: 45.0, top: 10.0),
-          child: Image(
-            alignment: Alignment.topLeft,
-            image: AssetImage('assets/images/logoheader.png'),
-            fit: BoxFit.contain,
+        centerTitle: false,
+        title: Transform(
+          // you can forcefully translate values left side using Transform
+          transform: Matrix4.translationValues(-20.0, 0.0, 0.0),
+          child: const SizedBox(
+            height: 30,
+            child: Image(
+              alignment: Alignment.topLeft,
+              image: AssetImage('assets/images/logoheader.png'),
+              fit: BoxFit.contain,
+            ),
           ),
         ),
         backgroundColor: Colors.transparent,
