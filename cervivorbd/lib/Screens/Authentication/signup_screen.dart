@@ -58,7 +58,6 @@ class _SignupScreenState extends State<SignupScreen> {
           ElevatedButton2(
               icon: Icons.app_registration,
               onPressed: () {
-           
                 validatePatientForm();
               },
               label: "নিবন্ধন করুন"),
@@ -139,7 +138,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Column(
                 children: [
                   Image.asset('assets/images/logo.png',
-                      width: w, height: h * 0.28),
+                      width: w * 0.5, height: h * 0.28),
                   Heading(label: "ফ্রিতে নিবন্ধন করুন"),
                   const SizedBox(height: 10),
                   DropdownButtonFormField(

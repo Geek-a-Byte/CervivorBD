@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 
 class PopUpItemBody extends StatelessWidget {
-  String? intro;
-  PopUpItemBody({Key? key, required this.intro}) : super(key: key);
+  const PopUpItemBody({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -12,7 +11,7 @@ class PopUpItemBody extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            intro!,
+            'hello',
             style: Theme.of(context).textTheme.headline6,
           ),
         ],

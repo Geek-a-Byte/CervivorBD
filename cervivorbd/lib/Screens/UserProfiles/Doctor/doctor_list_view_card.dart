@@ -10,7 +10,7 @@ class ListViewCard extends StatelessWidget {
     // final doctor = ModalRoute.of(context)!.settings.arguments as Doctor;
     return Container(
       color: Colors.transparent,
-      height: 10,
+      height: 100,
       width: MediaQuery.of(context).size.width,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -3,6 +3,9 @@ import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Widgets/Appbar/appbar2.dart';
+import 'package:cervivorbd/Utils/Widgets/PopUp/popup_item_body.dart';
+import 'package:cervivorbd/Utils/Widgets/PopUp/popup_item_launcher.dart';
 
 // ignore: must_be_immutable
 class MainScreen extends StatefulWidget {
@@ -57,23 +60,14 @@ class _MainScreenState extends State<MainScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kWhiteColor,
-        appBar: user != null
-            ? Appbar2(
-                username: loggedInUser.fullname,
-                propicURL: 'assets/images/nazia.png')
-            : AppBar(
-                flexibleSpace: const Padding(
-                  padding: EdgeInsets.only(left: 45.0, top: 10.0),
-                  child: Image(
-                    alignment: Alignment.topLeft,
-                    image: AssetImage('assets/images/logoheader.png'),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                iconTheme: const IconThemeData(color: kBlackColor900),
-              ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: user != null
+              ? Appbar2(
+                  username: loggedInUser.fullname,
+                  propicURL: 'assets/images/nazia.png')
+              : Appbar3(),
+        ),
         drawer: Drawer2(uid: loggedInUser.uid),
         body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),

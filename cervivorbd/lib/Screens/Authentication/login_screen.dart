@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     Image.asset('assets/images/logo.png',
-                        width: w, height: h * 0.28),
+                        width: w * 0.5, height: h * 0.28),
                     Heading(
                       label: "লগইন করুন",
                     ),
@@ -75,15 +75,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       label: "লগইন",
                     ),
                     const SizedBox(height: 10),
-                    TextButton2(
-                        label: "অ্যাকাউন্ট নেই? নিবন্ধন করুন",
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (c) => const SignupScreen()));
-                          // Navigator.popAndPushNamed(context, '/signup');
-                        }),
+                    // TextButton2(
+                    //     label: "অ্যাকাউন্ট নেই? নিবন্ধন করুন",
+                    //     onPressed: () {
+                    //       Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (c) => const SignupScreen()));
+
+                    //     }),
                   ],
                 ),
               ),
@@ -101,7 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => MainScreen(selectedIndex: 0, initialIndex: 0))),
+                    builder: (context) =>
+                        MainScreen(selectedIndex: 0, initialIndex: 0))),
               });
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
