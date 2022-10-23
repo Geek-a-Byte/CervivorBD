@@ -1,16 +1,17 @@
+import 'package:cervivorbd/Screens/UserProfiles/Doctor/top_doctor_vertical_list.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/theme.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 
-class AppointmentTabPage extends StatefulWidget {
-  const AppointmentTabPage({Key? key}) : super(key: key);
+class TreatmentTabPage extends StatefulWidget {
+  const TreatmentTabPage({Key? key}) : super(key: key);
 
   @override
-  _AppointmentTabPageState createState() => _AppointmentTabPageState();
+  _TreatmentTabPageState createState() => _TreatmentTabPageState();
 }
 
-class _AppointmentTabPageState extends State<AppointmentTabPage> {
+class _TreatmentTabPageState extends State<TreatmentTabPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? user;
 
@@ -29,7 +30,7 @@ class _AppointmentTabPageState extends State<AppointmentTabPage> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: DefaultTabController(
-          length: 2,
+          length: 4,
           child: Scaffold(
               body: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -39,22 +40,33 @@ class _AppointmentTabPageState extends State<AppointmentTabPage> {
                   height: 10,
                 ),
                 Container(
-                  height: 35,
+                  height: 100,
                   decoration: BoxDecoration(
                       color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(25.0)),
+                      borderRadius: BorderRadius.circular(10.0)),
                   child: TabBar(
                     indicator: BoxDecoration(
                         color: kdarkPink,
-                        borderRadius: BorderRadius.circular(25.0)),
+                        borderRadius: BorderRadius.circular(10.0)),
                     labelColor: Colors.white,
                     unselectedLabelColor: Colors.black,
                     tabs: const [
                       Tab(
-                        text: 'আসন্ন অ্যাপয়েন্টসমূহ',
+                        icon: Icon(FontAwesomeIcons.userDoctor),
+                        text: 'ডাক্তার',
                       ),
                       Tab(
-                        text: 'বিগত অ্যাপয়েন্টসমূহ',
+                        icon: Icon(FontAwesomeIcons.solidHospital),
+                        text: 'হাসপাতাল',
+                      ),
+                      Tab(
+                        icon: Icon(FontAwesomeIcons.calendar),
+                        text: 'অ্যাপয়েন্ট',
+                      ),
+                      Tab(
+                        icon: Icon(FontAwesomeIcons.prescription),
+                        // text: 'প্রেসক্রিপশন',
+                        text: 'ওষুধ',
                       ),
                     ],
                   ),
@@ -65,6 +77,16 @@ class _AppointmentTabPageState extends State<AppointmentTabPage> {
                 Expanded(
                     child: TabBarView(
                   children: [
+                    Container(
+                      padding:
+                          const EdgeInsets.only(right: 10, left: 10, top: 10),
+                      child: const DoctorList(),
+                    ),
+                    Container(
+                      padding:
+                          const EdgeInsets.only(right: 10, left: 10, top: 10),
+                      child: const MyAppointmentList(),
+                    ),
                     Container(
                       padding:
                           const EdgeInsets.only(right: 10, left: 10, top: 10),

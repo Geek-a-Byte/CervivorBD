@@ -93,7 +93,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const AppointmentTabPage(),
+            builder: (context) => const TreatmentTabPage(),
           ),
         );
       },
@@ -129,7 +129,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   void initState() {
     super.initState();
     _getUser();
-    selectTime(context);
+    // selectTime(context);
   }
 
   @override
@@ -216,7 +216,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Hero(
-                  tag: 'images/${doctor.doctorPicture}',
+                  tag: 'assets/images/${doctor.doctorPicture}',
                   child: Material(
                     type: MaterialType.transparency,
                     child: Container(
@@ -225,7 +225,8 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(doctor.doctorPicture!),
+                          image: AssetImage(
+                              'assets/images/${doctor.doctorPicture!}'),
                         ),
                       ),
                     ),
@@ -262,35 +263,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // Row(
-                            //   children: [
-                            //     RatingBar.builder(
-                            //       itemSize: 16,
-                            //       initialRating: double.parse(
-                            //         doctor.doctorRating!,
-                            //       ),
-                            //       minRating: 1,
-                            //       direction: Axis.horizontal,
-                            //       itemCount: 5,
-                            //       itemPadding: EdgeInsets.zero,
-                            //       itemBuilder: (context, _) => const Icon(
-                            //         Icons.star,
-                            //         color: kYellowColor,
-                            //       ),
-                            //       onRatingUpdate: (rating) {
-                            //         debugPrint(rating.toString());
-                            //       },
-                            //       unratedColor: kGreyColor600,
-                            //     ),
-                            //     const SizedBox(
-                            //       width: 4,
-                            //     ),
-                            //     Text(
-                            //       '(${doctor.doctorNumberOfPatient})',
-                            //       style: Theme.of(context).textTheme.bodyText2,
-                            //     ),
-                            //   ],
-                            // ),
                             Container(
                               height: 24,
                               padding: const EdgeInsets.symmetric(

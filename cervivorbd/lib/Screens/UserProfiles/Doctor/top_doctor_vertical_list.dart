@@ -1,9 +1,10 @@
+import 'package:cervivorbd/Screens/UserProfiles/Doctor/doctor_list_view_card.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 
-class TopDoctorsList extends StatelessWidget {
-  const TopDoctorsList({Key? key}) : super(key: key);
+class DoctorList extends StatelessWidget {
+  const DoctorList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,18 +12,17 @@ class TopDoctorsList extends StatelessWidget {
     // double h = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
         child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('Doctors')
-                .snapshots(),
-            builder: (BuildContext context,
-                AsyncSnapshot<QuerySnapshot> snapshot) {
+            stream:
+                FirebaseFirestore.instance.collection('Doctors').snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
               return SizedBox(
-                  height: 210,
+                  height: 100,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     physics: const ClampingScrollPhysics(),
@@ -36,8 +36,7 @@ class TopDoctorsList extends StatelessWidget {
                             '/doctor_details',
                             arguments: Doctor(
                               fullname: doctor['fullname'],
-                              doctorDescription:
-                                  doctor['doctorDescription'],
+                              doctorDescription: doctor['doctorDescription'],
                               doctorHospital: doctor['doctorHospital'],
                               doctorIsOpen: doctor['doctorIsOpen'],
                               doctorPicture: 'nazia.png',
@@ -51,7 +50,7 @@ class TopDoctorsList extends StatelessWidget {
                             ),
                           );
                         },
-                        child: Cards(
+                        child: ListViewCard(
                           doctor: Doctor(
                             fullname: doctor['fullname'],
                             doctorPicture: 'nazia.png',

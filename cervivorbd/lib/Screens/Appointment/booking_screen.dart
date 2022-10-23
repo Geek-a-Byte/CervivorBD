@@ -90,7 +90,7 @@ class _BookingScreenState extends State<BookingScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const AppointmentTabPage(),
+            builder: (context) => const TreatmentTabPage(),
           ),
         );
       },

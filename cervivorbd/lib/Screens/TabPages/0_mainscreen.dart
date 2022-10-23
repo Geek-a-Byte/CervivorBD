@@ -42,7 +42,6 @@ class _MainScreenState extends State<MainScreen>
           // call setState to rebuild the view
         });
       });
-    
     }
   }
 
@@ -82,7 +81,7 @@ class _MainScreenState extends State<MainScreen>
           children: [
             const HomeTabPage(),
             const Screening(),
-            user != null ? const AppointmentTabPage() : const LoginScreen(),
+            user != null ? const TreatmentTabPage() : const LoginScreen(),
             user != null ? const ForumTabPage() : const LoginScreen(),
           ],
         ),
@@ -98,7 +97,7 @@ class _MainScreenState extends State<MainScreen>
                 ),
                 label: "প্রাথমিক স্ক্রিনিং"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today), label: "অ্যাপয়েন্টসমূহ"),
+                icon: Icon(FontAwesomeIcons.stethoscope), label: "চিকিৎসা"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.forum), label: "পাব্লিক ফোরাম"),
           ],
