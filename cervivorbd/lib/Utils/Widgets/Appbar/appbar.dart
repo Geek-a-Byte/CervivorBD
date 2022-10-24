@@ -23,8 +23,8 @@ class Appbar2 extends StatelessWidget with PreferredSizeWidget {
             ),
           ),
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Colors.white,
+        elevation: 0.5,
         iconTheme: const IconThemeData(color: kBlackColor900),
         actions: <Widget>[
           Padding(
