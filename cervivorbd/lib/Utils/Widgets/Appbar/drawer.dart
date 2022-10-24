@@ -16,10 +16,15 @@ class Drawer2 extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
-            child: Image(
-              alignment: Alignment.topLeft,
-              image: AssetImage('assets/images/logo22.png'),
-              fit: BoxFit.contain,
+            child: Padding(
+              padding: EdgeInsets.only(top: 25.0, bottom: 25.0, right: 25.0),
+              child: Image(
+                width: 10,
+                height: 10,
+                alignment: Alignment.topLeft,
+                image: AssetImage('assets/images/logo22.png'),
+                fit: BoxFit.contain,
+              ),
             ),
             decoration: BoxDecoration(
               color: kdarkPink,

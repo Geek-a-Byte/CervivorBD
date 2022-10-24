@@ -144,11 +144,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   DropdownButtonFormField(
                     decoration: const InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        //<-- SEE HERE
                         borderSide: BorderSide(color: kdarkPink, width: 0.5),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        //<-- SEE HERE
                         borderSide: BorderSide(color: kdarkPink, width: 0.5),
                       ),
                       filled: true,
@@ -375,6 +373,8 @@ class _SignupScreenState extends State<SignupScreen> {
     await firebaseFirestore
         .collection("Doctors")
         .doc(user.uid)
+        .collection("about")
+        .doc()
         .set(doctor.toMap());
     Fluttertoast.showToast(msg: "Account created successfully :) ");
 

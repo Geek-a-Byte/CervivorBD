@@ -26,8 +26,8 @@ class _MySplashScreenState extends State<MySplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // double w = MediaQuery.of(context).size.width;
-    // double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: kPink,
@@ -36,25 +36,12 @@ class _MySplashScreenState extends State<MySplashScreen> {
             child: Center(
               child: Column(
                 children: [
-                  Image.asset('assets/images/logo.png'),
-                  // Container(
-                  //   height: h / 8,
-                  //   width: double.infinity,
-                  //   decoration: const BoxDecoration(
-                  //       color: Colors.white,
-                  //       image: DecorationImage(
-                  //         fit: BoxFit.contain,
-                  //         image: AssetImage('assets/images/logoheader.png'),
-                  //       )),
-                  // ),
-                  Container(
-                    width: double.infinity,
-                    color: Colors.white,
-                    child: Center(
-                      child: Text(
-                        'স্বাগতম!',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
+                  Image.asset('assets/images/logo.png',
+                      width: w * 0.5, height: h * 0.28),
+                  Center(
+                    child: Text(
+                      'স্বাগতম!',
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
                   const Padding(

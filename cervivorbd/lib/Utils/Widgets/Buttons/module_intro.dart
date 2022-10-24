@@ -6,7 +6,7 @@ import 'package:cervivorbd/Utils/Exports/widgets.dart';
 var moduleIntroMenu = [
   IntroButton2(label: 'হোম', onPressed: () {}),
   IntroButton2(label: 'প্রাথমিক স্ক্রিনিং', onPressed: () {}),
-  IntroButton2(label: 'অ্যাপয়েন্টসমূহ', onPressed: () {}),
+  IntroButton2(label: 'চিকিৎসা', onPressed: () {}),
   IntroButton2(label: 'পাব্লিক ফোরাম', onPressed: () {}),
 ];
 
@@ -20,13 +20,13 @@ var moduleIntroPageNavigationMenu = [
 var moduleIntroIconMenu = [
   Icons.home,
   FontAwesomeIcons.vial,
-  Icons.calendar_today,
+  FontAwesomeIcons.stethoscope,
   Icons.forum,
 ];
 
 class ModuleIntroGridMenu extends StatelessWidget {
   const ModuleIntroGridMenu({Key? key}) : super(key: key);
-
+ 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -34,10 +34,10 @@ class ModuleIntroGridMenu extends StatelessWidget {
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 0,
-        crossAxisSpacing: 0,
+        mainAxisSpacing: 15.0,
+        crossAxisSpacing: 15.0,
       ),
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.all(20.0),
       itemCount: moduleIntroMenu.length,
       itemBuilder: (BuildContext context, index) {
         return GestureDetector(
@@ -56,14 +56,26 @@ class ModuleIntroGridMenu extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Icon(
-                          moduleIntroIconMenu[index],
-                          size: 50,
+                        child: Container(
+                          width: 65,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: kdarkPink,
+                            border: Border.all(
+                              color: kdarkPink,
+                            ),
+                          ),
+                          child: Icon(
+                            moduleIntroIconMenu[index],
+                            color:Colors.white,
+                            size: 30,
+                          ),
                         ),
                       ),
                       Text(moduleIntroMenu[index].label!,
                           style:
-                              const TextStyle(fontSize: 15, color: kdarkPink)),
+                              const TextStyle(fontSize: 15, color: kBlackColor900)),
                     ],
                   ),
                 ),

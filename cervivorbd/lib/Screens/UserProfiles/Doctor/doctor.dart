@@ -65,35 +65,35 @@ class Doctor {
   }
 }
 
-var topDoctors = [
-  Doctor(
-      doctorStartWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
-      fullname: 'Nazia Shehnaz Joynab',
-      doctorSpeciality: 'Oncologist',
-      doctorHospital: 'GDN Hospital',
-      doctorYearOfExperience: '4',
-      doctorDescription:
-          'She is one of the best doctors in the GDN Hospital. He has saved more than 800 patients in the past 4 years. She has also received many awards from domestic and abroad as the best doctors. She is available on a private or schedule.',
-      doctorPicture: 'img-women-03.png',
-      doctorIsOpen: true),
-  Doctor(
-      doctorStartWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
-      fullname: 'Sazia Tabasum Mim',
-      doctorSpeciality: 'Oncologist',
-      doctorHospital: 'ABC Carolus Hospital',
-      doctorYearOfExperience: '6',
-      doctorDescription:
-          'She is one of the best doctors in the ABC Carolus Hospital. She has saved more than 1400 patients in the past 6 years. She has also received many awards from domestic and abroad as the best doctors. She is available on a private or schedule.',
-      doctorPicture: 'img-women-02.png',
-      doctorIsOpen: false),
-  Doctor(
-      fullname: 'Fairooz Nawar Nawme',
-      doctorSpeciality: 'Oncologist',
-      doctorHospital: 'XYZ Asia Hospital',
-      doctorYearOfExperience: '4',
-      doctorDescription:
-          'is one of the best doctors in the Columbia Asia Hospital. He has saved more than 900 patients in the past 4 years. He has also received many awards from domestic and abroad as the best doctors. He is available on a private or schedule.',
-      doctorPicture: 'img-women-01.png',
-      doctorStartWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
-      doctorIsOpen: false),
-];
+// var topDoctors = [
+//   Doctor(
+//       doctorStartWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
+//       fullname: 'Nazia Shehnaz Joynab',
+//       doctorSpeciality: 'Oncologist',
+//       doctorHospital: 'GDN Hospital',
+//       doctorYearOfExperience: '4',
+//       doctorDescription:
+//           'She is one of the best doctors in the GDN Hospital. He has saved more than 800 patients in the past 4 years. She has also received many awards from domestic and abroad as the best doctors. She is available on a private or schedule.',
+//       doctorPicture: 'img-women-03.png',
+//       doctorIsOpen: true),
+//   Doctor(
+//       doctorStartWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
+//       fullname: 'Sazia Tabasum Mim',
+//       doctorSpeciality: 'Oncologist',
+//       doctorHospital: 'ABC Carolus Hospital',
+//       doctorYearOfExperience: '6',
+//       doctorDescription:
+//           'She is one of the best doctors in the ABC Carolus Hospital. She has saved more than 1400 patients in the past 6 years. She has also received many awards from domestic and abroad as the best doctors. She is available on a private or schedule.',
+//       doctorPicture: 'img-women-02.png',
+//       doctorIsOpen: false),
+//   Doctor(
+//       fullname: 'Fairooz Nawar Nawme',
+//       doctorSpeciality: 'Oncologist',
+//       doctorHospital: 'XYZ Asia Hospital',
+//       doctorYearOfExperience: '4',
+//       doctorDescription:
+//           'is one of the best doctors in the Columbia Asia Hospital. He has saved more than 900 patients in the past 4 years. He has also received many awards from domestic and abroad as the best doctors. He is available on a private or schedule.',
+//       doctorPicture: 'img-women-01.png',
+//       doctorStartWorkingHour: 'Mon - Fri, 9.00 AM-20.00 PM',
+//       doctorIsOpen: false),
+// ];
