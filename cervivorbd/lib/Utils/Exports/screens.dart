@@ -6,7 +6,7 @@ export 'package:cervivorbd/Screens/Authentication/signup_screen.dart';
 export 'package:cervivorbd/Screens/Authentication/login_screen.dart';
 
 export 'package:cervivorbd/Screens/UserProfiles/Patient/patient.dart';
-export 'package:cervivorbd/Screens/UserProfiles/Patient/patientProfile.dart';
+export 'package:cervivorbd/Screens/UserProfiles/User/userProfile.dart';
 
 export 'package:cervivorbd/Screens/Forum/Comment/comment.dart';
 export 'package:cervivorbd/Screens/Forum/Comment/comment_container.dart';

@@ -353,6 +353,7 @@ class _SignupScreenState extends State<SignupScreen> {
     // writing all the values
     //doctor
     doctor.email = user!.email;
+    doctor.doctorIsOpen = true;
     doctor.uid = user.uid;
     doctor.fullname = fullnameTextEditingController.text;
     doctor.phonenumber = doctorPhoneTextEditingController.text;
@@ -373,8 +374,6 @@ class _SignupScreenState extends State<SignupScreen> {
     await firebaseFirestore
         .collection("Doctors")
         .doc(user.uid)
-        .collection("about")
-        .doc()
         .set(doctor.toMap());
     Fluttertoast.showToast(msg: "Account created successfully :) ");
 

@@ -1,5 +1,6 @@
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
+import 'package:cervivorbd/Utils/Theme/color_constants.dart';
 import 'package:intl/intl.dart';
 
 class MyAppointmentList extends StatefulWidget {
@@ -10,12 +11,16 @@ class MyAppointmentList extends StatefulWidget {
 }
 
 class _MyAppointmentListState extends State<MyAppointmentList> {
+  String? loggedInUserType;
+  User? user = FirebaseAuth.instance.currentUser;
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? user;
   String? _documentID;
 
-  Future<void> _getUser() async {
-    user = _auth.currentUser;
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
   }
 
   Future<void> deleteAppointment(String docID) {
@@ -25,18 +30,6 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
         .collection('pending')
         .doc(docID)
         .delete();
-  }
-
-  String _dateFormatter(String _timestamp) {
-    String formattedDate =
-        DateFormat('dd-MM-yyyy').format(DateTime.parse(_timestamp));
-    return formattedDate;
-  }
-
-  String _timeFormatter(String _timestamp) {
-    String formattedTime =
-        DateFormat('kk:mm').format(DateTime.parse(_timestamp));
-    return formattedTime;
   }
 
   showAlertDialog(BuildContext context) {
@@ -74,6 +67,33 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
     );
   }
 
+  Future<void> _getUser() async {
+    if (user != null) {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user!.uid)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInUserType = value['userType'];
+          // call setState to rebuild the view
+        });
+      });
+    }
+  }
+
+  String _dateFormatter(String _timestamp) {
+    String formattedDate =
+        DateFormat('dd-MM-yyyy').format(DateTime.parse(_timestamp));
+    return formattedDate;
+  }
+
+  String _timeFormatter(String _timestamp) {
+    String formattedTime =
+        DateFormat('kk:mm').format(DateTime.parse(_timestamp));
+    return formattedTime;
+  }
+
   _checkDiff(DateTime _date) {
     var diff = DateTime.now().difference(_date).inHours;
     if (diff > 2) {
@@ -93,20 +113,23 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _getUser();
+  _compareAppointmentApprovalStatus(bool approvedOrNot) {
+    if (approvedOrNot == true) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    String usertype = loggedInUserType == 'Doctor' ? 'Doctors' : 'Patients';
     return SafeArea(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance
+            .collection(usertype)
+            .doc(user!.uid)
             .collection('appointments')
-            .doc(user!.email.toString())
-            .collection('pending')
             .orderBy('date')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -136,98 +159,249 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
                       deleteAppointment(document.id);
                     }
                     return Card(
-                      elevation: 2,
-                      child: InkWell(
-                        onTap: () {},
-                        child: ExpansionTile(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: Text(
-                                  document['doctor'],
-                                  style: GoogleFonts.lato(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        elevation: 2,
+                        child: InkWell(
+                            onTap: () {},
+                            child: ExpansionTile(
+                                title: Row(
+                                  // mainAxisAlignment:
+                                  //     MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: Text(
+                                        loggedInUserType == 'Doctor'
+                                            ? document['patient']
+                                            : document['doctor'],
+                                        style: GoogleFonts.lato(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: Text(
+                                        _compareDate(document['date']
+                                                .toDate()
+                                                .toString())
+                                            ? "TODAY"
+                                            : "",
+                                        style: GoogleFonts.lato(
+                                            color: Colors.green,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Text(
-                                _compareDate(
-                                        document['date'].toDate().toString())
-                                    ? "TODAY"
-                                    : "",
-                                style: GoogleFonts.lato(
-                                    color: Colors.green,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                width: 0,
-                              ),
-                            ],
-                          ),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                            child: Text(
-                              _dateFormatter(
-                                  document['date'].toDate().toString()),
-                              style: GoogleFonts.lato(),
-                            ),
-                          ),
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20, right: 10, left: 16),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
+                                subtitle: Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Patient name: " + document['name'],
-                                        style: GoogleFonts.lato(
-                                          fontSize: 16,
-                                        ),
+                                        'Appointment Date: ' +
+                                            _dateFormatter(document['date']
+                                                .toDate()
+                                                .toString()),
+                                        style: GoogleFonts.lato(),
                                       ),
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      Text(
-                                        "Time: " +
-                                            _timeFormatter(
-                                              document['date']
-                                                  .toDate()
-                                                  .toString(),
-                                            ),
-                                        style: GoogleFonts.lato(
-                                          fontSize: 16,
-                                        ),
-                                      ),
+                                      _compareAppointmentApprovalStatus(
+                                              document['approvalStatus'])
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8.0),
+                                              child: Text(
+                                                "Approved",
+                                                style: GoogleFonts.lato(
+                                                    color: Colors.green,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            )
+                                          : Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8.0),
+                                              child: Text(
+                                                "Pending Approval",
+                                                style: GoogleFonts.lato(
+                                                    color: Colors.orange,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            )
                                     ],
                                   ),
-                                  IconButton(
-                                    tooltip: 'Delete Appointment',
-                                    icon: const Icon(
-                                      Icons.delete,
-                                      color: Colors.black87,
-                                    ),
-                                    onPressed: () {
-                                      _documentID = document.id;
-                                      showAlertDialog(context);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                                ),
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 20, right: 10, left: 16),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Appointed to: " +
+                                                        document['doctor'],
+                                                    style: GoogleFonts.lato(
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Patient name: " +
+                                                        document['patient'],
+                                                    style: GoogleFonts.lato(
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Patient phone: " +
+                                                        document['phone'],
+                                                    style: GoogleFonts.lato(
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Text(
+                                                    "Appointment Time: " +
+                                                        _timeFormatter(
+                                                          document['date']
+                                                              .toDate()
+                                                              .toString(),
+                                                        ),
+                                                    style: GoogleFonts.lato(
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  _compareAppointmentApprovalStatus(
+                                                              !document[
+                                                                  'approvalStatus']) &&
+                                                          usertype == "Doctors"
+                                                      ? Row(
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          5.0),
+                                                              child: ElevatedButton
+                                                                  .icon(
+                                                                      onPressed:
+                                                                          () {
+                                                                        document
+                                                                            .reference
+                                                                            .update({
+                                                                          'approvalStatus':
+                                                                              true
+                                                                        });
+                                                          
+                                                                        FirebaseFirestore
+                                                                            .instance
+                                                                            .collection(
+                                                                                'Patients')
+                                                                            .doc(document[
+                                                                                'patientUID'])
+                                                                            .collection(
+                                                                                'appointments')
+                                                                            .doc(document['doctorUID'] +
+                                                                                ' ' +
+                                                                                document['date']
+                                                                                    .toDate()
+                                                                                    .toString())
+                                                                            .update({
+                                                                          'approvalStatus':
+                                                                              true
+                                                                        });
+                                                                      },
+                                                                      style: ElevatedButton.styleFrom(
+                                                                          elevation:
+                                                                              0,
+                                                                          primary:
+                                                                              kGreenLightColor),
+                                                                      icon: const Icon(
+                                                                          Icons
+                                                                              .check,
+                                                                          size:
+                                                                              15,
+                                                                          color: Colors
+                                                                              .black),
+                                                                      label:
+                                                                          Text(
+                                                                        'Approve',
+                                                                        style: Theme.of(context)
+                                                                            .textTheme
+                                                                            .headline4!
+                                                                            .copyWith(color: kGreenColor),
+                                                                      )),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          5.0),
+                                                              child: ElevatedButton
+                                                                  .icon(
+                                                                      onPressed:
+                                                                          () {
+                                                                        _documentID =
+                                                                            document.id;
+                                                                        showAlertDialog(
+                                                                            context);
+                                                                      },
+                                                                      style: ElevatedButton
+                                                                          .styleFrom(
+                                                                        elevation:
+                                                                            0,
+                                                                        primary: const Color.fromARGB(
+                                                                            255,
+                                                                            241,
+                                                                            105,
+                                                                            95),
+                                                                      ),
+                                                                      icon: const Icon(
+                                                                          Icons
+                                                                              .delete,
+                                                                          size:
+                                                                              15,
+                                                                          color: Colors
+                                                                              .black),
+                                                                      label:
+                                                                          Text(
+                                                                        'Cancel',
+                                                                        style: Theme.of(context)
+                                                                            .textTheme
+                                                                            .headline4!
+                                                                            .copyWith(color: const Color.fromARGB(255, 91, 13, 8)),
+                                                                      )),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      : Container()
+                                                ])
+                                          ]))
+                                ])));
                   },
                 );
         },

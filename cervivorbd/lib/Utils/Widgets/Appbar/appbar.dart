@@ -10,6 +10,26 @@ class Appbar2 extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: ClipOval(
+              child: Material(
+                color: Colors.black, // Button color
+                child: InkWell(
+                  splashColor: kdarkPink, // Splash color
+                  onTap: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  child: const SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: Icon(Icons.menu, color: Colors.white, size: 20)),
+                ),
+              ),
+            ),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
         centerTitle: false,
         title: Transform(
           // you can forcefully translate values left side using Transform

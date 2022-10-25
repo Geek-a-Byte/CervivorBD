@@ -85,7 +85,7 @@ class _TreatmentTabPageState extends State<TreatmentTabPage> {
                     Container(
                       padding:
                           const EdgeInsets.only(right: 10, left: 10, top: 10),
-                      child: const MyAppointmentList(),
+                      child: Container(),
                     ),
                     Container(
                       padding:
@@ -95,7 +95,7 @@ class _TreatmentTabPageState extends State<TreatmentTabPage> {
                     Container(
                       padding:
                           const EdgeInsets.only(right: 10, left: 10, top: 10),
-                      child: const AppointmentHistoryList(),
+                      child: Container(),
                     ),
                   ],
                 ))

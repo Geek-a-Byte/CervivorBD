@@ -1,12 +1,17 @@
 class Appointment {
-  String? name;
+  String? patient;
+  String? patientUID;
+  String? doctorUID;
   String? phone;
   String? description;
   String? doctor;
   DateTime? date;
-
+  bool? approvalStatus;
   Appointment({
-    this.name,
+    this.approvalStatus,
+    this.doctorUID,
+    this.patientUID,
+    this.patient,
     this.phone,
     this.description,
     this.doctor,
@@ -16,7 +21,10 @@ class Appointment {
   //posting data to server
   factory Appointment.fromMap(map) {
     return Appointment(
-      name: map['name'],
+      approvalStatus:map['approvalStatus'],
+      doctorUID: map['doctorUID'],
+      patientUID: map['patientUID'],
+      patient: map['patient'],
       phone: map['phone'],
       description: map['description'],
       doctor: map['doctor'],
@@ -27,7 +35,10 @@ class Appointment {
   // sending data to our server
   Map<String, dynamic> toMapAppointment() {
     return {
-      'name': name,
+      'approvalStatus':approvalStatus,
+      'doctorUID': doctorUID,
+      'patientUID': patientUID,
+      'patient': patient,
       'phone': phone,
       'description': description,
       'doctor': doctor,

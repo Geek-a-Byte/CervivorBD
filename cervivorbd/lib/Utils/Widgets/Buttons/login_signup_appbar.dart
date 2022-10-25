@@ -15,21 +15,22 @@ class loginSignupButton extends StatelessWidget {
             primary: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 1, vertical: .5),
             side: const BorderSide(
-                width: 1.0, color: Color.fromARGB(255, 125, 180, 248))),
+                width: 1.0, color: Color.fromARGB(255, 0, 0, 0))),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(2.5),
+            padding: const EdgeInsets.all(5),
             child: Row(
               children: [
+                Icon(icon, color: const Color.fromARGB(255, 0, 0, 0)),
+                const SizedBox(width: 5),
                 Text(
                   label!,
                   style: const TextStyle(
-                      color: Color.fromARGB(255, 125, 180, 248),
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontSize: 12,
                       fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-                Icon(icon, color: const Color.fromARGB(255, 86, 133, 244)),
               ],
             ),
           ),

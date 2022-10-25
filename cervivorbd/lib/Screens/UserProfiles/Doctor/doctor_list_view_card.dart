@@ -9,9 +9,22 @@ class ListViewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // final doctor = ModalRoute.of(context)!.settings.arguments as Doctor;
     return Container(
-      color: Colors.transparent,
-      height: 100,
-      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: const Color(0xffeeeeee), width: 1.0),
+        color: Colors.white38,
+        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.white10,
+            blurRadius: 4,
+            spreadRadius: 2,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      height: 120,
+      width: double.infinity,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -33,7 +46,7 @@ class ListViewCard extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 16,
+            width: 10,
           ),
           Flexible(
             child: Column(
@@ -52,10 +65,15 @@ class ListViewCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${doctor!.doctorSpeciality} • ${doctor!.doctorHospital}',
+                  '${doctor!.doctorHospital}',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headline5,
+                ),Text(
+                  '${doctor!.doctorSpeciality}',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: Theme.of(context).textTheme.headline5,
                 ),
                 const Spacer(),
                 SizedBox(
@@ -66,8 +84,8 @@ class ListViewCard extends StatelessWidget {
                       Container(
                         height: 24,
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 13,
-                          vertical: 3,
+                          horizontal: 15,
+                          vertical: 5,
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),

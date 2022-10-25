@@ -1,4 +1,3 @@
-import 'package:cervivorbd/Utils/Exports/widgets.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 
@@ -128,78 +127,78 @@ class _HomeTabPageState extends State<HomeTabPage>
             const SizedBox(
               height: 5,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 5.0, top: 8.0, bottom: 0),
-                  child: Text(
-                    'বাংলাদেশে স্ক্রিনিং সেন্টারগুলো সম্পর্কে জানুন',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ),
-              ],
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: centerMenu[0],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: centerMenu[1],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: centerMenu[2],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: centerMenu[3],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: centerMenu[4],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: centerMenu[5],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: centerMenu[6],
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0),
-                  child: Text(
-                    'বিশেষজ্ঞ ডাক্তারগণ',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ),
-                TextButton2(
-                    label: 'সব দেখুন ->',
-                    onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      // builder: (c) => const LoginScreen()));
-                    }),
-              ],
-            ),
-            // const TopDoctorsList(),
-            const SizedBox(
-              height: 20,
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Padding(
+            //       padding:
+            //           const EdgeInsets.only(left: 5.0, top: 8.0, bottom: 0),
+            //       child: Text(
+            //         'বাংলাদেশে স্ক্রিনিং সেন্টারগুলো সম্পর্কে জানুন',
+            //         style: Theme.of(context).textTheme.headline4,
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   child: Row(
+            //     children: <Widget>[
+            //       Padding(
+            //         padding: const EdgeInsets.all(5.0),
+            //         child: centerMenu[0],
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(5.0),
+            //         child: centerMenu[1],
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(5.0),
+            //         child: centerMenu[2],
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(5.0),
+            //         child: centerMenu[3],
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(5.0),
+            //         child: centerMenu[4],
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(5.0),
+            //         child: centerMenu[5],
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(5.0),
+            //         child: centerMenu[6],
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Padding(
+            //       padding: const EdgeInsets.only(left: 5.0),
+            //       child: Text(
+            //         'বিশেষজ্ঞ ডাক্তারগণ',
+            //         style: Theme.of(context).textTheme.headline4,
+            //       ),
+            //     ),
+            //     TextButton2(
+            //         label: 'সব দেখুন ->',
+            //         onPressed: () {
+            //           // Navigator.push(
+            //           //     context,
+            //           //     MaterialPageRoute(
+            //           // builder: (c) => const LoginScreen()));
+            //         }),
+            //   ],
+            // ),
+            // // const TopDoctorsList(),
+            // const SizedBox(
+            //   height: 20,
+            // ),
 
             // const CenterGridMenu(),
           ]),

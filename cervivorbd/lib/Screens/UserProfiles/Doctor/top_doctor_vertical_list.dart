@@ -33,6 +33,7 @@ class DoctorList extends StatelessWidget {
                       Navigator.of(context).pushNamed(
                         '/doctor_details',
                         arguments: Doctor(
+                          uid: doctor['uid'],
                           fullname: doctor['fullname'],
                           doctorDescription: doctor['doctorDescription'],
                           doctorHospital: doctor['doctorHospital'],
@@ -43,28 +44,24 @@ class DoctorList extends StatelessWidget {
                               doctor['doctorYearOfExperience'],
                           doctorStartWorkingHour:
                               doctor['doctorStartWorkingHour'],
-                          doctorEndWorkingHour:
-                              doctor['doctorEndWorkingHour'],
+                          doctorEndWorkingHour: doctor['doctorEndWorkingHour'],
                         ),
                       );
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom:15.0),
-                      child: ListViewCard(
-                        doctor: Doctor(
-                          fullname: doctor['fullname'],
-                          doctorPicture: 'nazia.png',
-                          doctorDescription: doctor['doctorDescription'],
-                          doctorHospital: doctor['doctorHospital'],
-                          doctorIsOpen: doctor['doctorIsOpen'],
-                          doctorSpeciality: doctor['doctorSpeciality'],
-                          doctorYearOfExperience:
-                              doctor['doctorYearOfExperience'],
-                          doctorStartWorkingHour:
-                              doctor['doctorStartWorkingHour'],
-                          doctorEndWorkingHour:
-                              doctor['doctorEndWorkingHour'],
-                        ),
+                    child: ListViewCard(
+                      doctor: Doctor(
+                        fullname: doctor['fullname'],
+                        uid: doctor['uid'],
+                        doctorPicture: 'nazia.png',
+                        doctorDescription: doctor['doctorDescription'],
+                        doctorHospital: doctor['doctorHospital'],
+                        doctorIsOpen: doctor['doctorIsOpen'],
+                        doctorSpeciality: doctor['doctorSpeciality'],
+                        doctorYearOfExperience:
+                            doctor['doctorYearOfExperience'],
+                        doctorStartWorkingHour:
+                            doctor['doctorStartWorkingHour'],
+                        doctorEndWorkingHour: doctor['doctorEndWorkingHour'],
                       ),
                     ),
                   );

@@ -1,6 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:cervivorbd/Screens/Appointment/appointment.dart';
+import 'package:cervivorbd/Utils/Widgets/Appbar/appbar3.dart';
+import 'package:cervivorbd/Utils/Widgets/TextStyle/text_box_display.dart';
 import 'package:intl/intl.dart';
 import 'package:cervivorbd/Utils/Exports/firebase.dart';
 import 'package:cervivorbd/Utils/Exports/widgets.dart';
@@ -24,12 +26,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   // bool showDateTime = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _doctorController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _timeController = TextEditingController();
 
   DateTime selectedDate = DateTime.now();
   TimeOfDay currentTime = TimeOfDay.now();
@@ -38,10 +34,22 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   late String dateTime;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? user;
+  User? user = FirebaseAuth.instance.currentUser;
+  Patient loggedInUser = Patient();
 
   Future<void> _getUser() async {
-    user = _auth.currentUser!;
+    if (user != null) {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user!.uid)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInUser = Patient.fromMap(value.data());
+          // call setState to rebuild the view
+        });
+      });
+    }
   }
 
   Future<void> selectDate(BuildContext context) async {
@@ -132,11 +140,18 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
     // selectTime(context);
   }
 
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _doctorController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
+  Doctor? doctor;
   @override
   Widget build(BuildContext context) {
-    final doctor = ModalRoute.of(context)!.settings.arguments as Doctor;
-    _doctorController.text = doctor.fullname!;
-
+    doctor = ModalRoute.of(context)!.settings.arguments as Doctor;
+    _doctorController.text = doctor!.fullname!;
+    print(doctor!.uid);
     TextEditingController emailTextEditingController = TextEditingController();
     TextEditingController passwordTextEditingController =
         TextEditingController();
@@ -201,323 +216,325 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
     }
 
     return Scaffold(
+        appBar: Appbar4(label:'Doctor Details'),
         body: SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(children: [
-          const SizedBox(
-            height: 12,
-          ),
-          Container(
-            color: Colors.transparent,
-            height: 100,
-            width: MediaQuery.of(context).size.width,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Hero(
-                  tag: 'assets/images/${doctor.doctorPicture}',
-                  child: Material(
-                    type: MaterialType.transparency,
-                    child: Container(
-                      width: 88,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                              'assets/images/${doctor.doctorPicture!}'),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(children: [
+              Container(
+                color: Colors.transparent,
+                height: 100,
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Hero(
+                      tag: 'assets/images/${doctor!.doctorPicture}',
+                      child: Material(
+                        type: MaterialType.transparency,
+                        child: Container(
+                          width: 88,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(
+                                  'assets/images/${doctor!.doctorPicture!}'),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Hero(
-                        tag: doctor.fullname!,
-                        child: Material(
-                          color: Colors.transparent,
-                          child: Text(
-                            doctor.fullname!,
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Hero(
+                            tag: doctor!.fullname!,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: Text(
+                                doctor!.fullname!,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            '${doctor!.doctorSpeciality} • ${doctor!.doctorHospital}',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: Theme.of(context).textTheme.headline4,
                           ),
-                        ),
+                          const Spacer(),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width - 136,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  height: 24,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 13,
+                                    vertical: 3,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: doctor!.doctorIsOpen!
+                                        ? kGreenLightColor
+                                        : kRedLightColor,
+                                  ),
+                                  child: Text(
+                                    doctor!.doctorIsOpen!
+                                        ? 'Available'
+                                        : 'Not Available',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(
+                                          color: doctor!.doctorIsOpen!
+                                              ? kGreenColor
+                                              : kRedColor,
+                                        ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        '${doctor.doctorSpeciality} • ${doctor.doctorHospital}',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      const Spacer(),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width - 136,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'পেশাগত অভিজ্ঞতা',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  Text(
+                    doctor!.doctorDescription!,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'কর্মঘণ্টা',
+                    style: Theme.of(context).textTheme.headline4,
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    doctor!.doctorStartWorkingHour!,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  Text(
+                    doctor!.doctorEndWorkingHour!,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  user == null
+                      ? Column(
                           children: [
-                            Container(
-                              height: 24,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 13,
-                                vertical: 3,
+                            Text(
+                              'অ্যাপয়েন্ট বুকিং এর জন্য প্রথমে লগইন করুন',
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            const SizedBox(height: 10),
+                            TextFormField2(
+                                controller: emailTextEditingController,
+                                label: 'ইমেইল*'),
+                            const SizedBox(height: 10),
+                            TextFormField2(
+                                controller: passwordTextEditingController,
+                                label: 'পাসওয়ার্ড*'),
+                            const SizedBox(height: 10),
+                            ElevatedButton2(
+                              icon: Icons.login_outlined,
+                              onPressed: () {
+                                validateLoginForm();
+                              },
+                              label: "লগইন",
+                            ),
+                            const SizedBox(height: 10),
+                            TextButton2(
+                                label: "অ্যাকাউন্ট নেই? নিবন্ধন করুন",
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (c) =>
+                                              const SignupScreen()));
+                                  // Navigator.popAndPushNamed(context, '/signup');
+                                }),
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            Text(
+                              'অ্যাপয়েন্ট বুকিং এর জন্য পেশেন্টের ডিটেলস দিন',
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            const SizedBox(height: 10),
+                            Form(
+                              key: _formKey,
+                              child: Container(
+                                padding: const EdgeInsets.only(top: 0),
+                                child: Column(children: [
+                                  TextDisplayBox(
+                                      label: 'ডাক্তারের নাম *',
+                                      value: doctor!.fullname!),
+                                  TextDisplayBox(
+                                      label: 'পেশেন্টের নাম *',
+                                      value: loggedInUser.fullname),
+                                  TextDisplayBox(
+                                      label: 'পেশেন্টের ফোন নম্বর*',
+                                      value: loggedInUser.phonenumber),
+                                  TextFormField2(
+                                      controller: _descriptionController,
+                                      label: 'সমস্যার বিবরণ*'),
+                                  const SizedBox(height: 10),
+                                  Stack(
+                                    alignment: Alignment.centerRight,
+                                    children: [
+                                      TextFormField2(
+                                          controller: _dateController,
+                                          label: 'অ্যাপয়েন্টমেন্টের তারিখ*'),
+                                      const SizedBox(height: 10),
+                                      ClipOval(
+                                        child: Material(
+                                          color: kdarkPink, // button color
+                                          child: InkWell(
+                                            // inkwell color
+                                            child: const SizedBox(
+                                              width: 40,
+                                              height: 40,
+                                              child: Icon(
+                                                Icons.date_range_outlined,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              selectDate(context);
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Stack(
+                                    alignment: Alignment.centerRight,
+                                    children: [
+                                      TextFormField2(
+                                          controller: _timeController,
+                                          label: 'অ্যাপয়েন্টমেন্টের সময়*'),
+                                      ClipOval(
+                                        child: Material(
+                                          color: kdarkPink, // button color
+                                          child: InkWell(
+                                            // inkwell color
+                                            child: const SizedBox(
+                                              width: 40,
+                                              height: 40,
+                                              child: Icon(
+                                                Icons.timer_outlined,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              selectTime(context);
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton2(
+                                      label: "অ্যাপয়েন্ট কনফার্ম করুন",
+                                      onPressed: () {
+                                        validateForm();
+                                      },
+                                      icon: Icons.done_outline),
+                                ]),
                               ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: doctor.doctorIsOpen!
-                                    ? kGreenLightColor
-                                    : kRedLightColor,
-                              ),
-                              child: Text(
-                                doctor.doctorIsOpen!
-                                    ? 'Available'
-                                    : 'Not Available',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(
-                                      color: doctor.doctorIsOpen!
-                                          ? kGreenColor
-                                          : kRedColor,
-                                    ),
-                              ),
-                            )
+                            ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                  // const SizedBox(
+                  //   height: 12,
+                  // ),
+                  // Container(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 15),
+                  //   width: double.infinity,
+                  //   child: ElevatedButton(
+                  //     style: ElevatedButton.styleFrom(
+                  //         primary: Colors.black,
+                  //         textStyle: const TextStyle(
+                  //             fontSize: 15, fontWeight: FontWeight.bold)),
+                  //     onPressed: () {
+                  //       _selectDateTime(context);
+                  //       showDateTime = true;
+                  //     },
+                  //     child: const Text('ডেট পিক করুন *'),
+                  //   ),
+                  // ),
+                  // showDateTime
+                  //     ? Center(child: Text(getDateTime()))
+                  //     : const SizedBox(),
+                  // const SizedBox(
+                  //   height: 12,
+                  // ),
+                  // Text(
+                  //   'অ্যাপয়েন্টের অপশন বাছাই করুন',
+                  //   style: Theme.of(context).textTheme.headline4,
+                  // ),
+                  // const SizedBox(
+                  //   height: 12,
+                  // ),
+                  // const OptionGridMenu(),
+                  // Center(
+                  //     child: ElevatedButton2(
+                  //         onPressed: () {
+                  //           Navigator.push(
+                  //             context,
+                  //             MaterialPageRoute(
+                  //                 builder: (context) =>
+                  //                     BookingScreen(doctor: doctor.fullname)),
+                  //           );
+                  //         },
+                  //         label: 'অ্যাপয়েন্টের জন্য পেমেন্ট করুন')),
+                ],
+              ),
+            ]),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 12,
-              ),
-              Text(
-                'পেশাগত অভিজ্ঞতা',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              Text(
-                doctor.doctorDescription!,
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Text(
-                'কর্মঘণ্টা',
-                style: Theme.of(context).textTheme.headline4,
-                textAlign: TextAlign.left,
-              ),
-              Text(
-                doctor.doctorStartWorkingHour!,
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              Text(
-                doctor.doctorEndWorkingHour!,
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              user == null
-                  ? Column(
-                      children: [
-                        Text(
-                          'অ্যাপয়েন্ট বুকিং এর জন্য প্রথমে লগইন করুন',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        const SizedBox(height: 10),
-                        TextFormField2(
-                            controller: emailTextEditingController,
-                            label: 'ইমেইল*'),
-                        const SizedBox(height: 10),
-                        TextFormField2(
-                            controller: passwordTextEditingController,
-                            label: 'পাসওয়ার্ড*'),
-                        const SizedBox(height: 10),
-                        ElevatedButton2(
-                          icon: Icons.login_outlined,
-                          onPressed: () {
-                            validateLoginForm();
-                          },
-                          label: "লগইন",
-                        ),
-                        const SizedBox(height: 10),
-                        TextButton2(
-                            label: "অ্যাকাউন্ট নেই? নিবন্ধন করুন",
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (c) => const SignupScreen()));
-                              // Navigator.popAndPushNamed(context, '/signup');
-                            }),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        Text(
-                          'অ্যাপয়েন্ট বুকিং এর জন্য পেশেন্টের ডিটেলস দিন',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        const SizedBox(height: 10),
-                        Form(
-                          key: _formKey,
-                          child: Container(
-                            padding: const EdgeInsets.only(top: 0),
-                            child: Column(children: [
-                              TextFormField2(
-                                  controller: _nameController,
-                                  label: 'পেশেন্টের নাম *'),
-                              const SizedBox(height: 10),
-                              TextFormField2(
-                                  controller: _phoneController,
-                                  label: 'পেশেন্টের ফোন নম্বর*'),
-                              const SizedBox(height: 10),
-                              TextFormField2(
-                                  controller: _descriptionController,
-                                  label: 'সমস্যার বিবরণ*'),
-                              const SizedBox(height: 10),
-                              Stack(
-                                alignment: Alignment.centerRight,
-                                children: [
-                                  TextFormField2(
-                                      controller: _dateController,
-                                      label: 'অ্যাপয়েন্টমেন্টের তারিখ*'),
-                                  const SizedBox(height: 10),
-                                  ClipOval(
-                                    child: Material(
-                                      color: kdarkPink, // button color
-                                      child: InkWell(
-                                        // inkwell color
-                                        child: const SizedBox(
-                                          width: 40,
-                                          height: 40,
-                                          child: Icon(
-                                            Icons.date_range_outlined,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          selectDate(context);
-                                        },
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              Stack(
-                                alignment: Alignment.centerRight,
-                                children: [
-                                  TextFormField2(
-                                      controller: _timeController,
-                                      label: 'অ্যাপয়েন্টমেন্টের সময়*'),
-                                  ClipOval(
-                                    child: Material(
-                                      color: kdarkPink, // button color
-                                      child: InkWell(
-                                        // inkwell color
-                                        child: const SizedBox(
-                                          width: 40,
-                                          height: 40,
-                                          child: Icon(
-                                            Icons.timer_outlined,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          selectTime(context);
-                                        },
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              ElevatedButton2(
-                                  label: "অ্যাপয়েন্ট কনফার্ম করুন",
-                                  onPressed: () {
-                                    validateForm();
-                                  },
-                                  icon: Icons.done_outline),
-                            ]),
-                          ),
-                        ),
-                      ],
-                    ),
-              // const SizedBox(
-              //   height: 12,
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.symmetric(horizontal: 15),
-              //   width: double.infinity,
-              //   child: ElevatedButton(
-              //     style: ElevatedButton.styleFrom(
-              //         primary: Colors.black,
-              //         textStyle: const TextStyle(
-              //             fontSize: 15, fontWeight: FontWeight.bold)),
-              //     onPressed: () {
-              //       _selectDateTime(context);
-              //       showDateTime = true;
-              //     },
-              //     child: const Text('ডেট পিক করুন *'),
-              //   ),
-              // ),
-              // showDateTime
-              //     ? Center(child: Text(getDateTime()))
-              //     : const SizedBox(),
-              // const SizedBox(
-              //   height: 12,
-              // ),
-              // Text(
-              //   'অ্যাপয়েন্টের অপশন বাছাই করুন',
-              //   style: Theme.of(context).textTheme.headline4,
-              // ),
-              // const SizedBox(
-              //   height: 12,
-              // ),
-              // const OptionGridMenu(),
-              // Center(
-              //     child: ElevatedButton2(
-              //         onPressed: () {
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(
-              //                 builder: (context) =>
-              //                     BookingScreen(doctor: doctor.fullname)),
-              //           );
-              //         },
-              //         label: 'অ্যাপয়েন্টের জন্য পেমেন্ট করুন')),
-            ],
-          ),
-        ]),
-      ),
-    ));
+        ));
   }
 
   validateForm() {
     if (user == null) {
       Fluttertoast.showToast(
           msg: "Please login to the app before booking an appointment.");
-    } else if (_nameController.text.isEmpty) {
-      Fluttertoast.showToast(
-          msg: "Please provide your username registered in this app.");
-    } else if (_phoneController.text.length != 11) {
-      Fluttertoast.showToast(msg: "Please provide a valid phone number.");
-    } else if (_descriptionController.text.isEmpty) {
+    }
+    // else if (_nameController.text.isEmpty) {
+    //   Fluttertoast.showToast(
+    //       msg: "Please provide your username registered in this app.");
+    // } else if (_phoneController.text.length != 11) {
+    //   Fluttertoast.showToast(msg: "Please provide a valid phone number.");
+    // }
+    else if (_descriptionController.text.isEmpty) {
       Fluttertoast.showToast(
           msg: "Reason/Description of your problem is mandatory");
     } else if (_dateController.text.isEmpty) {
@@ -532,24 +549,39 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
 
   Future<void> _createAppointment() async {
     Appointment appointmentModel = Appointment();
-    appointmentModel.name = _nameController.text;
-    appointmentModel.phone = _phoneController.text;
+    appointmentModel.approvalStatus = false;
+    appointmentModel.patientUID = loggedInUser.uid;
+    appointmentModel.doctorUID = doctor!.uid;
+    appointmentModel.patient = loggedInUser.fullname;
+    appointmentModel.phone = loggedInUser.phonenumber;
     appointmentModel.description = _descriptionController.text;
     appointmentModel.doctor = _doctorController.text;
     appointmentModel.date = DateTime.parse(dateUTC + ' ' + dateTime + ':00');
     if (user != null) {
       await FirebaseFirestore.instance
+          .collection('Patients')
+          .doc(user!.uid)
           .collection('appointments')
-          .doc(user!.email)
-          .collection('pending')
-          .doc()
+          .doc(doctor!.uid! + ' ' + appointmentModel.date.toString())
           .set(appointmentModel.toMapAppointment());
       await FirebaseFirestore.instance
+          .collection('Doctors')
+          .doc(doctor!.uid)
           .collection('appointments')
-          .doc(user!.email)
-          .collection('all')
-          .doc()
+          .doc(user!.uid + ' ' + appointmentModel.date.toString())
           .set(appointmentModel.toMapAppointment());
+      // await FirebaseFirestore.instance
+      //     .collection('appointments')
+      //     .doc(user!.email)
+      //     .collection('pending')
+      //     .doc()
+      //     .set(appointmentModel.toMapAppointment());
+      // await FirebaseFirestore.instance
+      //     .collection('appointments')
+      //     .doc(user!.email)
+      //     .collection('all')
+      //     .doc()
+      //     .set(appointmentModel.toMapAppointment());
       _nameController.clear();
       _phoneController.clear();
       _descriptionController.clear();
