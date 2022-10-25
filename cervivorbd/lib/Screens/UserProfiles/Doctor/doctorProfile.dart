@@ -10,6 +10,8 @@ import 'package:cervivorbd/Utils/Exports/theme.dart';
 import 'package:cervivorbd/Utils/Exports/screens.dart';
 import 'package:cervivorbd/Utils/Exports/packages.dart';
 
+import '../../../Utils/Widgets/Buttons/available_hours_grid.dart';
+
 class DoctorDetailScreen extends StatefulWidget {
   const DoctorDetailScreen({Key? key}) : super(key: key);
 
@@ -18,46 +20,37 @@ class DoctorDetailScreen extends StatefulWidget {
 }
 
 class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
-  // DateTime selectedDate = DateTime.now();
-  // TimeOfDay selectedTime = TimeOfDay.now();
-  // DateTime dateTime = DateTime.now();
-  // bool showDate = false;
-  // bool showTime = false;
-  // bool showDateTime = false;
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  DateTime selectedDate = DateTime.now();
+  List<String>? availableHours;
   TimeOfDay currentTime = TimeOfDay.now();
-  String timeText = 'Select Time';
-  late String dateUTC;
   late String dateTime;
+  late String dateUTC;
+  Doctor? doctor;
+  Patient loggedInUser = Patient();
+  DateTime selectedDate = DateTime.now();
+  String timeText = 'Select Time';
+  User? user = FirebaseAuth.instance.currentUser;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? user = FirebaseAuth.instance.currentUser;
-  Patient loggedInUser = Patient();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _doctorController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
 
-  Future<void> _getUser() async {
-    if (user != null) {
-      await FirebaseFirestore.instance
-          .collection("users")
-          .doc(user!.uid)
-          .get()
-          .then((value) {
-        setState(() {
-          loggedInUser = Patient.fromMap(value.data());
-          // call setState to rebuild the view
-        });
-      });
-    }
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
   }
 
   Future<void> selectDate(BuildContext context) async {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2021),
-      lastDate: DateTime(2025),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 7)),
     ).then(
       (date) {
         setState(
@@ -74,13 +67,17 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   }
 
   Future<void> selectTime(BuildContext context) async {
-    TimeOfDay? selectedTime = await showTimePicker(
-      context: context,
-      initialTime: currentTime,
-    );
+    print(_timeController.text);
+    String s = _timeController.text;
+    TimeOfDay? selectedTime = TimeOfDay(
+        hour: int.parse(s.split(":")[0]), minute: int.parse(s.split(":")[1]));
+    // await showTimePicker(
+    //   context: context,
+    //   initialTime: currentTime,
+    // );
 
     MaterialLocalizations localizations = MaterialLocalizations.of(context);
-    String formattedTime = localizations.formatTimeOfDay(selectedTime!,
+    String formattedTime = localizations.formatTimeOfDay(selectedTime,
         alwaysUse24HourFormat: false);
 
     setState(() {
@@ -133,25 +130,155 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
     );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _getUser();
-    // selectTime(context);
+  Widget showAvailableHours(
+      BuildContext context, Future<List<double>> availableHours) {
+    return DoctorAvailableHoursGrid(availableHours: availableHours);
   }
 
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _doctorController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _timeController = TextEditingController();
-  Doctor? doctor;
+  loadAvailableHours(
+      BuildContext context, DateTime date, String doctorUID) async {
+    String dateString = DateFormat('yyyy-MM-dd').format(date);
+    print(dateString);
+    final activeHours = [
+      '09:00',
+      '09:30',
+      '10:00',
+      '10:30',
+      '11:00',
+      '11:30',
+      '12:00',
+      '12:30',
+      '13:00'
+    ];
+    var busyHours = [];
+    await FirebaseFirestore.instance
+        .collection("Doctors")
+        .doc(doctorUID)
+        .collection("busyHours")
+        .doc(dateString)
+        .get()
+        .then((value) {
+      if (value.data() != null) {
+        setState(() {
+          busyHours = value.data()!["busyTime"];
+          print(busyHours);
+        });
+      }
+    });
+    var set1 = Set.from(activeHours);
+    var set2 = Set.from(busyHours);
+    print(set1);
+    print(set2);
+    setState(() {
+      availableHours = List.from(set1.difference(set2));
+    });
+
+    print(availableHours);
+    // return availableHours;
+  }
+
+  validateAppointmentForm() {
+    if (user == null) {
+      Fluttertoast.showToast(
+          msg: "Please login to the app before booking an appointment.");
+    } else if (loggedInUser.toString() != "Instance of 'Patient'") {
+      print(loggedInUser.toString());
+      Fluttertoast.showToast(
+          msg:
+              "You can't take an appointment as a doctor, please sign in as a patient.");
+    } else if (_descriptionController.text.isEmpty) {
+      Fluttertoast.showToast(
+          msg: "Reason/Description of your problem is mandatory");
+    } else if (_dateController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "Please select a date for the appointment.");
+    } else if (_timeController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "Please select a time for the appointment.");
+    } else {
+      showAlertDialog(context);
+      _createAppointment();
+    }
+  }
+
+  Future<void> _getUser() async {
+    if (user != null) {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user!.uid)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInUser = Patient.fromMap(value.data());
+          // call setState to rebuild the view
+        });
+      });
+    }
+  }
+
+  Future<void> _createAppointment() async {
+    Appointment appointmentModel = Appointment();
+    appointmentModel.approvalStatus = false;
+    appointmentModel.patientUID = loggedInUser.uid;
+    appointmentModel.doctorUID = doctor!.uid;
+    appointmentModel.patient = loggedInUser.fullname;
+    appointmentModel.phone = loggedInUser.phonenumber;
+    appointmentModel.description = _descriptionController.text;
+    appointmentModel.doctor = _doctorController.text;
+    appointmentModel.date = DateTime.parse(dateUTC + ' ' + dateTime + ':00');
+    if (user != null) {
+      await FirebaseFirestore.instance
+          .collection('Patients')
+          .doc(user!.uid)
+          .collection('appointments')
+          .doc(doctor!.uid! + ' ' + appointmentModel.date.toString())
+          .set(appointmentModel.toMapAppointment());
+      await FirebaseFirestore.instance
+          .collection('Doctors')
+          .doc(doctor!.uid)
+          .collection('appointments')
+          .doc(user!.uid + ' ' + appointmentModel.date.toString())
+          .set(appointmentModel.toMapAppointment());
+      var list = [dateTime];
+      await FirebaseFirestore.instance
+          .collection('Doctors')
+          .doc(doctor!.uid)
+          .collection('busyHours')
+          .doc(dateUTC)
+          .set({"busyTime": FieldValue.arrayUnion(list)},
+              SetOptions(merge: true));
+      // var list = [_timeController.text];
+      // FirebaseFirestore.instance
+      //     .collection("Doctors")
+      //     .doc(doctor!.uid)
+      //     .collection("busyHours")
+      //     .doc(dateUTC)
+      //     .update({"busyTime": FieldValue.arrayUnion(list)});
+      // await FirebaseFirestore.instance
+      //     .collection('appointments')
+      //     .doc(user!.email)
+      //     .collection('pending')
+      //     .doc()
+      //     .set(appointmentModel.toMapAppointment());
+      // await FirebaseFirestore.instance
+      //     .collection('appointments')
+      //     .doc(user!.email)
+      //     .collection('all')
+      //     .doc()
+      //     .set(appointmentModel.toMapAppointment());
+      _nameController.clear();
+      _phoneController.clear();
+      _descriptionController.clear();
+      _dateController.clear();
+      _timeController.clear();
+      availableHours!.clear();
+      Fluttertoast.showToast(msg: "appointment created successfully!");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Widget rerender = DoctorAvailableHoursGrid(availableHours: availableHours!);
     doctor = ModalRoute.of(context)!.settings.arguments as Doctor;
     _doctorController.text = doctor!.fullname!;
-    print(doctor!.uid);
     TextEditingController emailTextEditingController = TextEditingController();
     TextEditingController passwordTextEditingController =
         TextEditingController();
@@ -216,7 +343,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
     }
 
     return Scaffold(
-        appBar: Appbar4(label:'Doctor Details'),
+        appBar: Appbar4(label: 'Doctor Details'),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10),
@@ -433,161 +560,125 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                       )
                                     ],
                                   ),
-                                  const SizedBox(height: 10),
-                                  Stack(
-                                    alignment: Alignment.centerRight,
-                                    children: [
-                                      TextFormField2(
-                                          controller: _timeController,
-                                          label: 'অ্যাপয়েন্টমেন্টের সময়*'),
-                                      ClipOval(
-                                        child: Material(
-                                          color: kdarkPink, // button color
-                                          child: InkWell(
-                                            // inkwell color
-                                            child: const SizedBox(
-                                              width: 40,
-                                              height: 40,
-                                              child: Icon(
-                                                Icons.timer_outlined,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            onTap: () {
-                                              selectTime(context);
-                                            },
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
                                   ElevatedButton2(
-                                      label: "অ্যাপয়েন্ট কনফার্ম করুন",
-                                      onPressed: () {
-                                        validateForm();
-                                      },
-                                      icon: Icons.done_outline),
+                                      label: "Check available hours",
+                                      icon: Icons.hourglass_bottom,
+                                      onPressed: () async {
+                                        setState(() {
+                                          loadAvailableHours(
+                                              context,
+                                              DateFormat('dd-MM-yyyy')
+                                                  .parse(_dateController.text),
+                                              doctor!.uid!);
+                                        });
+                                      }),
+                                  availableHours == null ||
+                                          _dateController.text == ''
+                                      ? Container()
+                                      : Column(
+                                          children: [
+                                            GridView.builder(
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              shrinkWrap: true,
+                                              gridDelegate:
+                                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 4,
+                                                mainAxisSpacing: 2,
+                                                crossAxisSpacing: 2,
+                                              ),
+                                              padding: EdgeInsets.zero,
+                                              itemCount: availableHours!.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      index) {
+                                                return OutlinedButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _timeController.text =
+                                                          availableHours![index]
+                                                              .toString();
+                                                      selectTime(context);
+                                                    });
+                                                  },
+                                                  child: SizedBox(
+                                                    height: 300,
+                                                    width: double.infinity,
+                                                    // decoration: BoxDecoration(
+                                                    //     borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                                                    //     image: DecorationImage(
+                                                    //         colorFilter: ColorFilter.mode(
+                                                    //             const Color.fromARGB(255, 52, 1, 27).withOpacity(0.8),
+                                                    //             BlendMode.darken),
+                                                    //         fit: BoxFit.cover,
+                                                    //         image: AssetImage(introPhotoMenu[index]))),
+                                                    child: Center(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(2.0),
+                                                        child: Text(
+                                                            availableHours![
+                                                                    index]
+                                                                .toString(),
+                                                            style: const TextStyle(
+                                                                fontSize: 15,
+                                                                color:
+                                                                    kBlackColor900)),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                            const SizedBox(height: 10),
+                                            TextDisplayBox(
+                                                value: _timeController.text,
+                                                label:
+                                                    'অ্যাপয়েন্টমেন্টের সময়*'),
+                                            ElevatedButton2(
+                                                label:
+                                                    "অ্যাপয়েন্ট কনফার্ম করুন",
+                                                onPressed: () {
+                                                  validateAppointmentForm();
+                                                },
+                                                icon: Icons.done_outline),
+                                          ],
+                                        ),
+                                  // Stack(
+                                  //   alignment: Alignment.centerRight,
+                                  //   children: [
+
+                                  //     ClipOval(
+                                  //       child: Material(
+                                  //         color: kdarkPink, // button color
+                                  //         child: InkWell(
+                                  //           // inkwell color
+                                  //           child: const SizedBox(
+                                  //             width: 40,
+                                  //             height: 40,
+                                  //             child: Icon(
+                                  //               Icons.timer_outlined,
+                                  //               color: Colors.white,
+                                  //             ),
+                                  //           ),
+                                  //           onTap: () {
+                                  //             selectTime(context);
+                                  //           },
+                                  //         ),
+                                  //       ),
+                                  //     )
+                                  //   ],
+                                  // ),
                                 ]),
                               ),
                             ),
                           ],
                         ),
-                  // const SizedBox(
-                  //   height: 12,
-                  // ),
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  //   width: double.infinity,
-                  //   child: ElevatedButton(
-                  //     style: ElevatedButton.styleFrom(
-                  //         primary: Colors.black,
-                  //         textStyle: const TextStyle(
-                  //             fontSize: 15, fontWeight: FontWeight.bold)),
-                  //     onPressed: () {
-                  //       _selectDateTime(context);
-                  //       showDateTime = true;
-                  //     },
-                  //     child: const Text('ডেট পিক করুন *'),
-                  //   ),
-                  // ),
-                  // showDateTime
-                  //     ? Center(child: Text(getDateTime()))
-                  //     : const SizedBox(),
-                  // const SizedBox(
-                  //   height: 12,
-                  // ),
-                  // Text(
-                  //   'অ্যাপয়েন্টের অপশন বাছাই করুন',
-                  //   style: Theme.of(context).textTheme.headline4,
-                  // ),
-                  // const SizedBox(
-                  //   height: 12,
-                  // ),
-                  // const OptionGridMenu(),
-                  // Center(
-                  //     child: ElevatedButton2(
-                  //         onPressed: () {
-                  //           Navigator.push(
-                  //             context,
-                  //             MaterialPageRoute(
-                  //                 builder: (context) =>
-                  //                     BookingScreen(doctor: doctor.fullname)),
-                  //           );
-                  //         },
-                  //         label: 'অ্যাপয়েন্টের জন্য পেমেন্ট করুন')),
                 ],
               ),
             ]),
           ),
         ));
-  }
-
-  validateForm() {
-    if (user == null) {
-      Fluttertoast.showToast(
-          msg: "Please login to the app before booking an appointment.");
-    }
-    // else if (_nameController.text.isEmpty) {
-    //   Fluttertoast.showToast(
-    //       msg: "Please provide your username registered in this app.");
-    // } else if (_phoneController.text.length != 11) {
-    //   Fluttertoast.showToast(msg: "Please provide a valid phone number.");
-    // }
-    else if (_descriptionController.text.isEmpty) {
-      Fluttertoast.showToast(
-          msg: "Reason/Description of your problem is mandatory");
-    } else if (_dateController.text.isEmpty) {
-      Fluttertoast.showToast(msg: "Please select a date for the appointment.");
-    } else if (_timeController.text.isEmpty) {
-      Fluttertoast.showToast(msg: "Please select a time for the appointment.");
-    } else {
-      showAlertDialog(context);
-      _createAppointment();
-    }
-  }
-
-  Future<void> _createAppointment() async {
-    Appointment appointmentModel = Appointment();
-    appointmentModel.approvalStatus = false;
-    appointmentModel.patientUID = loggedInUser.uid;
-    appointmentModel.doctorUID = doctor!.uid;
-    appointmentModel.patient = loggedInUser.fullname;
-    appointmentModel.phone = loggedInUser.phonenumber;
-    appointmentModel.description = _descriptionController.text;
-    appointmentModel.doctor = _doctorController.text;
-    appointmentModel.date = DateTime.parse(dateUTC + ' ' + dateTime + ':00');
-    if (user != null) {
-      await FirebaseFirestore.instance
-          .collection('Patients')
-          .doc(user!.uid)
-          .collection('appointments')
-          .doc(doctor!.uid! + ' ' + appointmentModel.date.toString())
-          .set(appointmentModel.toMapAppointment());
-      await FirebaseFirestore.instance
-          .collection('Doctors')
-          .doc(doctor!.uid)
-          .collection('appointments')
-          .doc(user!.uid + ' ' + appointmentModel.date.toString())
-          .set(appointmentModel.toMapAppointment());
-      // await FirebaseFirestore.instance
-      //     .collection('appointments')
-      //     .doc(user!.email)
-      //     .collection('pending')
-      //     .doc()
-      //     .set(appointmentModel.toMapAppointment());
-      // await FirebaseFirestore.instance
-      //     .collection('appointments')
-      //     .doc(user!.email)
-      //     .collection('all')
-      //     .doc()
-      //     .set(appointmentModel.toMapAppointment());
-      _nameController.clear();
-      _phoneController.clear();
-      _descriptionController.clear();
-      _dateController.clear();
-      _timeController.clear();
-      Fluttertoast.showToast(msg: "appointment created successfully!");
-    }
   }
 }

@@ -45,7 +45,7 @@ class CCIntroGridMenu extends StatelessWidget {
                 ),
               ),
             ),
-            margin: const EdgeInsets.only(left: 5.0, right: 0.0, top: 5.0),
+            
           ),
           // Container(
           //   constraints: const BoxConstraints(
